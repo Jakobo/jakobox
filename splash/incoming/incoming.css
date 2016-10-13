@@ -1,0 +1,18 @@
+.countdown-zero #countdown,
+.countdown-zero #omni,
+.countdown-zero h1,
+.countdown-zero #box-left,
+.countdown-zero #box-right {
+  animation: fadeout 1s ease-in forwards;
+}
+
+.countdown-zero #box {
+  z-index: 2;
+  animation: cubeThrough 2s ease-in forwards;
+  animation-delay: 0.5s;
+}
+
+.countdown-zero #box b {
+  animation: cubeNoDetail 2s ease-in forwards;
+  animation-delay: 0.5s;
+}

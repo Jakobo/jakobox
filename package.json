@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "jakobox",
+  "version": "1.0.0",
+  "description": "Twitch Experiments and Fun",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'todo w/ chokidar and postcss-cli plus simple server'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jakobo/jakobox.git"
+  },
+  "author": "Jakob Heuser <jakob@felocity.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Jakobo/jakobox/issues"
+  },
+  "homepage": "https://github.com/Jakobo/jakobox#readme",
+  "dependencies": {
+    "chokidar": "^1.6.0"
+  }
+}
