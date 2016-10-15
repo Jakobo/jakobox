@@ -1,6 +1,16 @@
+@-webkit-keyframes inOmni {
+  from { left: 1796px; opacity: 0; }
+  to { left: 214px; opacity: 1; }
+}
+
 @keyframes inOmni {
   from { left: 1796px; opacity: 0; }
   to { left: 214px; opacity: 1; }
+}
+
+@-webkit-keyframes outOmni {
+  from { left: 214px; top: 4px; opacity: 1; }
+  to { left: 214px; top: 4px; opacity: 0; }
 }
 
 @keyframes outOmni {
@@ -113,11 +123,13 @@ iframe.testfollow {
 }
 
 #omni p.in {
-  animation: inOmni 1s ease-out forwards;
+  -webkit-animation: inOmni 1s ease-out forwards;
+          animation: inOmni 1s ease-out forwards;
 }
 
 #omni p.out {
-  animation: outOmni 0.5s ease-in forwards;
+  -webkit-animation: outOmni 0.5s ease-in forwards;
+          animation: outOmni 0.5s ease-in forwards;
 }
 
 #cam {
@@ -170,9 +182,12 @@ iframe.testfollow {
   top: 42px;
   -webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.75));
   filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.75));
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-perspective: 1000;
+          perspective: 1000;
 }
 
 #cam .logo {
