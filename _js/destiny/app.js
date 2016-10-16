@@ -9,7 +9,7 @@ import Frame from "./frame"
 import params from "../lib/url"
 
 const background = params.background || "none";
-const timer = params.timer || 5000;
+const timer = params.timer || 35000;
 const showFollows = params.showFollows || false;
 
 // here we go...

@@ -105,7 +105,7 @@ export default {
     },
     zoomOut: {
       zIndex: 2,
-      animation: "zoomCubeOut 2s ease-in 0.5s forwards",
+      animation: "zoomCubeOut 2s ease-in 10s forwards",
       animationName: animation.zoomCubeOut
     },
     sides: {
@@ -114,7 +114,7 @@ export default {
         animationName: animation.removeCubeDetail
       },
       restoreEdges: {
-        animation: "restoreCubeDetail 2s ease-in 0.5s forwards",
+        animation: "restoreCubeDetail 2s ease-in 10s forwards",
         animationName: animation.restoreCubeDetail
       },
       all: {
