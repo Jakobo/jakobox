@@ -225,7 +225,7 @@ const Frame = (props) => {
 
   let follows = null;
   if (props.showFollows) {
-    follows = <iframe style={styles.testFollow} src="https://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" border="0" seamless="seamless" />
+    follows = <iframe style={styles.testFollow} src="http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" border="0" seamless="seamless" />
   }
 
   return <div style={frameStyles}>

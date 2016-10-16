@@ -60,7 +60,7 @@ export default {
     placement: {
       position: "absolute",
       left: "0",
-      top: "0",
+      top: "50px",
       width: "1920px",
       textAlign: "center",
       fontSize: "30px",

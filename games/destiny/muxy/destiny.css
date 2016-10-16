@@ -1,0 +1,108 @@
+/* DID YOU PUT THIS THROUGH AUTOPREFIXER? */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes slideRight {
+  0% { left: 682px; }
+  100% { left: 0; }
+}
+
+body {
+  overflow: hidden;
+}
+
+/*
+Reset the position so that absolute positioning works.
+Use an overflow: hidden to crop the region
+*/
+#notification-container {
+  position: relative;
+  overflow: hidden;
+  width: 682px;
+  height: 168px;
+}
+
+/*
+All text styles
+*/
+.text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.4),
+    1px -1px 1px rgba(0, 0, 0, 0.4),
+    -1px 1px 1px rgba(0, 0, 0, 0.4),
+    1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* background box */
+.box {
+  position: absolute;
+  top: 5px;
+  left: 682px;
+  width: 682px;
+  height: 208px;
+  background: url("./subhold.png") left top no-repeat;
+}
+
+.banner {
+  position: absolute;
+  left: 516px;
+  top: 0;
+  width: 120px;
+  height: 158px;
+  background: url("./banner.png") left top no-repeat;
+}
+
+.title {
+  position: absolute;
+  width: 496px;
+  left: 0;
+  top: 17px;
+  text-align: right;
+  color: #f1f0f0;
+}
+
+.subtext {
+  position: absolute;
+  width: 396px;
+  left: 100px;
+  text-align: right;
+  color: #f1f0f0;
+}
+
+.who {
+  top: 61px;
+}
+
+.about {
+  top: 94px;
+}
+
+.fx-slide {
+  animation: slideRight 0.8s ease forwards;
+}
+
+.fx-fade {
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.fx-fade-second {
+  animation: fadeIn 0.5s forwards;
+  animation-delay: 0.8s;
+  opacity: 0;
+}
+
+.fx-fade-out {
+  animation: fadeOut 1s forwards;
+  animation-delay: 5.3s;
+  opacity: 1;
+}

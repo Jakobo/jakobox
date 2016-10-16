@@ -16,7 +16,8 @@ var BABEL_DIRS = [
 var config = {
   entry: {
     destiny: [APP_DIR + "/destiny/app.js"],
-    incoming: [APP_DIR + "/incoming/app.js"]
+    incoming: [APP_DIR + "/incoming/app.js"],
+    outgoing: [APP_DIR + "/outgoing/app.js"]
   },
   output: {
     path: BUILD_DIR,
