@@ -15,7 +15,8 @@ var BABEL_DIRS = [
 // webpack config proper
 var config = {
   entry: {
-    destiny: [APP_DIR + "/destiny/app.js"]
+    destiny: [APP_DIR + "/destiny/app.js"],
+    incoming: [APP_DIR + "/incoming/app.js"]
   },
   output: {
     path: BUILD_DIR,
