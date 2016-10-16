@@ -1,12 +1,30 @@
-/* DID YOU PUT THIS THROUGH AUTOPREFIXER? */
+/*
+DID YOU PUT THIS THROUGH AUTOPREFIXER?
+https://autoprefixer.github.io
+*/
+
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
 
+@-webkit-keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 @keyframes fadeOut {
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+@-webkit-keyframes slideRight {
+  0% { left: 682px; }
+  100% { left: 0; }
 }
 
 @keyframes slideRight {
@@ -86,23 +104,30 @@ All text styles
 }
 
 .fx-slide {
-  animation: slideRight 0.8s ease forwards;
+  -webkit-animation: slideRight 0.8s ease forwards;
+          animation: slideRight 0.8s ease forwards;
 }
 
 .fx-fade {
-  animation: fadeIn 1s forwards;
-  animation-delay: 0.5s;
+  -webkit-animation: fadeIn 1s forwards;
+          animation: fadeIn 1s forwards;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
   opacity: 0;
 }
 
 .fx-fade-second {
-  animation: fadeIn 0.5s forwards;
-  animation-delay: 0.8s;
+  -webkit-animation: fadeIn 0.5s forwards;
+          animation: fadeIn 0.5s forwards;
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
   opacity: 0;
 }
 
 .fx-fade-out {
-  animation: fadeOut 1s forwards;
-  animation-delay: 5.3s;
+  -webkit-animation: fadeOut 1s forwards;
+          animation: fadeOut 1s forwards;
+  -webkit-animation-delay: 5.3s;
+          animation-delay: 5.3s;
   opacity: 1;
 }
