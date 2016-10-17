@@ -9,7 +9,7 @@ import Frame from "./frame"
 import params from "../lib/url"
 
 const background = params.background || "none";
-const timer = params.timer || 10000;
+const timer = params.timer || 8000;
 
 // here we go...
 render(<StyleRoot><Frame background={background} timer={timer} /></StyleRoot>, document.getElementById('app'));

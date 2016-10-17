@@ -9,7 +9,7 @@ import Frame from "./frame"
 import params from "../lib/url"
 
 const background = params.background || "none";
-const timer = params.timer || 15000;
+const timer = params.timer || 17000;
 const countdown = params.countdown || "30:00";
 
 // here we go...
