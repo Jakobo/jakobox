@@ -1,0 +1,150 @@
+<document unique_id="40D1B4C9-9FBF-4F73-A713-AD743FDF045C" version="6" os="macosx" original_document_path="/Users/jakobo/src/jakobox/games/destiny/destiny.gmsh">
+	<open_windows>
+		<vamWindowGlass frame="0,23,1439,824" asset_icon_scale="0.6" asset_icon_updateFPS="15" selected_layer="1836282929" vam_main_splitter="0.65"/>
+	</open_windows>
+	<vam_state master_audio_shown="1010" show_preview_edit_panel="1" preview_shown="1" live_shown="1" live_preview_split_open_percent="0.609189" transition_0_unique_id="-- CUT --" transition_1_unique_id="-- SMOOTH --" transition_2_unique_id="-- SMOOTH --" master_audio_monitor="0" preview_audio_monitor="0" master_audio_mute="0"/>
+	<transition_data/>
+	<chroma_key_data/>
+	<advanced_output>
+		<output_list output_last_selected="D8289579-7517-48D8-AE08-CBA1431ECF29">
+			<output output_enabled="1" output_type="1" output_url="/Users/jakob/Movies/MyStream.mp4" output_autoinfilename="1" output_branding="Record To Disk MP4 Brand" output_display_name="Record To Disk - MP4" output_display_group_name="Record To Disk - MP4" output_settings_complete="1" output_presetname="Twitch: 720p30 x264 (1750 Kbps)" output_guid="B147F2D5-12B8-452C-9CE8-AFF89E3E2871" output_id="B147F2D5-12B8-452C-9CE8-AFF89E3E2871" unique_id="1"/>
+			<output game_title="Destiny" output_type="2" output_branding="Twitch" output_url="rtmp://live.twitch.tv/app" destination_location_id="fID6akb494uIoC2X0cLgeHsTWXJhaoZxwNw0Fnt10190" twitch_channel_name="jakobox" output_display_group_name="Twitch" output_settings_complete="1" output_location="live_54275707_qEHnw9ItEGFABgIpS0Egplmqr4DqN8" output_enabled="1" output_presetname="Twitch: 720p30 x264 (1750 Kbps)" output_guid="D8289579-7517-48D8-AE08-CBA1431ECF29" output_id="D8289579-7517-48D8-AE08-CBA1431ECF29" output_display_name="live_54275707_qEHnw9ItEGFABgIpS0Egplmqr4DqN8" unique_id="2" flash_streaming_delay="10">
+				<twitch/>
+			</output>
+		</output_list>
+	</advanced_output>
+	<output_presets>
+		<preset output_presetname="Twitch: 720p30 x264 (1750 Kbps)">
+			<movie format="Flash" output_system="">
+				<track mo_width="1280" mo_height="720" type="1986618479" colourspace="846624121" mo_enabled="1" codecname="x264" fps="30" compressed="1" timescale="3000" target_bit_rate="1750" profile="1835100526" limit_bit_rate="0" key_frame_rate="60" timecode_interval="30" timecode_on="0" FlashVideoDisableH264BFrames="0" codec_quality="" x264_gpu_on="0" x264_commandline="--vbv-bufsize 2000" absolute_time_stamps="0" key_frame_aligned="0" strict_cbr="1" main_concept="1"/>
+				<track type="1635083375" bps="16" busses="1" channels="2" samplerate="44100" mo_enabled="1" codecname="MPEG-4 Audio" target_bit_rate="128" timescale="44100"/>
+			</movie>
+		</preset>
+	</output_presets>
+	<iso_outputs>
+		<xml_tag/>
+	</iso_outputs>
+	<volume value="1"/>
+	<preview_volume value="1"/>
+	<auto_live value="0"/>
+	<flip_flop value="0"/>
+	<output_annotations/>
+	<transition_duration/>
+	<visual_style/>
+	<single_output/>
+	<media_directories/>
+	<layer_names/>
+	<layer_scales layer_0="0.5" layer_1="0.5" layer_2="0.5" layer_3="0.5" layer_4="0.5"/>
+	<layer_visible/>
+	<sections/>
+	<aspectRatio type="825243696"/>
+	<shot_key_map/>
+	<shotsLiveWhenSaved>
+		<xml_tag vaLayerIndex="0" beLayerEnum="1" vaLayerEnum="1836282928" unique_id="850D7F27-3777-4BB1-9530-1B653299611F_shot"/>
+		<xml_tag vaLayerIndex="1" beLayerEnum="2" vaLayerEnum="1836282929" unique_id="1CB04420-86E5-40D8-B52A-AD2FA1A555E5_shot"/>
+		<xml_tag vaLayerIndex="2" beLayerEnum="3" vaLayerEnum="1836282930" unique_id="C1177744-CA7E-463E-BFA9-29680CDCA8BC_shot"/>
+	</shotsLiveWhenSaved>
+	<source_sdk_settings/>
+	<social_media/>
+	<source_configurations>
+		<source unique_id="535A940A-B179-47D3-ACB7-BE2141FAC27D" factoryGUID="CABB740E-B023-4F82-832F-335454157451" manuallyAddedSource="1" localizedDisplayName="Untitled Web Display" localizedGroupingName="Web Display" hasAudio="0" hasVideo="1" groupGUID="CABB740E-B023-4F82-832F-335454157451" prettyname="Destiny Overlay">
+			<xml_tag isUstream="0" title="Untitled Web Display" web_width="1920" web_height="1080" web_url="http://twitch.felocity.com/games/destiny/" web_transparent="1" web_shutdown_when_inactive="1" web_override_css="" isGameshow="1"/>
+		</source>
+		<source unique_id="8BBF3222-6534-41D6-9EAD-2AB1E7BF6E8F" factoryGUID="CABB740E-B023-4F82-832F-335454157451" manuallyAddedSource="1" localizedDisplayName="Untitled Web Display" localizedGroupingName="Web Display" hasAudio="0" hasVideo="1" groupGUID="CABB740E-B023-4F82-832F-335454157451" prettyname="Stream Incoming">
+			<xml_tag title="Untitled Web Display" web_width="1920" web_height="1080" web_url="http://twitch.felocity.com/splash/incoming/" web_transparent="0" web_shutdown_when_inactive="1" web_override_css="" isGameshow="1" isUstream="0"/>
+		</source>
+		<source unique_id="EB318200-54DA-4409-BF2C-4D6C32C8C180" factoryGUID="CABB740E-B023-4F82-832F-335454157451" manuallyAddedSource="1" localizedDisplayName="Untitled Web Display" localizedGroupingName="Web Display" hasAudio="0" hasVideo="1" groupGUID="CABB740E-B023-4F82-832F-335454157451" prettyname="Stream Outgoing">
+			<xml_tag title="Untitled Web Display" web_width="1920" web_height="1080" web_url="http://twitch.felocity.com/splash/outgoing/" web_transparent="0" web_shutdown_when_inactive="1" web_override_css="" isGameshow="1" isUstream="0"/>
+		</source>
+		<source unique_id="7E892228-6314-4070-AEA2-BAC511DB3556" factoryGUID="CABB740E-B023-4F82-832F-335454157451" manuallyAddedSource="1" localizedDisplayName="Untitled Web Display" localizedGroupingName="Web Display" hasAudio="0" hasVideo="1" groupGUID="CABB740E-B023-4F82-832F-335454157451" prettyname="Muxy - Destiny">
+			<xml_tag title="Untitled Web Display" web_width="682" web_height="210" web_url="http://a.muxy.io/alert/jakobox/srX-UDXTDVsAURa8mWWdPkAVxz0NA94E" web_transparent="1" web_shutdown_when_inactive="1" web_override_css="" isGameshow="1" isUstream="0"/>
+		</source>
+	</source_configurations>
+	<document_thumbnail thumbnail="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"/>
+	<game_overlay_position/>
+	<screename/>
+	<assets>
+		<asset name="Clear Layer" unique_id="A7AF8F71-0664-4BFA-93CC-53080FE9372B_shot" type="shot" media-type="9" vam_state="5" created_for_layer="5" blank_shot="1"/>
+		<asset name="Clear Layer" unique_id="1CB04420-86E5-40D8-B52A-AD2FA1A555E5_shot" type="shot" media-type="9" vam_state="3" created_for_layer="1" blank_shot="1"/>
+		<asset name="Clear Layer" unique_id="C1177744-CA7E-463E-BFA9-29680CDCA8BC_shot" type="shot" media-type="9" vam_state="3" created_for_layer="2" blank_shot="1"/>
+		<asset name="Clear Layer" unique_id="447932E1-EAF9-401D-9255-BB45C80AD2E8_shot" type="shot" media-type="9" vam_state="1" created_for_layer="3" blank_shot="1"/>
+		<asset name="Clear Layer" unique_id="2F6B8C5F-FAB3-4A4E-858D-29B99D6282C9_shot" type="shot" media-type="9" vam_state="1" created_for_layer="4" blank_shot="1"/>
+		<asset name="Destiny Overlay" unique_id="E3391F70-7CFD-4D8C-AE6B-8A87B7F20A06_shot" type="shot" media-type="9" vam_state="12" created_for_layer="1" veil_track_count="0" still_image_tracks="0" audio_tracks="2" video_tracks="3" alpha_track_count="3"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="535A940A-B179-47D3-ACB7-BE2141FAC27D" name="Destiny Overlay" video_tracks="1" audio_tracks="0" alpha_track_count="1" sourceGUID="CABB740E-B023-4F82-832F-335454157451" square_pixel_width="1920" square_pixel_height="1080"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="8BBF3222-6534-41D6-9EAD-2AB1E7BF6E8F" name="Stream Incoming" video_tracks="1" audio_tracks="0" alpha_track_count="1" square_pixel_width="1920" sourceGUID="CABB740E-B023-4F82-832F-335454157451" square_pixel_height="1080"/>
+		<asset name="Stream Incoming" unique_id="850D7F27-3777-4BB1-9530-1B653299611F_shot" type="shot" media-type="9" vam_state="2" veil_track_count="0" alpha_track_count="1" audio_tracks="0" video_tracks="1" still_image_tracks="0" created_for_layer="5"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="EB318200-54DA-4409-BF2C-4D6C32C8C180" name="Stream Outgoing" video_tracks="1" audio_tracks="0" alpha_track_count="1" sourceGUID="CABB740E-B023-4F82-832F-335454157451" square_pixel_height="1080" square_pixel_width="1920"/>
+		<asset name="Stream Outgoing" unique_id="8761A653-6595-4B66-95F8-0FD33B0E5882_shot" type="shot" media-type="9" vam_state="0" veil_track_count="0" alpha_track_count="1" audio_tracks="0" video_tracks="1" still_image_tracks="0" created_for_layer="5"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="7E892228-6314-4070-AEA2-BAC511DB3556" name="Muxy - Destiny" video_tracks="1" audio_tracks="0" alpha_track_count="1" square_pixel_height="210" square_pixel_width="682" sourceGUID="CABB740E-B023-4F82-832F-335454157451"/>
+		<asset media-type="3" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="pc-audio-capture~System Audio Capture" name="System Audio Capture" video_tracks="0" audio_tracks="1" sourceGUID="F5E735BC-09C6-EE3E-1003-0BB38045D978" short_name="System Audio Capture"/>
+		<asset name="Game" unique_id="8927A20C-216D-4768-ACBD-C78A7DC027F2_shot" type="shot" media-type="9" vam_state="12" veil_track_count="0" still_image_tracks="0" audio_tracks="1" video_tracks="1" alpha_track_count="1" created_for_layer="2"/>
+		<asset media-type="3" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="System Device~XI100DUSB-HDMI Audio" name="Magewell HDMI Audo Capture" video_tracks="0" audio_tracks="1" sourceGUID="72550C07-A0B9-9E0A-FFBA-EF9F137860D6" short_name="Magewell HD...udo Capture"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="System Device~XI100DUSB-HDMI Video" name="Magewell HDMI Capture" video_tracks="1" audio_tracks="0" alpha_track_count="1" square_pixel_height="1080" sourceGUID="72550C07-A0B9-9E0A-FFBA-EF9F137860D6" square_pixel_width="1920"/>
+		<asset media-type="2" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="System Device~HD Pro Webcam C920 Video" name="HD Pro Webcam C920 Video" video_tracks="1" audio_tracks="0" alpha_track_count="1" square_pixel_width="1920" square_pixel_height="1080" sourceGUID="72550C07-A0B9-9E0A-FFBA-EF9F137860D6"/>
+		<asset media-type="3" type="vaSourcesManager" url="vaSourcesManager::URL" unique_id="System Device~ZEDi10 Audio" name="ZEDi10 Audio" video_tracks="0" audio_tracks="1" short_name="ZEDi10 Audio" sourceGUID="72550C07-A0B9-9E0A-FFBA-EF9F137860D6"/>
+	</assets>
+	<xml_tag/>
+	<shots>
+		<shot event_type="2" unique_id="A7AF8F71-0664-4BFA-93CC-53080FE9372B_shot"/>
+		<shot event_type="2" unique_id="1CB04420-86E5-40D8-B52A-AD2FA1A555E5_shot"/>
+		<shot event_type="2" unique_id="C1177744-CA7E-463E-BFA9-29680CDCA8BC_shot"/>
+		<shot event_type="2" unique_id="447932E1-EAF9-401D-9255-BB45C80AD2E8_shot"/>
+		<shot event_type="2" unique_id="2F6B8C5F-FAB3-4A4E-858D-29B99D6282C9_shot"/>
+		<shot event_type="2" unique_id="E3391F70-7CFD-4D8C-AE6B-8A87B7F20A06_shot">
+			<event event_type="4" zorder="5" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" ro_user_scale="0.5,0.5" obj_scale="0.21875,0.224074" obj_pos="-2.79127,0.0717811" obj_crop_rect="540,298,540,298" unique_id="System Device~HD Pro Webcam C920 Video">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+			<event event_type="4" zorder="10" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" unique_id="535A940A-B179-47D3-ACB7-BE2141FAC27D">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+			<event event_type="4" zorder="15" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" obj_scale="0.532812,0.291667" obj_pos="1.6725,0.924444" unique_id="7E892228-6314-4070-AEA2-BAC511DB3556" ro_user_scale="1.5,1.5">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+			<event event_type="4" zorder="20" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" obj_trans="0" unique_id="pc-audio-capture~System Audio Capture" volume="1.99431">
+					<event event_type="1" channel_id="1" ro_media_type="1635083375"/>
+					<xml_tag name="pluginChain">
+						<xml_tag value="dlST" name="plugin"/>
+					</xml_tag>
+				</event>
+			</event>
+			<event event_type="4" zorder="25" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" obj_trans="0" unique_id="System Device~ZEDi10 Audio">
+					<event event_type="1" channel_id="1" ro_media_type="1635083375"/>
+				</event>
+			</event>
+		</shot>
+		<shot event_type="2" unique_id="850D7F27-3777-4BB1-9530-1B653299611F_shot">
+			<event event_type="4" zorder="5" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" unique_id="8BBF3222-6534-41D6-9EAD-2AB1E7BF6E8F">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+		</shot>
+		<shot event_type="2" unique_id="8761A653-6595-4B66-95F8-0FD33B0E5882_shot">
+			<event event_type="4" zorder="5" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" unique_id="EB318200-54DA-4409-BF2C-4D6C32C8C180">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+		</shot>
+		<shot event_type="2" unique_id="8927A20C-216D-4768-ACBD-C78A7DC027F2_shot">
+			<event event_type="4" zorder="5" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" ro_respect_aspect_ratio="1" unique_id="System Device~XI100DUSB-HDMI Video">
+					<event event_type="1" channel_id="1" ro_media_type="1986618479"/>
+				</event>
+			</event>
+			<event event_type="4" zorder="10" unique_id="one_quad">
+				<event event_type="2" channel_id="1" respect_actual_size="1" obj_trans="0" unique_id="System Device~XI100DUSB-HDMI Audio" volume="0.225162">
+					<event event_type="1" channel_id="1" ro_media_type="1635083375"/>
+				</event>
+			</event>
+		</shot>
+	</shots>
+</document>
