@@ -15,6 +15,7 @@ var BABEL_DIRS = [
 // webpack config proper
 var config = {
   entry: {
+    generic: [APP_DIR + "/generic/app.js"],
     destiny: [APP_DIR + "/destiny/app.js"],
     incoming: [APP_DIR + "/incoming/app.js"],
     outgoing: [APP_DIR + "/outgoing/app.js"]
