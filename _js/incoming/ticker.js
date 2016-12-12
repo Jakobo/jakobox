@@ -10,7 +10,7 @@ const items = [
   "I'm not a naturally organized person. Thankfully, there's technology!",
   "The first game Jakob ever beat was Ninja Gaiden 2.",
   "Get more Gear, Guns, Games, and Rigs at 3gr.tv",
-  "Only on XB1. Street Fighter V wasn't a compelling enough reason to buy another system"
+  "In \"Behind the Stream\" in Creative, we'll dig into the application behind this stream."
 ];
 
 export default items;

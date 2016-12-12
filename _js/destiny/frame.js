@@ -6,6 +6,8 @@ import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 import items from "./ticker"
 
+import Logo from "../styles/logo"
+
 import Omnibar from "../lib/omnibar"
 
 /*
@@ -39,7 +41,7 @@ const styles = {
       background: "url(http://cdn-thumbthrone.s3.amazonaws.com/wp-content/uploads/2014/09/Destiny_20140913173803.jpg) top left no-repeat"
     }
   },
-  testFollow: {
+  follow: {
     border: "0",
     width: "682px",
     height: "210px",
@@ -68,7 +70,7 @@ const styles = {
       left: "0px",
       top: "1032px",
       background: "rgba(30, 30, 30, 0.5)",
-      border: "4px solid rgba(255, 83, 39, 0.7)",
+      borderTop: "4px solid rgba(255, 83, 39, 0.7)",
       borderLeft: "0",
       borderRight: "0",
       borderBottom: "0",
@@ -79,7 +81,7 @@ const styles = {
       position: "relative",
       width: "1920px",
       height: "57px",
-      border: "2px solid rgba(0, 0, 0, 0.2)",
+      borderTop: "2px solid rgba(0, 0, 0, 0.2)",
       borderLeft: "0",
       borderRight: "0",
       borderBottom: "0"
@@ -114,42 +116,10 @@ const styles = {
     }
   },
   logo: {
-    base: {
-      display: "block",
-      overflow: "visible",
-      position: "absolute"
-    },
-    text: {
-      fontSize: "55px",
-      fontFamily: "HelveticaNeue-CondensedBlack",
-      fontWeight: 600,
-      fontStretch: "condensed",
-      color: "#fff"
-    },
-    stroke: {
-      fill: "#fff",
-      stroke: "#000",
-      strokeWidth: "2"
-    },
-    mediumStroke: {
-      strokeWidth: "6"
-    },
-    heavyStroke: {
-      strokeWidth: "8"
-    },
-    jako: {
-      top: "-43px",
-      left: "6px"
-    },
-    box: {
-      height: "85px",
-      left: "36px",
-      top: "-62px"
-    },
-    ox: {
-      top: "-43px",
-      left: "198px"
-    }
+    position: "absolute",
+    left: "8px",
+    top: "-55px",
+    transform: "scale(0.7)"
   },
   cam: {
     base: {
@@ -223,10 +193,7 @@ const Frame = (props) => {
     (styles.frame[props.background]) ? styles.frame[props.background] : {}
   )
 
-  let follows = null;
-  if (props.showFollows) {
-    follows = <iframe style={styles.testFollow} src="http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" border="0" seamless="seamless" />
-  }
+  const followUrl = (props.fakeFollows) ? "http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" : "http://a.muxy.io/alert/jakobox/srX-UDXTDVsAURa8mWWdPkAVxz0NA94E"
 
   return <div style={frameStyles}>
     <div style={styles.omnibar.base}>
@@ -242,19 +209,10 @@ const Frame = (props) => {
         <div style={styles.cam.accentTop}></div>
         <div style={styles.cam.accentRight}></div>
 
-        <svg style={Object.assign({}, styles.logo.base, styles.logo.text, styles.logo.stroke, styles.logo.jako)} xmlns="http://www.w3.org/2000/svg" width="150" height="42" viewBox="0 0 150 42">
-          <text x="0" y="42">JAKO</text>
-        </svg>
-        <svg style={Object.assign({}, styles.logo.base, styles.logo.box)}  xmlns="http://www.w3.org/2000/svg" width="250" height="289" viewBox="0 0 250 289">
-          <path id="Inside" style={Object.assign({}, styles.logo.stroke, styles.logo.mediumStroke)} d="M168,122.01v49.957L126.025,197,82.982,171.967V122.01l43.043-26.038Z"/>
-          <path id="Outside" style={Object.assign({}, styles.logo.stroke, styles.logo.heavyStroke)} d="M124.433,231.815l73.559-42.841V103.317L126.025,61,82.982,86V36.04L126.025,9.991,239.95,78.049V213.007L126.025,278.955l-43.043-23L51.972,237.991l0.639-.365-0.639.342L10.028,214.025V78.049L51.972,54.007V188.974Z"/>
-        </svg>
-        <svg style={Object.assign({}, styles.logo.base, styles.logo.text, styles.logo.stroke, styles.logo.ox)}  xmlns="http://www.w3.org/2000/svg" width="75" height="42" viewBox="0 0 75 42">
-          <text x="0" y="42">OX</text>
-        </svg>
+        <div style={styles.logo}><Logo spin={false} infinite={false} spinEvery={13} cubeStroke={10}></Logo></div>
       </div>
     </div>
-    {follows}
+    <iframe style={styles.follow} src={followUrl} seamless="seamless" />
   </div>
 };
 

@@ -5,7 +5,7 @@ import Radium from "radium"
 import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 
-import Logo from "./logo"
+import Logo from "../styles/logo"
 import Cam from "./cam"
 
 const styles = {

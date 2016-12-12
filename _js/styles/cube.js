@@ -32,7 +32,7 @@ const styles = {
     animationName: animation.spinOne
   },
   spinAlways: {
-    animation: "spinCubeAlways 15s linear infinite",
+    animation: "spinCubeAlways 45s linear infinite",
     animationName: animation.spinCube
   },
   sides: {
@@ -44,7 +44,9 @@ const styles = {
       background: "#000",
       boxShadow: "inset 0 0 30px rgba(255,255,255,0.4)",
       boxSizing: "border-box",
-      border: "1px solid #fff"
+      borderWidth: "1px",
+      borderStyle: "solid",
+      borderColor: "#fff"
     },
     back:   { transform: "translateZ(-75px) rotateY(180deg)" },
     right:  { transform: "rotateY(-270deg) translateX(75px)", transformOrigin: "top right" },

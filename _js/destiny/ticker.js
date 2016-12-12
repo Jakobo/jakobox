@@ -12,7 +12,9 @@ const items = [
   "If I had to pick a favorite alcohol, it'd be bourbon.",
   "Have feedback on the stream? Whisper/message me. I'm always looking to improve!",
   "Without a regular schedule, the best way to catch me is to follow the stream.",
-  "I love absolutely terrible movies. Like, really terrible movies..."
+  "I love absolutely terrible movies. Like, really terrible movies...",
+  "In \"Behind the Stream\" in Creative, we'll dig into the application behind this stream.",
+  "When not sporting UR, I'll often take a scout rifle into the Crucible."
 ];
 
 export default items;

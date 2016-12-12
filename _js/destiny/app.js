@@ -10,7 +10,7 @@ import params from "../lib/url"
 
 const background = params.background || "none";
 const timer = params.timer || 37000;
-const showFollows = params.showFollows || false;
+const fakeFollows = params.fakeFollows || false;
 
 // here we go...
-render(<StyleRoot><Frame background={background} timer={timer} showFollows={showFollows}/></StyleRoot>, document.getElementById('app'));
+render(<StyleRoot><Frame background={background} timer={timer} fakeFollows={fakeFollows}/></StyleRoot>, document.getElementById('app'));
