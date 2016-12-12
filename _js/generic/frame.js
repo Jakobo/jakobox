@@ -1,4 +1,4 @@
-import React from "react"
+import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
@@ -6,6 +6,7 @@ import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 
 import Logo from "./logo"
+import Cam from "./cam"
 
 const styles = {
   frame: {
@@ -28,30 +29,181 @@ const styles = {
   },
   logo: {
     position: "absolute"
+  },
+  cam: {
+    position: "absolute"
+  },
+  follows: {
+    position: "absolute",
+    border: "0px solid transparent",
+    width: "405px",
+    height: "35px",
+    filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.75))",
+    transform: "translateZ(0)",
+    backfaceVisibility: "hidden",
+    perspective: 1000
   }
 };
 
-const logoXY = (x = "left", y = "top") => {
-  const xs = {
-    left: 0,
-    center: 730,
-    right: 1470
-  };
-  const ys = {
-    top: 0,
-    lowthird: 847,
-    bottom: 979
-  };
-  return {
-    left: ((typeof xs[x] != "undefined") ? xs[x] : xs.left) + "px",
-    top: ((typeof ys[y] != "undefined") ? ys[y] : xs.left) + "px",
-  };
+const positions = {
+  logo: {
+    1:  [0, 0],
+    2:  [730, 0],
+    3:  [1470, 0],
+    4:  false,
+    5:  false,
+    6:  [0, 847],
+    7:  [1470, 847],
+    8:  [0, 979],
+    9:  [730, 979],
+    10: [1470, 979]
+  },
+  box: {
+    1:  [10, 0],
+    2:  [916, 0],
+    3:  [1833, 0],
+    4:  false,
+    5:  false,
+    6:  false,
+    7:  false,
+    8:  [10, 976],
+    9:  [916, 976],
+    10: [1833, 976]
+  },
+  cam: { /* 442 x 268 */
+    1:  [0, 0],
+    2:  [753, 0],
+    3:  [1493, 0],
+    4:  [0, 240],
+    5:  [1493, 240],
+    6:  [0, 520],
+    7:  [1493, 520],
+    8:  [0, 828],
+    9:  [753, 828],
+    10: [1493, 828]
+  },
+  logoCam: {
+    1:  [8, 230],
+    2:  false,
+    3:  [1543, 230],
+    4:  false,
+    5:  false,
+    6:  false,
+    7:  false,
+    8:  [8, 747],
+    9:  false,
+    10: [1543, 747]
+  },
+  boxCam: {
+    1:  [331, 140],
+    2:  [904, 140],
+    3:  [1824, 140],
+    4:  [331, 379],
+    5:  [1824, 379],
+    6:  [331, 659],
+    7:  [1824, 659],
+    8:  [331, 967],
+    9:  [904, 967],
+    10: [1824, 967],
+    also: {
+      opacity: "0.4"
+    }
+  },
+  follow: {
+    1:  [425, 0],
+    2:  [1175, 0],
+    3:  [1090, 0],
+    4:  [425, 456],
+    5:  [1090, 456],
+    6:  [425, 737],
+    7:  [1090, 737],
+    8:  [425, 1044],
+    9:  [350, 1044],
+    10: [1090, 1044]
+  }
 }
 
-const stroke = (text, style) => {
-  return <div style={style}>
-    <div style={Object.assign({}, styles.stroke, typography.base)}>{text}</div><div style={Object.assign({}, styles.strokeFill, typography.base)}>{text}</div>
-  </div>
+const follows = {
+  positions: {
+    1:  "leftTop",
+    2:  "leftTop",
+    3:  "rightTop",
+    4:  "leftBottom",
+    5:  "rightBottom",
+    6:  "leftBottom",
+    7:  "rightBottom",
+    8:  "leftBottom",
+    9:  "rightBottom",
+    10: "rightBottom"
+  },
+  leftTop: {
+    demo: "http://u.muxy.io/dashboard/alerts/demo/_ivbIhS6wtUryeSWwStye-V3td-UcihR",
+    actual: "http://a.muxy.io/alert/jakobox/Hp5__2JcmNnT-IUGbMuABxhzymGMyRJ_"
+  },
+  leftBottom: {
+    demo: "http://u.muxy.io/dashboard/alerts/demo/8UHzd1WBsL9KzrZR0SROyuxQxSamCdJG",
+    actual: "http://a.muxy.io/alert/jakobox/jBPhN9c41U4PzUQTxe1sVhy8dKg1J0-9"
+  },
+  rightTop: {
+    demo: "http://u.muxy.io/dashboard/alerts/demo/u63HJH2IRdvX6jZgylkOdh4BkQZhbOIA",
+    actual: "http://a.muxy.io/alert/jakobox/XBIsxnQjoZwYKcqkzXZ1Xd_7Q9x5lCK8"
+  },
+  rightBottom: {
+    demo: "http://u.muxy.io/dashboard/alerts/demo/f0Py8FO3adoYs8q6dS6KF9TvgFgs5IgH",
+    actual: "http://a.muxy.io/alert/jakobox/DFN18EsYcVKcKam_i22EPMP8PAKhdwYt"
+  }
+}
+
+const getFollowsUrl = (pos, demo) => {
+  return follows[follows.positions[pos]][(demo) ? "demo" : "actual"]
+}
+
+const getXY = (obj, camPos, logoPos, boxOnly) => {
+  const fmt = (xy, pos) => {
+    if (!xy[pos]) {
+      pos = 1;
+    }
+
+    return Object.assign({},
+      {
+        left: `${xy[pos][0]}px`,
+        top: `${xy[pos][1]}px`
+      },
+      xy.also || {}
+    );
+  }
+
+  if (obj == "follow") {
+    return fmt(positions.follow, camPos);
+  }
+
+  if (obj == "cam") {
+    return fmt(positions.cam, camPos);
+  }
+
+  if (camPos === logoPos) {
+    if (boxOnly) {
+      return fmt(positions.boxCam, logoPos);
+    }
+    else {
+      return fmt(positions.logoCam, logoPos);
+    }
+  }
+  else {
+    if (boxOnly) {
+      return fmt(positions.box, logoPos);
+    }
+    else {
+      return fmt(positions.logo, logoPos);
+    }
+  }
+
+
+  let ret = (obj == "cam") ? positions.cam : positions.logo;
+
+  if (boxOnly && obj == "logo") {
+    ret = positions.box;
+  }
 }
 
 const Frame = (props) => {
@@ -60,50 +212,31 @@ const Frame = (props) => {
     (styles.frame[props.background]) ? styles.frame[props.background] : {}
   )
 
-  let follows = null;
-  if (props.showFollows) {
-    follows = <iframe style={styles.testFollow} src="http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" border="0" seamless="seamless" />
-  }
+  const camOverrides = getXY("cam", props.cam, props.logo, props.useBox);
+  const logoOverrides = getXY("logo", props.cam, props.logo, props.useBox);
+  const followOverrides = getXY("follow", props.cam, props.logo, props.useBox);
 
   return <div style={frameStyles}>
-    <div style={Object.assign({}, styles.logo, logoXY(props.logoX, props.logoY))}><Logo spin={true} infinite={true}></Logo></div>
+    <iframe style={Object.assign({}, styles.follows, followOverrides)} src={getFollowsUrl(props.cam, props.fakeFollows)} seamless="seamless" />
+    <div style={Object.assign({}, styles.cam, camOverrides)}><Cam></Cam></div>
+    <div style={Object.assign({}, styles.logo, logoOverrides)}><Logo spin={true} infinite={true} text={!props.useBox}></Logo></div>
   </div>
 };
 
-/*
-stroke: {
-  position: "absolute",
-  WebkitTextStroke: "0.2em #000",
-  textStroke: "0.2em #000",
-  left: "0",
-  zIndex: "-1"
-},
-strokeFill: {
-  position: "relative",
-  background: "transparent",
-  color: "#fff",
-  textShadow: "2px 2px 0 rgba(0, 0, 0, 0.2)"
-},
-<div style={styles.logo}>
-  <svg style={Object.assign({}, styles.logo.base, styles.logo.text, styles.logo.stroke, styles.logo.jako)} xmlns="http://www.w3.org/2000/svg" width="150" height="42" viewBox="0 0 150 42">
-    <text x="0" y="42">JAKO</text>
-  </svg>
-  <svg style={Object.assign({}, styles.logo.base, styles.logo.box)}  xmlns="http://www.w3.org/2000/svg" width="250" height="289" viewBox="0 0 250 289">
-    <path id="Inside" style={Object.assign({}, styles.logo.stroke, styles.logo.mediumStroke)} d="M168,122.01v49.957L126.025,197,82.982,171.967V122.01l43.043-26.038Z"/>
-    <path id="Outside" style={Object.assign({}, styles.logo.stroke, styles.logo.heavyStroke)} d="M124.433,231.815l73.559-42.841V103.317L126.025,61,82.982,86V36.04L126.025,9.991,239.95,78.049V213.007L126.025,278.955l-43.043-23L51.972,237.991l0.639-.365-0.639.342L10.028,214.025V78.049L51.972,54.007V188.974Z"/>
-  </svg>
-  <svg style={Object.assign({}, styles.logo.base, styles.logo.text, styles.logo.stroke, styles.logo.ox)}  xmlns="http://www.w3.org/2000/svg" width="75" height="42" viewBox="0 0 75 42">
-    <text x="0" y="42">OX</text>
-  </svg>
-</div>
-{follows}
-<div style={styles.cam.base}>
-  <div style={styles.cam.reset}>
-    <div style={styles.cam.frame}></div>
-    <div style={styles.cam.accentTop}></div>
-    <div style={styles.cam.accentLeft}></div>
-  </div>
-</div>
-*/
+Frame.propTypes = {
+  cam: PropTypes.number,
+  logo: PropTypes.number,
+  useBox: PropTypes.bool,
+  fakeFollows: PropTypes.bool,
+  background: PropTypes.string
+};
+
+Frame.defaultProps = {
+  cam: 1,
+  logo: 1,
+  useBox: false,
+  fakeFollows: false,
+  background: ""
+};
 
 export default Radium(Frame);

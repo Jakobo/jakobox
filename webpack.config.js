@@ -27,8 +27,9 @@ var config = {
   },
   module : {
     loaders : [
-      { test: /\.jsx?/, include: BABEL_DIRS, loader: 'babel' },
-      { test: /\.svg$/, loader: 'babel!svg-react' }
+      { test: /\.json$/, loader: "json-loader" },
+      { test: /\.jsx?/, include: BABEL_DIRS, loader: "babel" },
+      { test: /\.svg$/, loader: "babel!svg-react" }
     ]
   },
 };
