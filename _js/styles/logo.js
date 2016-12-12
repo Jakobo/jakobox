@@ -154,8 +154,10 @@ class SpinEveryHOC extends React.Component {
 
   render() {
     let propset = Object.assign({}, this.props);
-    propset.spin = this.state.spin;
-    delete propset["spinEvery"];
+    if (this.props.spinEvery > 0) {
+      propset.spin = this.state.spin;
+      delete propset["spinEvery"];
+    }
     return <Logo {...propset}></Logo>
   }
 }
