@@ -9,19 +9,47 @@ import items from "./ticker"
 
 import Countdown from "../lib/countdown"
 import Omnibar from "../lib/omnibar"
+import Logo from "../styles/logo"
+
+const animation = {
+  fadeOut: Radium.keyframes({
+    "0%":   { opacity: 1 },
+    "30%": { opacity: 0 },
+    "100%": { opacity: 0 }
+  }),
+  bgColor: Radium.keyframes({
+    "0%":   {  },
+    "30%": { background: "#2A2A5C" },
+    "100%": { background: "#000" }
+  })
+}
 
 const styles = {
   frame: {
     chroma: {
       background: "#0f0"
+    },
+    toCubecolor: {
+      animation: "bgColor 3s ease-in forwards",
+      animationName: animation.bgColor
     }
   },
   note: Object.assign({}, typography.base, {
     position: "absolute",
-    top: "715px",
+    top: "645px",
     left: "1050px",
     fontSize: "48px"
   }),
+  logo: {
+    position: "absolute",
+    left: "83px",
+    top: "343px",
+    transform: "scale(3.8)"
+  },
+  fadeOut: {
+    animation: "fadeOut 3s ease-in forwards",
+    animationName: animation.fadeOut
+  },
   countdown: {
     placement: {
       width: "1920px",
@@ -66,35 +94,15 @@ const countdownColon = (str) => {
 const Frame = Radium((props) => {
   const frameStyles = Object.assign({},
     overlay.base,
-    (styles.frame[props.background]) ? styles.frame[props.background] : {}
+    (styles.frame[props.background]) ? styles.frame[props.background] : {},
+    (props.done) ? styles.frame.toCubecolor : {}
   )
 
-  let follows = null;
-  if (props.showFollows) {
-    follows = <iframe style={styles.testFollow} src="https://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" border="0" seamless="seamless" />
-  }
-
   return <div style={frameStyles}>
-    <Omnibar delay={props.timer} onStyleIn={omniIn} onStyleOut={omniOut} onNoStyle={omniNo} items={items} />
-    <div style={Object.assign({}, typography.base, splashStyles.jakoboxText, splashStyles.jako)}>JAKO</div>
-    <div style={Object.assign({}, typography.base, splashStyles.jakoboxText, splashStyles.ox)}>OX</div>
-    <svg style={splashStyles.logo} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 289">
-      <path d="M124.433,231.815l73.559-42.841V103.317L126.025,61,82.982,86V36.04L126.025,9.991,239.95,78.049V213.007L126.025,278.955l-43.043-23L51.972,237.991l0.639-.365-0.639.342L10.028,214.025V78.049L51.972,54.007V188.974"/>
-    </svg>
-    <div style={Object.assign({}, splashStyles.cube.placement, (props.done) ? splashStyles.cube.zoomIn : {})}>
-      <div style={splashStyles.cube.reset}>
-        <div style={Object.assign({}, splashStyles.cube.container)}>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.front, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.back, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.top, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.bottom, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.left, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-          <b style={Object.assign({}, splashStyles.cube.sides.all, splashStyles.cube.sides.right, (props.done) ? splashStyles.cube.sides.removeEdges : {})}></b>
-        </div>
-      </div>
-    </div>
-    <h1 style={styles.note}>STREAM IS STARTING SOON</h1>
-    <div style={styles.countdown.placement}><Countdown onStyleNumber={countdownNumber} onStyleColon={countdownColon} onComplete={props.onCountdownComplete} start={props.countdown}/></div>
+    <div style={Object.assign({}, (props.done) ? styles.fadeOut : {})}><Omnibar delay={props.timer} onStyleIn={omniIn} onStyleOut={omniOut} onNoStyle={omniNo} items={items} /></div>
+    <div style={Object.assign({}, styles.logo, (props.done) ? styles.fadeOut : {})}><Logo spin={true} infinite={true} bStrokeColor={"#000"} bFillColor={"#151431"} cubeFillColor={"#2A2A5C"} cubeStrokeColor={"#fff"} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
+    <h1 style={Object.assign({}, styles.note, (props.done) ? styles.fadeOut : {})}>STREAM IS STARTING SOON</h1>
+    <div style={Object.assign({}, styles.countdown.placement, (props.done) ? styles.fadeOut : {})}><Countdown onStyleNumber={countdownNumber} onStyleColon={countdownColon} onComplete={props.onCountdownComplete} start={props.countdown}/></div>
   </div>
 })
 
