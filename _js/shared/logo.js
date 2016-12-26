@@ -4,7 +4,7 @@ import { render } from "react-dom"
 import Radium from "radium"
 
 import typography from "../styles/typography"
-import Cube from "../styles/cube"
+import Cube from "./logo/cube"
 
 const styles = {
   container: {
@@ -196,7 +196,7 @@ class SpinEveryHOC extends React.Component {
         newState.spin = !newState.spin;
         this.setState(newState);
         this.tick();
-      }, this.props.spinEvery * 500);
+      }, this.props.spinEvery * 1000);
     }
   }
 

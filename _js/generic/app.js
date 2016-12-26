@@ -8,11 +8,14 @@ import {StyleRoot, Style} from 'radium';
 import Frame from "./frame"
 import params from "../lib/url"
 
-const background = params.background || "none";
-const fakeFollows = (params.fakeFollows == "true") ? true : false;
-const cam = parseInt(params.cam || 1);
-const logo = parseInt(params.logo || 1);
-const useBox = (params.useBox == "true") ? true : false;
+let props = {
+  background: params.background || "none",
+  fakeFollows: (params.fakeFollows == "true") ? true : false,
+  cam: parseInt(params.cam || 0),
+  logo: parseInt(params.logo || 0),
+  useBox: (params.useBox == "true") ? true : false,
+  noThirds: (params.noThirds == "true") ? true : false
+};
 
 // here we go...
-render(<StyleRoot><Frame background={background} fakeFollows={fakeFollows} cam={cam} logo={logo} useBox={useBox} /></StyleRoot>, document.getElementById('app'));
+render(<StyleRoot><Frame {...props} /></StyleRoot>, document.getElementById('app'));

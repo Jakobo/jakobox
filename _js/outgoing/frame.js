@@ -9,7 +9,7 @@ import items from "./ticker"
 
 import Countdown from "../lib/countdown"
 import Omnibar from "../lib/omnibar"
-import Logo from "../styles/logo"
+import Logo from "../shared/logo"
 
 const styles = {
   frame: {

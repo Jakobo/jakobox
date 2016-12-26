@@ -2,10 +2,12 @@ import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
+import LowerThirds from "../shared/lowerthird"
+
 import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 
-import Logo from "../styles/logo"
+import Logo from "../shared/logo"
 import Cam from "./cam"
 
 const styles = {
@@ -155,7 +157,7 @@ const follows = {
 }
 
 const getFollowsUrl = (pos, demo) => {
-  return follows[follows.positions[pos]][(demo) ? "demo" : "actual"]
+  return follows[follows.positions[pos || 10]][(demo) ? "demo" : "actual"]
 }
 
 const getXY = (obj, camPos, logoPos, boxOnly) => {
@@ -218,8 +220,9 @@ const Frame = (props) => {
 
   return <div style={frameStyles}>
     <iframe style={Object.assign({}, styles.follows, followOverrides)} src={getFollowsUrl(props.cam, props.fakeFollows)} seamless="seamless" />
-    <div style={Object.assign({}, styles.cam, camOverrides)}><Cam></Cam></div>
-    <div style={Object.assign({}, styles.logo, logoOverrides)}><Logo spin={true} infinite={true} text={!props.useBox}></Logo></div>
+    {(props.cam === 0) ? null : <div style={Object.assign({}, styles.cam, camOverrides)}><Cam></Cam></div> }
+    {(props.logo === 0) ? null : <div style={Object.assign({}, styles.logo, logoOverrides)}><Logo spin={true} infinite={true} text={!props.useBox}></Logo></div> }
+    {(props.noThirds) ? null : <LowerThirds></LowerThirds> }
   </div>
 };
 
