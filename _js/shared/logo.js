@@ -1,4 +1,10 @@
-// collapse all logo related stuff into an easy to manage element
+/**
+ * Logo
+ * Manages all logo related behaviors and display. Contains both the
+ * box and non-box versions of the logo.
+ * Strokes, fills, etc can all be controlled via props.
+ */
+
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"

@@ -1,3 +1,7 @@
+/**
+ * Default overlay styles
+ */
+
 export default {
   base: {
     width: "1920px",

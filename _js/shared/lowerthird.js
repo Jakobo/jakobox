@@ -1,4 +1,11 @@
-// collapse all logo related stuff into an easy to manage element
+/**
+ * Lower Thirds
+ * Creates a bottom-right Lower Thirds based on the `Box` logo.
+ * Playlists can be added to LowerThirds, and it will handle dispatching
+ * the correct component with an onComplete callback to handle the next item
+ * in the playlist.
+ */
+
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"

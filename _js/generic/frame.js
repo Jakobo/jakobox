@@ -1,3 +1,14 @@
+/**
+ * Generic twitch stream frame that does all the heavy lifting.
+ * This frame is built such that it can handle a variety of different
+ * logo, cam, and follow positions in addition to turning on/off the
+ * standard LowerThirds option.
+ *
+ * This is a good candidate to refactor later, making a Generic (abstract)
+ * that is used by the Destiny frame, and a Generic (concrete) that is used
+ * by the majority of this code to create the basic frame
+ */
+
 import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"
@@ -8,7 +19,7 @@ import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 
 import Logo from "../shared/logo"
-import Cam from "./cam"
+import Cam from "../shared/cam"
 
 const styles = {
   frame: {

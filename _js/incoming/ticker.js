@@ -1,3 +1,8 @@
+/**
+ * Incoming Stream Ticker Bar. Various items to show while waiting for
+ * the stream to start
+ */
+
 const items = [
   "Welcome to the box!",
   "Wanna talk tech? This stream is all built using the web. Details in the about, or just ask",

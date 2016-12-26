@@ -1,3 +1,13 @@
+/**
+ * Jakobox Cube. The cube that is at the core of the HTML rendered logo.
+ * The `cube` component supports spinning once or spinning in an infinite loop,
+ * the two major ways the cube is displayed.
+ *
+ * To support a variety of contexts, you can also pass in overriding styles
+ * for the cube sides, container, and outermost container (for things like
+ * tilt and rotation)
+ */
+
 import React from "react"
 import { render } from "react-dom"
 import Radium from "radium"

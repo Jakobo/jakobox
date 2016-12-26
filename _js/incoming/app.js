@@ -1,3 +1,8 @@
+/**
+ * Incoming Stream Splash Entry Point
+ * `timer` refers to the rotation of the ticker bar
+ */
+
 // MUST POLYFILL FOR NON-ES2015 ENVIRONMENTS
 import "babel-polyfill"
 
@@ -10,7 +15,6 @@ import params from "../lib/url"
 
 const background = params.background || "none";
 const timer = params.timer || 17000;
-const countdown = params.countdown || "30:00";
 
 // here we go...
-render(<StyleRoot><Frame background={background} timer={timer} countdown={countdown} /></StyleRoot>, document.getElementById('app'));
+render(<StyleRoot><Frame background={background} timer={timer} /></StyleRoot>, document.getElementById('app'));

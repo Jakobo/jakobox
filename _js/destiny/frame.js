@@ -1,3 +1,11 @@
+/**
+ * Destiny Display frame
+ * Does all the heavy lifting for the Destiny twitch frame.
+ * Lays out the objects onto the 1920x1080 screen. This may become
+ * obsolete if the Generic frame style can be leveraged. However, that
+ * might just be premature optimizing.
+ */
+
 import React from "react"
 import { render } from "react-dom"
 import Radium from "radium"

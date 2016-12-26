@@ -1,3 +1,9 @@
+/**
+ * Creates a countdown in the form of 00:00
+ * when the countdown is complete, an onComplete callback is called
+ * to let a parent React Component handle the completion behavior
+ */
+
 import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"

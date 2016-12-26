@@ -1,3 +1,8 @@
+/**
+ * Outgoing Stream Splash Entry Point
+ * `timer` refers to the rotation of the ticker bar
+ */
+
 // MUST POLYFILL FOR NON-ES2015 ENVIRONMENTS
 import "babel-polyfill"
 

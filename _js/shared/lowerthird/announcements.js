@@ -1,4 +1,17 @@
-// random factoid feed
+/**
+ * Announcements Lower Thirds
+ * Displays a set of announcements passed in as an array. Animates them in
+ * a sweeping motion towards the left before clearing.
+ *
+ * Heirarchy:
+ * |- Announcements (root) - selects item, renders an <Announcement>
+ *    |- Announcement - manages animation of a single announcement
+ *
+ * An announcement signals <Announcements> via onComplete, while the root
+ * element can signal completion of all announcements via its props.onComplete
+ * value
+ */
+
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"

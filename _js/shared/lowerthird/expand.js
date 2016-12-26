@@ -1,4 +1,12 @@
-// the expand object displays "Jakobox" before returning to default state
+/**
+ * Expand Effect Lower Thirds
+ * This lower thirds effect moves the Box logo to the left, making room to
+ * show "Jako" to the left side, and "ox" to the right. This lingers for a
+ * moment before returning to the initial state.
+ *
+ * calls props.onComplete when the animation is finished
+ */
+
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"

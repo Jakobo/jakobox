@@ -1,3 +1,8 @@
+/**
+ * Ticker Omnibar. Scrolls information in, then out again, based on a
+ * passed in set of animations
+ */
+
 import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"

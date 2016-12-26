@@ -1,3 +1,8 @@
+/**
+ * Default splash screen styles
+ * TODO remove dead code
+ */
+
 import Radium from "radium"
 
 const animation = {

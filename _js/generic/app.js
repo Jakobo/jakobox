@@ -1,3 +1,9 @@
+/**
+ * Generic Stream Layout
+ * Contains a suite of parameters that can be passed in by URL to create
+ * any number of twitch layouts.
+ */
+
 // MUST POLYFILL FOR NON-ES2015 ENVIRONMENTS
 import "babel-polyfill"
 

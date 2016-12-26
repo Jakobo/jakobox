@@ -1,4 +1,7 @@
-// query options can override
+/**
+ * URL Handler
+ * Create an object of parameters based on the query string information
+ */
 const params = (function(){
   var query = window.ENV || {};
   var a = location.search.substr(1).split('&');

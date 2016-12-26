@@ -1,3 +1,8 @@
+/**
+ * Outgoing Stream Ticker Bar. Various items to show while waiting for
+ * the stream to wrap up
+ */
+
 const items = [
   // "Check out the entire GGGR crew at 3gr.tv or twitch.tv/team/gggr",
   "Thanks again for watching and keeping it fun!",

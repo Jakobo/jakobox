@@ -1,3 +1,7 @@
+/**
+ * Destiny Ticker items
+ */
+
 const items = [
   "Jakob got into streaming, decided to put his programming to use. Now we have this!\nWhat is the box?",
   "Keep it clean, stay respectful, don't be an asshole\nChat rules",

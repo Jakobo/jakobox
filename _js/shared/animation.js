@@ -1,18 +1,27 @@
-// generic animation object
+/**
+ * Animation Timeline Manager
+ * Drives a multi-step animation with a reasonable set of syntaxes.
+ * To drive multiple CSS animations, it will automatically create a nested
+ * <div> container that will move independently. This enables animations to
+ * be scripted with indepentent start/end resolutions.
+ *
+ * Heirarchy:
+ * |- Animation (root) - Takes a timeline of events and creates segments
+ *    |- AnimationSegments - shift() the next segment & creates an AnimationEvent
+ *       |- AnimationEvent - Runs the animation as a CSS3 animation
+ *
+ * Additionally, to help buidling `props.timeline` for management, a `timeline`
+ * object is exported. It has the following methods (chained):
+ * - from(time, styles): initial state at `time`
+ * - to(time, styles): final state at `time`
+ * - timeline(): returns an exported version of the timeline as an array
+ * - duration(): returns the total time (in seconds) of the entire timeline
+ * - raw(): return the raw data object from the timeline
+ */
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-/*
-<Animation segments={[
-  easing: "ease-in-out",
-  duration: 2,
-  frames: {
-    "0%":   { css },
-    "100%": { css }
-  }
-]}>...obj</Animation>
-*/
 const reset = {
   position: "relative"
 };

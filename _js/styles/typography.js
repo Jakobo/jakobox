@@ -1,3 +1,7 @@
+/**
+ * Default typography items
+ */
+
 export default {
   base: {
     fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
