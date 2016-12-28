@@ -9,33 +9,53 @@ import Radium from "radium"
 import overlay from "../styles/overlay"
 import typography from "../styles/typography"
 import splashStyles from "../styles/splash"
+
+import {timeline} from "../shared/animation"
+
+import Omnibar from "../shared/omnibar"
 import items from "./ticker"
 
-import Omnibar from "../lib/omnibar"
 import Logo from "../shared/logo"
 
-const animation = {
-  fadeOut: Radium.keyframes({
-    "0%":   { opacity: 1 },
-    "30%": { opacity: 0 },
-    "100%": { opacity: 0 }
-  }),
-  bgColor: Radium.keyframes({
-    "0%":   {  },
-    "30%": { background: "#2A2A5C" },
-    "100%": { background: "#000" }
-  })
+const omnibarOptions = {
+  width: 1920,
+  height: 30,
+  textStyle: {
+    display: "block",
+    overflow: "visible",
+    fontSize: "30px",
+    fontFamily: "HelveticaNeue",
+    fontWeight: 200,
+    color: "#333",
+    fill: "#333",
+    stroke: "#000",
+    strokeWidth: "0",
+    textAnchor: "middle",
+    filter: "drop-shadow(2px 2px 2px rgba(0,0,0,0.4))",
+    transform: "translateZ(0)",
+    backfaceVisibility: "hidden",
+    perspective: 1000
+  },
+  animation: timeline()
+    .from(0,   { opacity: 0 })
+    .to(0.7,   { opacity: 1 })
+    .from(6.3, { opacity: 1 })
+    .to(7,     { opacity: 0 })
+    .from(0,   { transform: "translateX(960px)" })
+    .to(7,     { transform: "translateX(0)" }, "cubic-bezier(.25, .99, .75, .01)")
 }
 
 const styles = {
   frame: {
     chroma: {
       background: "#0f0"
-    },
-    toCubecolor: {
-      animation: "bgColor 3s ease-in forwards",
-      animationName: animation.bgColor
     }
+  },
+  omnibar: {
+    position: "absolute",
+    left: "480px",
+    top: "810px",
+    width: "1920px"
   },
   note: Object.assign({}, typography.base, {
     position: "absolute",
@@ -48,24 +68,8 @@ const styles = {
     left: "83px",
     top: "343px",
     transform: "scale(3.8)"
-  },
-  fadeOut: {
-    animation: "fadeOut 3s ease-in forwards",
-    animationName: animation.fadeOut
   }
 };
-
-const omniIn = (str) => {
-  return <span style={Object.assign({}, typography.base, splashStyles.omnibar.placement, splashStyles.omnibar.fadeIn)}>{str}</span>
-}
-
-const omniOut = (str) => {
-  return <span style={Object.assign({}, typography.base, splashStyles.omnibar.placement, splashStyles.omnibar.fadeOut)}>{str}</span>
-}
-
-const omniNo = (str) => {
-  return <span style={Object.assign({}, typography.base, splashStyles.omnibar.placement, splashStyles.omnibar.noShow)}>{str}</span>
-}
 
 // layout
 const Frame = Radium((props) => {
@@ -76,7 +80,16 @@ const Frame = Radium((props) => {
   )
 
   return <div style={frameStyles}>
-    <div style={Object.assign({}, (props.done) ? styles.fadeOut : {})}><Omnibar delay={props.timer} onStyleIn={omniIn} onStyleOut={omniOut} onNoStyle={omniNo} items={items} /></div>
+    <div style={Object.assign({}, styles.omnibar)}>
+      <Omnibar
+        loop={true}
+        items={items}
+        width={omnibarOptions.width}
+        height={omnibarOptions.height}
+        animation={omnibarOptions.animation}
+        textStyle={omnibarOptions.textStyle}>
+      </Omnibar>
+    </div>
     <div style={Object.assign({}, styles.logo, (props.done) ? styles.fadeOut : {})}><Logo spin={true} infinite={true} bStrokeColor={"#000"} bFillColor={"#151431"} cubeFillColor={"#2A2A5C"} cubeStrokeColor={"#fff"} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
     <h1 style={Object.assign({}, styles.note, (props.done) ? styles.fadeOut : {})}>STREAM IS STARTING SOON</h1>
   </div>

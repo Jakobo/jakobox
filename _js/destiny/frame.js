@@ -19,7 +19,7 @@ import ExpandingLogo from "../shared/lowerthird/expand"
 import GGGRCobrand from "../shared/lowerthird/gggr"
 import {makeAnnouncements} from "../shared/lowerthird/announcements"
 import {makeWatermark} from "../shared/lowerthird/watermark"
-import destinyFacts from "./ticker.js"
+import destinyFacts from "./facts.js"
 
 const playlist = [
   makeWatermark(6),
