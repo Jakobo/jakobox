@@ -29,7 +29,8 @@ var config = {
     loaders : [
       { test: /\.json$/, loader: "json-loader" },
       { test: /\.jsx?/, include: BABEL_DIRS, loader: "babel" },
-      { test: /\.svg$/, loader: "babel!svg-react" }
+      { test: /\.svg$/, loader: "babel!svg-react" },
+      { test: /\.(png|jpg)$/, loader: 'url-loader' }
     ]
   },
 };

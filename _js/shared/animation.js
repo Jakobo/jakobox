@@ -27,7 +27,7 @@ const reset = {
 };
 
 const AnimationEvent = Radium((props) => {
-  const clean = (o) => {
+  const clean = (o, init) => {
     if ((o.left || o.right || o.top || o.bottom) && !o.position) {
       o.position = "absolute";
     }
@@ -37,7 +37,7 @@ const AnimationEvent = Radium((props) => {
     "0%": clean(props.initialStyle),
     "100%": clean(props.finalStyle)
   });
-  let styles = Object.assign({}, clean(props.initialStyle), {
+  let styles = Object.assign({}, clean(props.initialStyle, true), {
     animation: `placeholder ${props.duration}s ${props.easing} ${props.delay}s forwards`,
     animationName: animation
   });

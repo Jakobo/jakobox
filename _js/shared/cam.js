@@ -7,45 +7,62 @@ import React from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-const styles = {
+const originalStyles = {
   reset: {
-    position: "relative"
+    position: "relative",
+    width: "480px",
+    height: "340px"
   },
-  border: {
-    position: "absolute",
+  frame: {
     boxSizing: "borderBox",
     width: "412px",
     height: "237px",
-    borderWidth: "6px",
-    borderStyle: "solid",
-    borderColor: "#2a3f56",
+    border: "6px solid #fff",
     boxShadow: "5px 5px 7px 0px rgba(0,0,0,0.75)",
     left: "0px",
-    top: "0px"
+    top: "50px"
   },
-  accent: {
+  accentTop: {
     position: "absolute",
-    boxSizing: "borderBox",
-    width: "416px",
-    height: "241px",
-    borderWidth: "2px",
-    borderStyle: "solid",
-    borderColor: "#fff",
-    left: "6px",
-    top: "6px"
+    boxSizing: "border-box",
+    borderBottom: "8px solid #fff",
+    borderLeft: "16px solid transparent",
+    height: "0",
+    width: "130px",
+    left: "294px",
+    top: "-7px",
+    zIndex: "2"
+  },
+  accentRight: {
+    position: "absolute",
+    boxSizing: "border-box",
+    borderLeft: "8px solid #fff",
+    borderBottom: "16px solid transparent",
+    width: "0",
+    height: "150px",
+    left: "424px",
+    top: "-7px",
+    filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.75))",
+    transform: "translateZ(0)",
+    backfaceVisibility: "hidden",
+    perspective: 1000
   }
-}
+};
 
-const Cam = (props) => {
-  var localStyles = Object.assign({}, styles);
-  localStyles.border.borderColor = props.color || "#2a3f56";
-  localStyles.accent.borderColor = props.accentColor || "#fff";
-
+const Frame = Radium((props) => {
+  let styles = Object.assign({}, originalStyles);
+  if (props.color) {
+    styles.frame.border = `6px solid ${props.color}`;
+  }
+  if (props.accent) {
+    styles.accentTop.borderBottom = `8px solid ${props.accent}`;
+    styles.accentRight.borderLeft = `8px solid ${props.accent}`;
+  }
   return <div style={styles.reset}>
-    <div style={styles.border}></div>
-    <div style={styles.accent}></div>
-    {props.children}
+    <div style={styles.frame}></div>
+    <div style={styles.accentTop}></div>
+    <div style={styles.accentRight}></div>
   </div>
-}
+});
 
-export default Radium(Cam);
+export default Frame;

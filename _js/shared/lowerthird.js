@@ -10,27 +10,11 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo from "./logo"
+import GGGRCobrand from "./lowerthird/gggr"
 import ExpandingLogo from "./lowerthird/expand"
+import {makeWatermark} from "./lowerthird/watermark"
 
-import {makeAnnouncements} from "./lowerthird/announcements"
-import destinyFacts from "../destiny/ticker.js"
-
-// default component is the spinning logo for X cycles
-const makeDefault = (cycles) => {
-  return (props) => {
-    const timeUntilDone = (cycles || 1) * 45000;
-    window.setTimeout(() => {
-      props.onComplete()
-    }, timeUntilDone);
-    return <div style={props.logoStyle}><Logo spin={true} infinite={true} text={false} /></div>
-  }
-};
-
-const playlists = {
-  default: [makeDefault(6), ExpandingLogo],
-  destiny: [makeAnnouncements(destinyFacts, 3, true)]
-};
+const defaultPlaylist = [makeWatermark(8), ExpandingLogo, GGGRCobrand];
 
 const logoStyle = {
   left: "1800px",
@@ -57,7 +41,7 @@ class LowerThird extends React.Component {
       current: 0
     };
     this.cachebreak = 0;
-    this.playlist = playlists.default.concat(playlists[this.props.playlist] || []);
+    this.playlist = (this.props.playlist) ? this.props.playlist : defaultPlaylist;
     this.onComplete = this.onComplete.bind(this);
   }
 

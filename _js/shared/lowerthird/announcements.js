@@ -16,7 +16,7 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo from "../logo"
+import Logo, {Watermark} from "../logo"
 import Animation, {timeline} from "../animation"
 
 const shuffle = (array) => {
@@ -66,15 +66,14 @@ class Announcements extends React.Component {
 // the announcement fragment handles displaying the announcement with
 // the logo that spins once
 const Announcement = Radium((props) => {
-  const width = props.posX(-5);
+  const width = props.posX(-20);
   const widthRaw = parseInt(width);
 
   const containerStyles = {
     position: "absolute",
     left: "0px",
     top: props.posY(45),
-    width: width,
-    backgroundColor: "#f00"
+    width: width
   };
 
   const textStyles = {
@@ -98,7 +97,11 @@ const Announcement = Radium((props) => {
       fill: "#fff",
       stroke: "#000",
       strokeWidth: "1",
-      textAnchor: "end"
+      textAnchor: "end",
+      filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.75))",
+      transform: "translateZ(0)",
+      backfaceVisibility: "hidden",
+      perspective: 1000
     },
     svgSmall: {
       fontSize: "18px",
@@ -111,19 +114,19 @@ const Announcement = Radium((props) => {
   // fast drift left (line 2 if exists)
   // snap back & fast fade out
   // stall timing based on string size
-  const dT = (props.line1.length > 60) ? 8 : 6;
+  const dT = (props.line1.length > 60) ? 6 : 8;
   const outerMotion = timeline()
     .from(0,      { opacity: 0 })
-    .to(0.3,      { opacity: 1 }, "ease-in")
-    .from(0.1,    { left: "0px" })
-    .to(dT,       { left: "-130px", }, "ease-in-out")
-    .from(dT,     { left: "0px", opacity: 1 })
-    .to(dT + 0.8, { left: "130px", opacity: 0 }, "ease-in");
+    .to(0.3,      { opacity: 1 }, "linear")
+    .from(0.1,    { transform: "translateX(0)" })
+    .to(dT,       { transform: "translateX(-40px)" }, "linear")
+    .from(dT,     { transform: "translateX(0)", opacity: 1 })
+    .to(dT + 0.8, { transform: "translateX(40px)", opacity: 0 }, "linear");
   const innerMotion = timeline()
-    .from(0.1,    { left: "0px" })
-    .to(dT,       { left: "-100px" })
-    .from(dT,     { left: "0px" })
-    .to(dT + 0.5, { left: "50px" })
+    .from(0.1,    { transform: "translateX(0)" })
+    .to(dT,       { transform: "translateX(-100px)" }, "linear")
+    .from(dT,     { transform: "translateX(0)" })
+    .to(dT + 0.8, { transform: "translateX(100px)" }, "linear")
 
   const capLine2 = (props.line2) ? props.line2.toUpperCase() : "";
 

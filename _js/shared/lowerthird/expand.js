@@ -11,7 +11,7 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo from "../logo"
+import Logo, {Watermark} from "../logo"
 import Animation, {timeline} from "../animation"
 
 const oStyles = {
@@ -32,24 +32,30 @@ const oStyles = {
 }
 
 const boxSlide = timeline()
-  .from(0, { left: "0px", transform: "rotateZ(0)", transformOrigin: "43px 52px", width: "86px", height: "104px" })
-  .to(2, { left: "-100px", transform: "rotateZ(-360deg)" }, "ease-in")
+  .from(0, { transform: "translateX(0)" })
+  .to(2, { transform: "translateX(-100px)" }, "ease-in")
+  .from(0, { transform: "rotateZ(0)", transformOrigin: "43px 52px", width: "86px", height: "104px" })
+  .to(2, { transform: "rotateZ(-360deg)" }, "ease-in")
   .from(12, { left: "0px", transform: "rotateZ(0)", transformOrigin: "43px 52px", width: "86px", height: "104px" })
   .to(14, { left: "100px", transform: "rotateZ(360deg)" }, "ease-in-out")
 
 const jakoSlide = timeline()
-  .from(2, { left: "185px", opacity: 0 })
-  .to(2.6, { left: "0px", opacity: 1 })
-  .from(11.4, { left: "0px", opacity: 1 })
-  .to(12, { left: "185px", opacity: 0 })
+  .from(2, { transform: "translateX(185px)", opacity: 0 })
+  .to(2.6, { transform: "translateX(0)", opacity: 1 })
+  .from(11.4, { transform: "translateX(0)", opacity: 1 })
+  .to(12, { transform: "translateX(185px)", opacity: 0 })
 
 const oxSlide = timeline()
-  .from(2, { left: "-85px", opacity: 0 })
-  .to(2.6, { left: "2px", opacity: 1 })
-  .from(11.4, { left: "0px", opacity: 1 })
-  .to(12, { left: "-87px", opacity: 0 })
+  .from(2, { transform: "translateX(-85px)", opacity: 0 })
+  .to(2.6, { transform: "translateX(2px)", opacity: 1 })
+  .from(11.4, { transform: "translateX(0)", opacity: 1 })
+  .to(12, { transform: "translateX(-87px)", opacity: 0 })
 
-const duration = Math.max(boxSlide.duration(), jakoSlide.duration(), oxSlide.duration());
+const duration = Math.max(
+  boxSlide.duration(),
+  jakoSlide.duration(),
+  oxSlide.duration()
+);
 
 // default component is the spinning logo
 const ExpandingLogo = Radium((props) => {
