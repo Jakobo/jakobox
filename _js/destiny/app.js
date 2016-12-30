@@ -18,6 +18,7 @@ import params from "../lib/url"
 
 const background = params.background || "none";
 const fakeFollows = params.fakeFollows || false;
+const demo = params.demo || false;
 
 // here we go...
-render(<StyleRoot><Frame background={background} fakeFollows={fakeFollows}/></StyleRoot>, document.getElementById('app'));
+render(<StyleRoot><Frame background={background} fakeFollows={fakeFollows} demo={demo}/></StyleRoot>, document.getElementById('app'));

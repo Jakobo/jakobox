@@ -29,6 +29,13 @@ const playlist = [
   GGGRCobrand
 ];
 
+const demoPlaylist = [
+  makeAnnouncements(destinyFacts, 3, true),
+  ExpandingLogo,
+  GGGRCobrand,
+  makeWatermark(1)
+];
+
 const styles = {
   frame: {
     chroma: {
@@ -73,7 +80,7 @@ const Frame = (props) => {
   return <div style={frameStyles}>
     <div style={styles.cam}><Cam color={"#2a3f56"} accent={"#df8926"}></Cam></div>
     <iframe style={styles.follow} src={followUrl} seamless="seamless" />
-    <LowerThird playlist={playlist}></LowerThird>
+    <LowerThird playlist={(props.demo) ? demoPlaylist : playlist}></LowerThird>
   </div>
 };
 
