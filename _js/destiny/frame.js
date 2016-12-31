@@ -22,10 +22,11 @@ import {makeWatermark} from "../shared/lowerthird/watermark"
 import destinyFacts from "./facts.js"
 
 const playlist = [
-  makeWatermark(6),
+  makeWatermark(7),
   makeAnnouncements(destinyFacts, 3, true),
-  makeWatermark(1),
+  makeWatermark(2),
   ExpandingLogo,
+  makeWatermark(2),
   GGGRCobrand
 ];
 
