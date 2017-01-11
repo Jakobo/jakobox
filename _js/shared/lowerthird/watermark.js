@@ -18,8 +18,8 @@ const makeWatermark = (cycles) => {
   const cycleTime = 45;
   const fade = timeline()
     .from(0, { opacity: "1" })
-    .to(0.4,   { opacity: "0.6" })
-    .from(cycles * cycleTime - 0.4, { opacity: "0.6" })
+    .to(0.4,   { opacity: "0.8" })
+    .from(cycles * cycleTime - 0.4, { opacity: "0.8" })
     .to(cycles * cycleTime, { opacity: "1" })
   return (props) => {
     window.setTimeout(() => {

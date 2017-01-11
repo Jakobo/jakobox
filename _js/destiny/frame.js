@@ -23,10 +23,10 @@ import destinyFacts from "./facts.js"
 
 const playlist = [
   makeWatermark(7),
-  makeAnnouncements(destinyFacts, 3, true),
-  makeWatermark(2),
   ExpandingLogo,
-  makeWatermark(2),
+  makeAnnouncements(destinyFacts, 3, true),
+  makeWatermark(5),
+  ExpandingLogo,
   GGGRCobrand
 ];
 
