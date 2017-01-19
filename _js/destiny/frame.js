@@ -52,6 +52,9 @@ const styles = {
     },
     local: {
       background: "url(/_assets/screens/destiny.jpg) top left no-repeat"
+    },
+    localib: {
+      background: "url(/_assets/screens/destiny-ib.jpg) top left no-repeat"
     }
   },
   follow: {
@@ -64,7 +67,7 @@ const styles = {
   },
   cam: {
     position: "absolute",
-    top: "400px",
+    top: "460px",
     left: "3px"
   }
 };
