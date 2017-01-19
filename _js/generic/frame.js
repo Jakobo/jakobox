@@ -38,6 +38,9 @@ const styles = {
     },
     ki: {
       background: "url(https://i.ytimg.com/vi/qInozta1EzM/maxresdefault.jpg) top left no-repeat"
+    },
+    local: {
+      background: "url(/_assets/screens/destiny.jpg) top left no-repeat"
     }
   },
   logo: {
@@ -232,7 +235,6 @@ const Frame = (props) => {
   return <div style={frameStyles}>
     <iframe style={Object.assign({}, styles.follows, followOverrides)} src={getFollowsUrl(props.cam, props.fakeFollows)} seamless="seamless" />
     {(props.cam === 0) ? null : <div style={Object.assign({}, styles.cam, camOverrides)}><Cam></Cam></div> }
-    {(props.logo === 0) ? null : <div style={Object.assign({}, styles.logo, logoOverrides)}><Logo spin={true} infinite={true} text={!props.useBox}></Logo></div> }
     {(props.noThirds) ? null : <LowerThirds></LowerThirds> }
   </div>
 };
