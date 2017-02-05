@@ -2,7 +2,7 @@ var webpack = require("webpack");
 var path = require("path");
 
 // directories
-var APP_DIR = path.resolve(__dirname, "_js");
+var APP_DIR = path.resolve(__dirname, "_js", "apps");
 var BUILD_DIR = path.resolve(__dirname, "assets");
 
 // only apply BABEL to these directories... otherwise the build becomes SUPER
