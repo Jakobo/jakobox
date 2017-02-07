@@ -1,4 +1,5 @@
-const storageKey = "jakobox-store";
+const storagePrefix = "jakobox-";
+let key = "";
 
 function wrapAction(action) {
   return {
@@ -7,12 +8,23 @@ function wrapAction(action) {
   }
 }
 
+function storageKey() {
+  return (key) ? storagePrefix + key : null;
+}
+
+export function setStorageKey(newKey) {
+  key = newKey;
+}
+
 export function storageMiddleware() {
+  if (storageKey() === null) {
+    throw new Error("setStorageKey must be called first")
+  }
   return () => next => action => {
     const wrappedAction = wrapAction(action);
 
     localStorage.setItem(
-      storageKey,
+      storageKey(),
       JSON.stringify(wrappedAction)
     );
 
@@ -21,6 +33,9 @@ export function storageMiddleware() {
 }
 
 export function createOnStorage(store) {
+  if (storageKey() === null) {
+    throw new Error("setStorageKey must be called first")
+  }
   return () => {
     const wrappedAction = JSON.parse(localStorage.getItem(storageKey));
     store.dispatch(wrappedAction.action);

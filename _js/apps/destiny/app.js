@@ -13,12 +13,30 @@ import React from "react"
 import { render } from "react-dom"
 import {StyleRoot, Style} from 'radium';
 
-import Frame from "./frame"
-import params from "../lib/url"
+import thunkMiddleware from "redux-thunk"
+import createLogger from "redux-logger"
+import { createStore, applyMiddleware } from "redux"
+import { Provider } from "react-redux"
+import createStore from '../../store';
+import {createOnStorage} from '../../middleware';
 
+const store = createStore();
+const onStorage = createOnStorage(store);
+window.addEventListener('storage', onStorage);
+
+import Frame from "./frame"
+
+import params from "../lib/url"
 const background = params.background || "none";
 const fakeFollows = params.fakeFollows || false;
 const demo = params.demo || false;
 
 // here we go...
-render(<StyleRoot><Frame background={background} fakeFollows={fakeFollows} demo={demo}/></StyleRoot>, document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <StyleRoot>
+      <Frame background={background} fakeFollows={fakeFollows} demo={demo}/>
+    </StyleRoot>
+  </Provider>,
+  document.getElementById('app')
+);
