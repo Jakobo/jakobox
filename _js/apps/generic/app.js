@@ -12,7 +12,7 @@ import { render } from "react-dom"
 import {StyleRoot, Style} from 'radium';
 
 import Frame from "./frame"
-import params from "../lib/url"
+import params from "../../lib/url"
 
 let props = {
   background: params.background || "none",

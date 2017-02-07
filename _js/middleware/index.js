@@ -13,6 +13,7 @@ function storageKey() {
 }
 
 export function setStorageKey(newKey) {
+  console.log(`Using Storage: ${newKey}`);
   key = newKey;
 }
 

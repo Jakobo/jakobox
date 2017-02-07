@@ -13,13 +13,13 @@ import React, { PropTypes } from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import LowerThirds from "../shared/lowerthird"
+import LowerThirds from "../../components/lowerthird"
 
-import overlay from "../styles/overlay"
-import typography from "../styles/typography"
+import overlay from "../../styles/overlay"
+import typography from "../../styles/typography"
 
-import Logo from "../shared/logo"
-import Cam from "../shared/cam"
+import Logo from "../../components/logo"
+import Cam from "../../components/cam"
 
 const styles = {
   frame: {

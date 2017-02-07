@@ -6,16 +6,16 @@ import React from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import overlay from "../styles/overlay"
-import typography from "../styles/typography"
-import splashStyles from "../styles/splash"
+import overlay from "../../styles/overlay"
+import typography from "../../styles/typography"
+import splashStyles from "../../styles/splash"
 
-import {timeline} from "../shared/animation"
+import {timeline} from "../../components/animation"
 
-import Omnibar from "../shared/omnibar"
+import Omnibar from "../../components/omnibar"
 import items from "./ticker"
 
-import Logo from "../shared/logo"
+import Logo from "../../components/logo"
 
 
 const omnibarOptions = {

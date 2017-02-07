@@ -2,6 +2,7 @@ var webpack = require("webpack");
 var path = require("path");
 
 // directories
+var BASE_JS_DIR = path.resolve(__dirname, "_js");
 var APP_DIR = path.resolve(__dirname, "_js", "apps");
 var BUILD_DIR = path.resolve(__dirname, "assets");
 
@@ -9,6 +10,7 @@ var BUILD_DIR = path.resolve(__dirname, "assets");
 // slow! We should only be running babel on the app dir and any node modules
 // that were improperly designed and didn't publish built code
 var BABEL_DIRS = [
+  BASE_JS_DIR,
   APP_DIR
 ];
 

@@ -11,9 +11,14 @@ import lowerthirds from "../ducks/lowerthirds";
 import storage from "../ducks/storage";
 import testdata from "../ducks/testdata";
 
-import {storageMiddleware} from '../middleware';
+import {setStorageKey, storageMiddleware} from '../middleware';
 
-export default function() {
+import thunkMiddleware from "redux-thunk"
+import createLogger from "redux-logger"
+
+const loggerMiddleware = createLogger();
+
+export default function(key) {
   const reducers = combineReducers({
     camera,
     color,
@@ -23,10 +28,16 @@ export default function() {
     testdata
   });
 
+  if (key) {
+    setStorageKey(key);
+  }
+
   return createStore(
     reducers,
     applyMiddleware(
-      storageMiddleware()
+      storageMiddleware(),
+      thunkMiddleware,
+      loggerMiddleware
     )
   );
 }

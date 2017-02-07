@@ -11,7 +11,8 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo, {Watermark} from "../logo"
+import Logo from "../logo"
+import Watermark from "../watermark"
 import Animation, {timeline} from "../animation"
 
 const oStyles = {

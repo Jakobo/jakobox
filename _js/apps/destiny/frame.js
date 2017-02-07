@@ -10,15 +10,15 @@ import React from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import overlay from "../styles/overlay"
+import overlay from "../../styles/overlay"
 
-import LowerThird from "../shared/lowerthird"
-import Cam from "../shared/cam"
+import LowerThird from "../../components/lowerthird"
+import Cam from "../../components/cam"
 
-import ExpandingLogo from "../shared/lowerthird/expand"
-import GGGRCobrand from "../shared/lowerthird/gggr"
-import {makeAnnouncements} from "../shared/lowerthird/announcements"
-import {makeWatermark} from "../shared/lowerthird/watermark"
+import ExpandingLogo from "../../components/lowerthird/expand"
+import GGGRCobrand from "../../components/lowerthird/gggr"
+import {makeAnnouncements} from "../../components/lowerthird/announcements"
+import {makeWatermark} from "../../components/lowerthird/watermark"
 import destinyFacts from "./facts.js"
 
 const playlist = [
