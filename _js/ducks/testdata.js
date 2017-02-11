@@ -1,33 +1,37 @@
-const SET_BACKGROUND = 'testdata/SET_BACKGROUND';
 const SET_FAKE_FOLLOWS = 'testdata/FAKE_FOLLOWS';
+const SET_DEMO_PL = 'testdata/SET_DEMO_PL';
 
 const initialState = {
-  background: null,
-  fakeFollows: false
+  fakeFollows: false,
+  demoPlaylist: false
 };
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
-    case SET_BACKGROUND:
-      newState.background = action.background;
-    break;
     case SET_FAKE_FOLLOWS:
       newState.fakeFollows = action.enabled;
+    break;
+    case SET_DEMO_PL:
+      newState.demoPlaylist = action.enabled;
     break;
   }
 
   return newState;
 }
 
-export function setBackground(background) {
-  return {type: SET_BACKGROUND, background};
-}
-
 export function enableFakeFollows() {
-  return {type: SET_FAKE_FOLLOWS, true};
+  return {type: SET_FAKE_FOLLOWS, enabled: true};
 }
 
 export function disableFakeFollows() {
-  return {type: SET_FAKE_FOLLOWS, false};
+  return {type: SET_FAKE_FOLLOWS, enabled: false};
+}
+
+export function enableDemoPlaylist() {
+  return {type: SET_DEMO_PL, enabled: true};
+}
+
+export function disableDemoPlaylist() {
+  return {type: SET_DEMO_PL, enabled: false};
 }

@@ -23,16 +23,20 @@ window.addEventListener('storage', onStorage);
 
 import Frame from "./frame"
 
-import params from "../../lib/url"
-const background = params.background || "none";
-const fakeFollows = params.fakeFollows || false;
-const demo = params.demo || false;
+import initConsoleActions from "../../lib/console_actions"
+
+initConsoleActions(store);
+
+// import params from "../../lib/url"
+// const background = params.background || "none";
+// const fakeFollows = params.fakeFollows || false;
+// const demo = params.demo || false;
 
 // here we go...
 render(
   <Provider store={store}>
     <StyleRoot>
-      <Frame background={background} fakeFollows={fakeFollows} demo={demo}/>
+      <Frame />
     </StyleRoot>
   </Provider>,
   document.getElementById('app')

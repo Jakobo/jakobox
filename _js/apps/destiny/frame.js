@@ -8,6 +8,7 @@
 
 import React from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
 import overlay from "../../styles/overlay"
@@ -38,26 +39,6 @@ const demoPlaylist = [
 ];
 
 const styles = {
-  frame: {
-    chroma: {
-      background: "#0f0"
-    },
-    pvp: {
-      background: "url(https://i.ytimg.com/vi/KiKMW9RrSIY/maxresdefault.jpg) top left no-repeat"
-    },
-    message: {
-      background: "url(https://ibin.co/2yWLfHG6o1ig.jpg) top left no-repeat"
-    },
-    orbit: {
-      background: "url(http://cdn-thumbthrone.s3.amazonaws.com/wp-content/uploads/2014/09/Destiny_20140913173803.jpg) top left no-repeat"
-    },
-    local: {
-      background: "url(/_assets/screens/destiny.jpg) top left no-repeat"
-    },
-    localib: {
-      background: "url(/_assets/screens/destiny-ib.jpg) top left no-repeat"
-    }
-  },
   follow: {
     border: "0",
     width: "682px",
@@ -76,7 +57,9 @@ const styles = {
 const Frame = (props) => {
   const frameStyles = Object.assign({},
     overlay.base,
-    (styles.frame[props.background]) ? styles.frame[props.background] : {}
+    {
+      background: (props.background.indexOf("http") === 0) ? `url(${props.background}) top left no-repeat` : props.background
+    }
   )
 
   const followUrl = (props.fakeFollows) ? "http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX" : "http://a.muxy.io/alert/jakobox/srX-UDXTDVsAURa8mWWdPkAVxz0NA94E"
@@ -84,8 +67,18 @@ const Frame = (props) => {
   return <div style={frameStyles}>
     <div style={styles.cam}><Cam color={"#2a3f56"} accent={"#df8926"}></Cam></div>
     <iframe style={styles.follow} src={followUrl} seamless="seamless" />
-    <LowerThird playlist={(props.demo) ? demoPlaylist : playlist}></LowerThird>
+    <LowerThird playlist={(props.demoPlaylist) ? demoPlaylist : playlist}></LowerThird>
   </div>
 };
 
-export default Radium(Frame);
+const ConnectedFrame = connect(
+  (state, ownProps) => {
+    return {
+      background: state.background.background,
+      fakeFollows: state.testdata.fakeFollows,
+      demoPlaylist: state.testdata.demoPlaylist
+    }
+  }
+)(Radium(Frame))
+
+export default ConnectedFrame;
