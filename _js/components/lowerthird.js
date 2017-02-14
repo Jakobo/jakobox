@@ -8,13 +8,12 @@
 
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
 import GGGRCobrand from "./lowerthird/gggr"
 import ExpandingLogo from "./lowerthird/expand"
 import {makeWatermark} from "./lowerthird/watermark"
-
-const defaultPlaylist = [makeWatermark(8), ExpandingLogo, GGGRCobrand];
 
 const logoStyle = {
   left: "1800px",
@@ -34,6 +33,9 @@ const posY = (by) => {
   return shift(logoStyle.top, by);
 }
 
+// for now, going to let each LowerThird keep a localized state object
+// long term, this state should go into the redux store, but let's limit
+// the number of moving parts
 class LowerThird extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +43,6 @@ class LowerThird extends React.Component {
       current: 0
     };
     this.cachebreak = 0;
-    this.playlist = (this.props.playlist) ? this.props.playlist : defaultPlaylist;
     this.onComplete = this.onComplete.bind(this);
   }
 
@@ -49,17 +50,36 @@ class LowerThird extends React.Component {
     // attempt to select the next component
     let newState = Object.assign({}, this.state);
     newState.current = newState.current + 1;
-    if (newState.current >= this.playlist.length) {
+    if (newState.current >= this.props.playlist.length) {
       newState.current = 0;
     }
 
     this.setState(newState);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.playlist !== nextProps.playlist) {
+      this.setState(Object.assign({}, this.state, {
+        current: 0
+      }));
+    }
+  }
+
   render() {
-    const Component = this.playlist[this.state.current];
+    if (this.props.playlist.length === 0) {
+      return null;
+    }
+    const Component = this.props.playlist[this.state.current];
     return <div><Component key={this.cachebreak++} onComplete={this.onComplete} posX={posX} posY={posY} logoStyle={logoStyle} /></div>
   }
 }
 
-export default LowerThird;
+const ConnectedLowerThird = connect(
+  (state, ownProps) => {
+    return {
+      playlist: ownProps.playlists[state.lowerthirds.currentPlaylist] || []
+    }
+  }
+)(LowerThird);
+
+export default ConnectedLowerThird;

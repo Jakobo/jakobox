@@ -14,6 +14,7 @@
 
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
 import Logo from "../logo"
@@ -157,11 +158,14 @@ const Announcement = Radium((props) => {
 
 });
 
-const makeAnnouncements = (items, number, shuffle) => {
-  return (props) => {
-    return <Announcements items={items} sample={number} shuffle={shuffle} {...props} />
+const ConnectedAnnouncements = connect(
+  (state, ownProps) => {
+    return {
+      items: state.lowerthirds.ticker.items,
+      number: state.lowerthirds.ticker.size,
+      shuffle: state.lowerthirds.ticker.shuffle
+    }
   }
-}
+)(Announcements)
 
-export {makeAnnouncements};
-export default Announcements;
+export default ConnectedAnnouncements;

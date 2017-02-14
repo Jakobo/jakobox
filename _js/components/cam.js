@@ -5,9 +5,15 @@
 
 import React from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
 const originalStyles = {
+  position: {
+    position: "absolute",
+    left: "0px",
+    right: "0px"
+  },
   reset: {
     position: "relative",
     width: "480px",
@@ -49,7 +55,7 @@ const originalStyles = {
   }
 };
 
-const Frame = Radium((props) => {
+const Cam = Radium((props) => {
   let styles = Object.assign({}, originalStyles);
   if (props.color) {
     styles.frame.border = `6px solid ${props.color}`;
@@ -58,11 +64,27 @@ const Frame = Radium((props) => {
     styles.accentTop.borderBottom = `8px solid ${props.accent}`;
     styles.accentRight.borderLeft = `8px solid ${props.accent}`;
   }
-  return <div style={styles.reset}>
-    <div style={styles.frame}></div>
-    <div style={styles.accentTop}></div>
-    <div style={styles.accentRight}></div>
+  styles.position.left = `${props.x}px`;
+  styles.position.top = `${props.y}px`;
+  
+  return <div style={styles.position}>
+    <div style={styles.reset}>
+      <div style={styles.frame}></div>
+      <div style={styles.accentTop}></div>
+      <div style={styles.accentRight}></div>
+    </div>
   </div>
 });
 
-export default Frame;
+const ConnectedCam = connect(
+  (state, ownProps) => {
+    return {
+      color: ownProps.color || state.color.camera.main,
+      accent: ownProps.accent || state.color.camera.accent,
+      x: ownProps.x || state.camera.x,
+      y: ownProps.y || state.camera.y
+    }
+  }
+)(Radium(Cam))
+
+export default ConnectedCam;

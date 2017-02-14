@@ -11,37 +11,39 @@
 
 import React, { PropTypes } from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
+
+import configure from "./conf"
 
 import LowerThirds from "../../components/lowerthird"
 
 import overlay from "../../styles/overlay"
-import typography from "../../styles/typography"
+import typography from "../../lib/typography"
 
 import Logo from "../../components/logo"
 import Cam from "../../components/cam"
 
+// TODO: replace with Watermark, make lowerthirds support pulling props from playlist
+import {makeWatermark} from "../../components/lowerthird/watermark"
+import ExpandingLogo from "../../components/lowerthird/expand"
+import GGGRCobrand from "../../components/lowerthird/gggr"
+
+const playlists = {
+  normal: [
+    makeWatermark(10),
+    ExpandingLogo,
+    GGGRCobrand
+  ]
+}
+
 const styles = {
-  frame: {
-    chroma: {
-      background: "#0f0"
-    },
-    code: {
-      background: "url(https://ibin.co/33Uam0QIrYAu.png) top left no-repeat",
-      backgroundSize: "cover"
-    },
-    destiny: {
-      background: "url(https://i.ytimg.com/vi/KiKMW9RrSIY/maxresdefault.jpg) top left no-repeat"
-    },
-    destiny2: {
-      background: "url(http://cdn-thumbthrone.s3.amazonaws.com/wp-content/uploads/2014/09/Destiny_20140913173803.jpg) top left no-repeat"
-    },
-    ki: {
-      background: "url(https://i.ytimg.com/vi/qInozta1EzM/maxresdefault.jpg) top left no-repeat"
-    },
-    local: {
-      background: "url(/_assets/screens/destiny.jpg) top left no-repeat"
-    }
+  base: {
+    width: "1920px",
+    height: "1080px",
+    overflow: "hidden",
+    position: "relative",
+    background: "transparent"
   },
   logo: {
     position: "absolute"
@@ -214,7 +216,6 @@ const getXY = (obj, camPos, logoPos, boxOnly) => {
     }
   }
 
-
   let ret = (obj == "cam") ? positions.cam : positions.logo;
 
   if (boxOnly && obj == "logo") {
@@ -223,9 +224,13 @@ const getXY = (obj, camPos, logoPos, boxOnly) => {
 }
 
 const Frame = (props) => {
+  props.defaults();
+  
   const frameStyles = Object.assign({},
-    overlay.base,
-    (styles.frame[props.background]) ? styles.frame[props.background] : {}
+    styles.base,
+    {
+      background: (props.background.indexOf("http") === 0) ? `url(${props.background}) top left no-repeat` : props.background
+    }
   )
 
   const camOverrides = getXY("cam", props.cam, props.logo, props.useBox);
@@ -235,7 +240,7 @@ const Frame = (props) => {
   return <div style={frameStyles}>
     <iframe style={Object.assign({}, styles.follows, followOverrides)} src={getFollowsUrl(props.cam, props.fakeFollows)} seamless="seamless" />
     {(props.cam === 0) ? null : <div style={Object.assign({}, styles.cam, camOverrides)}><Cam></Cam></div> }
-    {(props.noThirds) ? null : <LowerThirds></LowerThirds> }
+    {(props.noThirds) ? null : <LowerThirds playlists={playlists} /> }
   </div>
 };
 
@@ -255,4 +260,22 @@ Frame.defaultProps = {
   background: ""
 };
 
-export default Radium(Frame);
+const ConnectedFrame = connect(
+  (state, ownProps) => {
+    return {
+      background: state.background.background
+    }
+  },
+  (dispatch) => {
+    return {
+      defaults: () => {
+        // place on end of event queue
+        window.setTimeout(() => {
+          configure(dispatch);
+        });
+      }
+    }
+  }
+)(Radium(Frame))
+
+export default ConnectedFrame;

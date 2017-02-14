@@ -3,12 +3,16 @@ import {
   createStore,
   combineReducers
 } from "redux";
+import { enableBatching } from "redux-batched-actions";
 
 import background from "../ducks/background";
 import camera from "../ducks/camera";
 import color from "../ducks/color";
+import follows from "../ducks/follows";
+import generic from "../ducks/generic";
 import logo from "../ducks/logo";
 import lowerthirds from "../ducks/lowerthirds";
+import screen from "../ducks/screen";
 import storage from "../ducks/storage";
 import testdata from "../ducks/testdata";
 
@@ -24,8 +28,11 @@ export default function(key) {
     background,
     camera,
     color,
+    follows,
+    generic,
     logo,
     lowerthirds,
+    screen,
     storage,
     testdata
   });
@@ -35,7 +42,7 @@ export default function(key) {
   }
 
   return createStore(
-    reducers,
+    enableBatching(reducers),
     applyMiddleware(
       storageMiddleware(),
       thunkMiddleware,

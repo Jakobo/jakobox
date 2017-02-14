@@ -1,11 +1,11 @@
-const SET_POSITION = "logo/SET_POSITION";
 const USE_BOX = "logo/USE_BOX";
 const USE_FULL_LOGO = "logo/USE_FULL_LOGO";
+const SET_POSITION = "logo/SET_POSITION";
 
 const initialState = {
+  onlyBox: false,
   x: 0,
-  y: 0,
-  onlyBox: false
+  y: 0
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -26,14 +26,14 @@ export default function reducer(state = initialState, action = {}) {
   return newState;
 }
 
-export function setPosition(x, y) {
-  return {type: SET_POSITION, x, y};
-}
-
 export function showFullLogo() {
   return {type: USE_FULL_LOGO};
 }
 
 export function showOnlyBox() {
   return {type: USE_BOX};
+}
+
+export function setPosition(x, y) {
+  return {type: SET_POSITION, x, y};
 }

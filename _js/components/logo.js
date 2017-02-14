@@ -7,9 +7,9 @@
 
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
-import typography from "../styles/typography"
 import Cube from "./logo/cube"
 
 const styles = {
@@ -181,52 +181,27 @@ Logo.defaultProps = {
   bFillColor: "#fff"
 };
 
-// this HOC controls the pulse if enabled via the "spinEvery" prop
-class SpinEveryHOC extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      spin: false
-    };
-    this.timer = null;
-  }
-
-  componentDidMount() {
-    this.tick();
-  }
-
-  tick() {
-    if (this.props.spinEvery) {
-      this.timer = window.setTimeout(() => {
-        let newState = Object.assign({}, this.state);
-        newState.spin = !newState.spin;
-        this.setState(newState);
-        this.tick();
-      }, this.props.spinEvery * 1000);
+const ConnectedLogo = connect(
+  (state, ownProps) => {
+    return {
+      cubeStrokeColor: ownProps.cubeStrokeColor || state.color.cube.stroke,
+      cubeFillColor: ownProps.cubeFillColor || state.color.cube.fill,
+      textStrokeColor: ownProps.textStrokeColor || state.color.text.stroke,
+      textFillColor: ownProps.textFillColor || state.color.text.fill,
+      bStrokeColor: ownProps.bStrokeColor || state.color.b.stroke,
+      bFillColor: ownProps.bFillColor || state.color.b.fill
+    }
+  },
+  (dispatch) => {
+    return {
+      defaults: () => {
+        // place on end of event queue
+        window.setTimeout(() => {
+          configure(dispatch);
+        });
+      }
     }
   }
+)(Radium(Logo))
 
-  componentWillUnmount() {
-    window.clearTimeout(this.timer);
-    this.timer = null;
-  }
-
-  render() {
-    let propset = Object.assign({}, this.props);
-    if (this.props.spinEvery > 0) {
-      propset.spin = this.state.spin;
-      delete propset["spinEvery"];
-    }
-    return <Logo {...propset}></Logo>
-  }
-}
-
-SpinEveryHOC.propTypes = {
-  spinEvery: PropTypes.number
-};
-SpinEveryHOC.defaultProps = {
-  spinEvery: null
-};
-
-// expose SpinEvery as the default
-export default SpinEveryHOC;
+export default ConnectedLogo;

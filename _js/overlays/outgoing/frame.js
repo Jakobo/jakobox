@@ -7,7 +7,7 @@ import { render } from "react-dom"
 import Radium from "radium"
 
 import overlay from "../../styles/overlay"
-import typography from "../../styles/typography"
+import typography from "../../lib/typography"
 import splashStyles from "../../styles/splash"
 
 import {timeline} from "../../components/animation"

@@ -3,7 +3,7 @@ var path = require("path");
 
 // directories
 var BASE_JS_DIR = path.resolve(__dirname, "_js");
-var APP_DIR = path.resolve(__dirname, "_js", "apps");
+var APP_DIR = path.resolve(__dirname, "_js", "overlays");
 var BUILD_DIR = path.resolve(__dirname, "assets");
 
 // only apply BABEL to these directories... otherwise the build becomes SUPER
@@ -17,9 +17,7 @@ var BABEL_DIRS = [
 // webpack config proper
 var config = {
   entry: {
-    generic:  [APP_DIR + "/generic/app.js"],
-    destiny:  [APP_DIR + "/destiny/app.js"],
-    brb:      [APP_DIR + "/brb/app.js"],
+    all:      [BASE_JS_DIR + "/app.js"],
     incoming: [APP_DIR + "/incoming/app.js"],
     outgoing: [APP_DIR + "/outgoing/app.js"]
   },

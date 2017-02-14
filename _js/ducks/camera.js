@@ -1,11 +1,10 @@
 const SET_POSITION = "camera/SET_POSITION";
-const SET_COLORS = "camera/SET_COLORS";
+
+import { setCameraColor } from "./color"
 
 const initialState = {
   x: 0,
-  y: 0,
-  color: "#fff",
-  accent: "#fff"
+  y: 0
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -14,10 +13,6 @@ export default function reducer(state = initialState, action = {}) {
     case SET_POSITION:
       newState.x = action.x;
       newState.y = action.y;
-    break;
-    case SET_COLORS:
-      newState.color = action.color;
-      newState.accent = action.accent;
     break;
   }
 
@@ -28,6 +23,7 @@ export function setPosition(x, y) {
   return {type: SET_POSITION, x, y};
 }
 
+// color of camera is handled in the color domain
 export function setColors(color, accent) {
-  return {type: SET_COLORS, color, accent};
+  return setCameraColor(color, accent);
 }
