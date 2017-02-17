@@ -23,7 +23,6 @@ export function storageMiddleware() {
   }
   return () => next => action => {
     const wrappedAction = wrapAction(action);
-
     localStorage.setItem(
       storageKey(),
       JSON.stringify(wrappedAction)
@@ -38,7 +37,7 @@ export function createOnStorage(store) {
     throw new Error("setStorageKey must be called first")
   }
   return () => {
-    const wrappedAction = JSON.parse(localStorage.getItem(storageKey));
+    const wrappedAction = JSON.parse(localStorage.getItem(storageKey()));
     store.dispatch(wrappedAction.action);
   }
 }

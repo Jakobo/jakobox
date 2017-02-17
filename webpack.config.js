@@ -17,9 +17,7 @@ var BABEL_DIRS = [
 // webpack config proper
 var config = {
   entry: {
-    all:      [BASE_JS_DIR + "/app.js"],
-    incoming: [APP_DIR + "/incoming/app.js"],
-    outgoing: [APP_DIR + "/outgoing/app.js"]
+    all:      [BASE_JS_DIR + "/app.js"]
   },
   output: {
     path: BUILD_DIR,

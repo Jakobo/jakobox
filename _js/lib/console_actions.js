@@ -3,10 +3,10 @@ import * as camera from "../ducks/camera";
 import * as color from "../ducks/color";
 import * as follows from "../ducks/follows";
 import * as generic from "../ducks/generic";
+import * as global from "../ducks/global";
 import * as logo from "../ducks/logo";
 import * as lowerthirds from "../ducks/lowerthirds";
 import * as screen from "../ducks/screen";
-import * as storage from "../ducks/storage";
 import * as testdata from "../ducks/testdata";
 
 function strip(o) {
@@ -25,10 +25,10 @@ export default function init(store) {
       color: strip(color),
       follows: strip(follows),
       generic: strip(generic),
+      global: strip(global),
       logo: strip(logo),
       lowerthirds: strip(lowerthirds),
       screen: strip(screen),
-      storage: strip(storage),
       testdata: strip(testdata)
     }
   }

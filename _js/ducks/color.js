@@ -1,6 +1,8 @@
+import { RESET } from "./global"
+
 const SET_CUBE = "color/SET_CUBE";
-const SET_B = "color/SET_CUBE";
-const SET_TEXT = "color/SET_CUBE";
+const SET_B = "color/SET_B";
+const SET_TEXT = "color/SET_TEXT";
 const SET_CAMERA = "color/SET_CAMERA";
 
 const initialState = {
@@ -25,13 +27,16 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
+    case RESET:
+      newState = Object.assign({}, initialState);
+    break;
     case SET_CUBE:
       newState.cube.stroke = action.stroke;
       newState.cube.fill = action.fill;
     break;
     case SET_B:
       newState.b.stroke = action.stroke;
-      newState.v.fill = action.fill;
+      newState.b.fill = action.fill;
     break;
     case SET_TEXT:
       newState.text.stroke = action.stroke;

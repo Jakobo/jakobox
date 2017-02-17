@@ -1,3 +1,5 @@
+import { RESET } from "./global"
+
 const SET_URLS = "follows/SET_URLS";
 const SET_FAKE_FOLLOWS = "follows/SET_FAKE_FOLLOWS";
 const SET_SIZE = "follows/SET_SIZE";
@@ -16,6 +18,9 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
+    case RESET:
+      newState = Object.assign({}, initialState);
+    break;
     case SET_FAKE_FOLLOWS:
       newState.fakeFollows = action.enabled;
     break;

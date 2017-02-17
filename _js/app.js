@@ -33,8 +33,8 @@ initConsoleActions(store);
 import Destiny from "./overlays/destiny"
 import BRB from "./overlays/brb"
 import Generic from "./overlays/generic"
-import Incoming from "./overlays/incoming/frame"
-import Outgoing from "./overlays/outgoing/frame"
+import Incoming from "./overlays/incoming"
+import Outgoing from "./overlays/outgoing"
 const screens = {
   brb: BRB,
   destiny: Destiny,

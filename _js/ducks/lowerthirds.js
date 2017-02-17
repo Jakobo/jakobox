@@ -1,3 +1,5 @@
+import { RESET } from "./global"
+
 const SHOW_LOWER_THIRDS = "lowerthirds/SHOW_LOWER_THIRDS";
 const HIDE_LOWER_THIRDS = "lowerthirds/HIDE_LOWER_THIRDS";
 const SET_CURRENT_PLAYLIST = "lowerthirds/SET_CURRENT_PLAYLIST";
@@ -6,7 +8,7 @@ const SET_TICKER_SIZE = "lowerthirds/SET_TICKER_SIZE";
 const SET_TICKER_SHUFFLE = "lowerthirds/SET_TICKER_SHUFFLE";
 
 const initialState = {
-  useLowerThirds: false,
+  visible: false,
   currentPlaylist: "",
   ticker: {
     items: [],
@@ -18,11 +20,14 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
+    case RESET:
+      newState = Object.assign({}, initialState);
+    break;
     case SHOW_LOWER_THIRDS:
-      newState.useLowerThirds = true;
+      newState.visible = true;
     break;
     case HIDE_LOWER_THIRDS:
-      newState.useLowerThirds = false;
+      newState.visible = false;
     break;
     case SET_CURRENT_PLAYLIST:
       newState.currentPlaylist = action.name;

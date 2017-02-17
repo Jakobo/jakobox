@@ -69,6 +69,10 @@ class LowerThird extends React.Component {
     if (this.props.playlist.length === 0) {
       return null;
     }
+    if (!this.props.visible) {
+      return null;
+    }
+    
     const Component = this.props.playlist[this.state.current];
     return <div><Component key={this.cachebreak++} onComplete={this.onComplete} posX={posX} posY={posY} logoStyle={logoStyle} /></div>
   }
@@ -77,7 +81,8 @@ class LowerThird extends React.Component {
 const ConnectedLowerThird = connect(
   (state, ownProps) => {
     return {
-      playlist: ownProps.playlists[state.lowerthirds.currentPlaylist] || []
+      playlist: ownProps.playlists[state.lowerthirds.currentPlaylist] || [],
+      visible: state.lowerthirds.visible
     }
   }
 )(LowerThird);

@@ -1,3 +1,5 @@
+import { RESET } from "./global"
+
 const SET_DEMO_PL = 'testdata/SET_DEMO_PL';
 
 const initialState = {
@@ -7,6 +9,9 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
+    case RESET:
+      newState = Object.assign({}, initialState);
+    break;
     case SET_DEMO_PL:
       newState.demoPlaylist = action.enabled;
     break;

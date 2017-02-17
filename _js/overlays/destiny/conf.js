@@ -1,10 +1,17 @@
 import * as camera from "../../ducks/camera"
 import * as color from "../../ducks/color"
 import * as follows from "../../ducks/follows"
+import * as global from "../../ducks/global"
+import * as logo from "../../ducks/logo"
 import * as lowerthirds from "../../ducks/lowerthirds"
 
 export default function init(dispatch) {
+  dispatch(global.reset())
   dispatch(color.setCameraColor("#2a3f56", "#df8926"))
+  dispatch(color.setBColor("#000", "#fff"))
+  dispatch(color.setCubeColor("#000", "#fff"))
+  dispatch(color.setTextColor("#000", "#fff"))
+  dispatch(logo.setScale(1))
   dispatch(camera.setPosition(3, 460))
   dispatch(follows.setPosition(1238, 283))
   dispatch(follows.setSize(682, 210))
@@ -13,6 +20,7 @@ export default function init(dispatch) {
     "http://a.muxy.io/alert/jakobox/srX-UDXTDVsAURa8mWWdPkAVxz0NA94E"
   ))
   // dispatch(follows.enableFakeFollows())
+  dispatch(lowerthirds.showLowerThirds())
   dispatch(lowerthirds.setCurrentPlaylist("normal"))
   dispatch(lowerthirds.setTickerSize(3))
   dispatch(lowerthirds.enableTickerShuffle())

@@ -1,13 +1,20 @@
-import { batchActions } from 'redux-batched-actions';
+import { RESET } from "./global"
 
 import * as cameraActions from "./camera"
 import * as followsActions from "./follows"
+import * as lowerThirdsActions from "./lowerthirds"
 import * as logoActions from "./logo"
 
-const initialState = {};
+const SET_POSITIONS = "generic/SET_POSITIONS"
+
+const initialState = {
+  logo: 10,
+  cam: 4
+};
 
 const positions = {
   logo: {
+    0: false,
     1:  [0, 0],
     2:  [730, 0],
     3:  [1470, 0],
@@ -20,6 +27,7 @@ const positions = {
     10: [1470, 979]
   },
   box: {
+    0: false,
     1:  [10, 0],
     2:  [916, 0],
     3:  [1833, 0],
@@ -32,6 +40,7 @@ const positions = {
     10: [1833, 976]
   },
   cam: { /* 442 x 268 */
+    0: false,
     1:  [0, 0],
     2:  [753, 0],
     3:  [1493, 0],
@@ -44,6 +53,7 @@ const positions = {
     10: [1493, 828]
   },
   logoCam: {
+    0: false,
     1:  [8, 230],
     2:  false,
     3:  [1543, 230],
@@ -56,6 +66,7 @@ const positions = {
     10: [1543, 747]
   },
   boxCam: {
+    0: false,
     1:  [331, 140],
     2:  [904, 140],
     3:  [1824, 140],
@@ -71,6 +82,7 @@ const positions = {
     }
   },
   follow: {
+    0: false,
     1:  [425, 0],
     2:  [1175, 0],
     3:  [1090, 0],
@@ -117,15 +129,23 @@ const followData = {
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
-  switch(action.type) {}
+  switch(action.type) {
+    case RESET:
+      newState = Object.assign({}, initialState);
+    break;
+    case SET_POSITIONS:
+      newState.logo = action.logo;
+      newState.cam = action.cam;
+    break;
+  }
 
   return newState;
 }
 
-export function setLayout(camera, logo, box) {
+export function setLayout(camera, logo, textLogo) {
   let logoMode = "logo";
   if (camera === logo) {
-    logoMode = (box) ? "boxCam" : "logoCam"
+    logoMode = (textLogo) ? "logoCam" : "boxCam"
   }
   const cameraPosition = {
     x: positions.cam[camera][0],
@@ -144,10 +164,13 @@ export function setLayout(camera, logo, box) {
     liveUrl: followData[followData.positions[camera]].actual
   };
 
-  return batchActions([
+  return [
+    (camera > 0) ? cameraActions.showCamera() : cameraActions.hideCamera(),
     cameraActions.setPosition(cameraPosition.x, cameraPosition.y),
+    (logo > 0) ? logoActions.showLogo() : logoActions.hideLogo(),
     logoActions.setPosition(logoPosition.x, logoPosition.y),
+    (textLogo) ? logoActions.showFullLogo() : logoActions.showOnlyBox(),
     followsActions.setUrls(followUrls.fakeUrl, followUrls.liveUrl),
     followsActions.setPosition(followPosition.x, followPosition.y)
-  ])
+  ]
 }

@@ -13,6 +13,11 @@ import Radium from "radium"
 import Cube from "./logo/cube"
 
 const styles = {
+  position: {
+    position: "absolute",
+    left: "0px",
+    top: "0px"
+  },
   container: {
     position: "relative"
   },
@@ -105,48 +110,55 @@ const Logo = Radium((props) => {
     filter: props.filter || null
   };
 
+  const positionStyles = Object.assign({}, styles.position);
+  positionStyles.left = `${props.x}px`;
+  positionStyles.top = `${props.y}px`;
+  positionStyles.transform = `scale(${props.scale})`;
+
   // apply the side modifications to the cube (need to carry the stroke down through the react tree)
   let cubeStyles = Object.assign({}, cubeOverrides);
   cubeStyles.side = Object.assign({}, cubeStyles.side, strokes.cube);
 
-  return <div style={styles.container}>
-    <div style={Object.assign({},
-      styles.cube,
-      (props.text === false) ? styles.cubeOnly : {}
-    )}><Cube spin={props.spin} infinite={props.infinite} styles={cubeStyles}></Cube></div>
-    <div style={Object.assign({}, shadows)}>
-      <svg style={Object.assign({},
-        styles.logo.base,
-        styles.logo.text,
-        styles.logo.stroke,
-        strokes.light,
-        styles.logo.jako,
-        (props.text === false) ? styles.logo.hide : {}
-      )} xmlns="http://www.w3.org/2000/svg" width="150" height="42" viewBox="0 0 150 42">
-        <text x="0" y="42">JAKO</text>
-      </svg>
-      <svg style={Object.assign({},
-        styles.logo.base,
-        styles.logo.box,
-        (props.text === false) ? styles.logo.boxOnly : {}
-      )}  xmlns="http://www.w3.org/2000/svg" width="250" height="289" viewBox="0 0 250 289">
-        <path id="Outside" style={Object.assign({},
+  return <div style={positionStyles}>
+    <div style={styles.container}>
+      <div style={Object.assign({},
+        styles.cube,
+        (props.text === false) ? styles.cubeOnly : {}
+      )}><Cube spin={props.spin} infinite={props.infinite} styles={cubeStyles}></Cube></div>
+      <div style={Object.assign({}, shadows)}>
+        <svg style={Object.assign({},
+          styles.logo.base,
+          styles.logo.text,
           styles.logo.stroke,
-          styles.logo.heavyStroke,
-          strokes.heavy,
-          strokes.b
-        )} d="M124.433,231.815l73.559-42.841V103.317L126.025,61,82.982,86V36.04L126.025,9.991,239.95,78.049V213.007L126.025,278.955l-43.043-23L51.972,237.991l0.639-.365-0.639.342L10.028,214.025V78.049L51.972,54.007V188.974Z"/>
-      </svg>
-      <svg style={Object.assign({},
-        styles.logo.base,
-        styles.logo.text,
-        styles.logo.stroke,
-        strokes.light,
-        styles.logo.ox,
-        (props.text === false) ? styles.logo.hide : {}
-      )}  xmlns="http://www.w3.org/2000/svg" width="75" height="42" viewBox="0 0 75 42">
-        <text x="0" y="42">OX</text>
-      </svg>
+          strokes.light,
+          styles.logo.jako,
+          (props.text === false) ? styles.logo.hide : {}
+        )} xmlns="http://www.w3.org/2000/svg" width="150" height="42" viewBox="0 0 150 42">
+          <text x="0" y="42">JAKO</text>
+        </svg>
+        <svg style={Object.assign({},
+          styles.logo.base,
+          styles.logo.box,
+          (props.text === false) ? styles.logo.boxOnly : {}
+        )}  xmlns="http://www.w3.org/2000/svg" width="250" height="289" viewBox="0 0 250 289">
+          <path id="Outside" style={Object.assign({},
+            styles.logo.stroke,
+            styles.logo.heavyStroke,
+            strokes.heavy,
+            strokes.b
+          )} d="M124.433,231.815l73.559-42.841V103.317L126.025,61,82.982,86V36.04L126.025,9.991,239.95,78.049V213.007L126.025,278.955l-43.043-23L51.972,237.991l0.639-.365-0.639.342L10.028,214.025V78.049L51.972,54.007V188.974Z"/>
+        </svg>
+        <svg style={Object.assign({},
+          styles.logo.base,
+          styles.logo.text,
+          styles.logo.stroke,
+          strokes.light,
+          styles.logo.ox,
+          (props.text === false) ? styles.logo.hide : {}
+        )}  xmlns="http://www.w3.org/2000/svg" width="75" height="42" viewBox="0 0 75 42">
+          <text x="0" y="42">OX</text>
+        </svg>
+      </div>
     </div>
   </div>
 });
@@ -189,7 +201,13 @@ const ConnectedLogo = connect(
       textStrokeColor: ownProps.textStrokeColor || state.color.text.stroke,
       textFillColor: ownProps.textFillColor || state.color.text.fill,
       bStrokeColor: ownProps.bStrokeColor || state.color.b.stroke,
-      bFillColor: ownProps.bFillColor || state.color.b.fill
+      bFillColor: ownProps.bFillColor || state.color.b.fill,
+      x: (typeof ownProps.x !== "undefined") ? ownProps.x : state.logo.x,
+      y: (typeof ownProps.y !== "undefined") ? ownProps.y : state.logo.y,
+      scale: (typeof ownProps.scale !== "undefined") ? ownProps.scale : state.logo.scale,
+      text: (typeof ownProps.text !== "undefined") ? ownProps.text : state.logo.textLogo,
+      spin: (typeof ownProps.spin !== "undefined") ? ownProps.spin : state.logo.spin,
+      infinite: (typeof ownProps.infinite !== "undefined") ? ownProps.infinite : state.logo.infinite
     }
   },
   (dispatch) => {

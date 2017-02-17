@@ -1,22 +1,22 @@
 /**
- * Outgoing Stream Render Frame
+ * Incoming Stream Render Frame
  */
 
 import React from "react"
 import { render } from "react-dom"
+import { connect } from "react-redux"
 import Radium from "radium"
 
-import overlay from "../../styles/overlay"
 import typography from "../../lib/typography"
 import splashStyles from "../../styles/splash"
 
-import {timeline} from "../../components/animation"
-
+import Logo from "../../components/logo"
 import Omnibar from "../../components/omnibar"
 import items from "./ticker"
 
-import Logo from "../../components/logo"
+import {timeline} from "../../components/animation"
 
+import configure from "./conf"
 
 const omnibarOptions = {
   width: 1920,
@@ -47,16 +47,12 @@ const omnibarOptions = {
 }
 
 const styles = {
-  frame: {
-    chroma: {
-      background: "#0f0"
-    }
-  },
-  logo: {
-    position: "absolute",
-    left: "83px",
-    top: "343px",
-    transform: "scale(3.8)"
+  base: {
+    width: "1920px",
+    height: "1080px",
+    overflow: "hidden",
+    position: "relative",
+    background: "transparent"
   },
   omnibar: {
     position: "absolute",
@@ -73,13 +69,19 @@ const styles = {
 };
 
 // layout
-const Frame = (props) => {
+const Frame = Radium((props) => {
+  props.defaults();
+
   const frameStyles = Object.assign({},
-    overlay.base,
-    (styles.frame[props.background]) ? styles.frame[props.background] : {}
+    styles.base,
+    {
+      background: (props.background.indexOf("http") === 0) ? `url(${props.background}) top left no-repeat` : props.background
+    }
   )
 
-  return <div style={frameStyles}>
+  const splashStyles = Object.assign({}, frameStyles, styles.background)
+
+  return <div style={splashStyles}>
     <div style={Object.assign({}, styles.omnibar)}>
       <Omnibar
         loop={true}
@@ -90,9 +92,27 @@ const Frame = (props) => {
         textStyle={omnibarOptions.textStyle}>
       </Omnibar>
     </div>
-    <div style={styles.logo}><Logo spin={true} infinite={true} bStrokeColor={"#000"} bFillColor={"#151431"} cubeFillColor={"#2A2A5C"} cubeStrokeColor={"#fff"} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
+    <Logo spin={true} infinite={true} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} />
     <h1 style={styles.note}>THANKS FOR WATCHING</h1>
   </div>
-}
+})
 
-export default Radium(Frame);
+const ConnectedFrame = connect(
+  (state, ownProps) => {
+    return {
+      background: state.background.background
+    }
+  },
+  (dispatch) => {
+    return {
+      defaults: () => {
+        // place on end of event queue
+        window.setTimeout(() => {
+          configure(dispatch);
+        });
+      }
+    }
+  }
+)(Radium(Frame))
+
+export default ConnectedFrame;

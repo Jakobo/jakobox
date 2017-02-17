@@ -56,6 +56,10 @@ const originalStyles = {
 };
 
 const Cam = Radium((props) => {
+  if (!props.visible) {
+    return null;
+  }
+
   let styles = Object.assign({}, originalStyles);
   if (props.color) {
     styles.frame.border = `6px solid ${props.color}`;
@@ -66,7 +70,7 @@ const Cam = Radium((props) => {
   }
   styles.position.left = `${props.x}px`;
   styles.position.top = `${props.y}px`;
-  
+
   return <div style={styles.position}>
     <div style={styles.reset}>
       <div style={styles.frame}></div>
@@ -82,7 +86,8 @@ const ConnectedCam = connect(
       color: ownProps.color || state.color.camera.main,
       accent: ownProps.accent || state.color.camera.accent,
       x: ownProps.x || state.camera.x,
-      y: ownProps.y || state.camera.y
+      y: ownProps.y || state.camera.y,
+      visible: state.camera.visible
     }
   }
 )(Radium(Cam))

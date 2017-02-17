@@ -33,10 +33,6 @@ const styles = {
     color: "rgba(255, 255, 255, 0.8)"
   }),
   logo: {
-    position: "absolute",
-    transform: "scale(3.8)",
-    left: "83px",
-    top: "343px",
     opacity: 0.8
   }
 };

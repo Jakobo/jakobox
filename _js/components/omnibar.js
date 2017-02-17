@@ -1,6 +1,9 @@
 /**
  * Improved Omnibar Animation
  * <Omnibar textStyle={} items={} animation={} loop={true}/>
+ * To avoid setting state on an unmounted component, we nullify the callback
+ * so when the OmnibarItem completes, it can still trigger it's callback before
+ * unloading but we do not create a mutation as a result.
  */
 import React, {PropTypes} from "react"
 import { render } from "react-dom"
@@ -25,17 +28,28 @@ class Omnibar extends React.Component {
     this.state = {
       current: 0
     };
-    this.next = this.next.bind(this);
+    this.onItemComplete = this.onItemComplete.bind(this);
     this.items = this.props.items;
     this.instances = 0;
+    this.next = this.unmountedNext;
   }
-  next() {
+  componentWillMount() {
+    this.next = this.mountedNext;
+  }
+  componentWillUnmount() {
+    this.next = this.unmountedNext;
+  }
+  mountedNext() {
     let newState = Object.assign({}, this.state);
     newState.current += 1;
     if (newState.current >= this.items.length && this.props.loop) {
       newState.current = 0;
     }
     this.setState(newState);
+  }
+  unmountedNext() {}
+  onItemComplete() {
+    this.next();
   }
   render() {
     return <OmnibarItem key={this.instances++}
@@ -44,7 +58,7 @@ class Omnibar extends React.Component {
       timeline={this.props.animation.timeline()}
       duration={this.props.animation.duration()}
       textStyle={this.props.textStyle}
-      onComplete={this.next}
+      onComplete={this.onItemComplete}
       text={this.items[this.state.current]}>
     </OmnibarItem>
   }

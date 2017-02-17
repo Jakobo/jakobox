@@ -10,10 +10,10 @@ import camera from "../ducks/camera";
 import color from "../ducks/color";
 import follows from "../ducks/follows";
 import generic from "../ducks/generic";
+import global from "../ducks/global";
 import logo from "../ducks/logo";
 import lowerthirds from "../ducks/lowerthirds";
 import screen from "../ducks/screen";
-import storage from "../ducks/storage";
 import testdata from "../ducks/testdata";
 
 import {setStorageKey, storageMiddleware} from '../middleware';
@@ -33,7 +33,6 @@ export default function(key) {
     logo,
     lowerthirds,
     screen,
-    storage,
     testdata
   });
 
