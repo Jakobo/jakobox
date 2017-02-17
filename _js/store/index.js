@@ -3,7 +3,6 @@ import {
   createStore,
   combineReducers
 } from "redux";
-import { enableBatching } from "redux-batched-actions";
 
 import background from "../ducks/background";
 import camera from "../ducks/camera";
@@ -41,7 +40,7 @@ export default function(key) {
   }
 
   return createStore(
-    enableBatching(reducers),
+    reducers,
     applyMiddleware(
       storageMiddleware(),
       thunkMiddleware,
