@@ -6,7 +6,12 @@ Readme files are more memos to your future self. So if you're not me, you're pro
 This could also be seen as me trying to break my poor MacBook Pro.
 
 ## Architecture
-This is a standard react application, with several entry points defined. I chose to use different entry points instead of a single page application because I preferred the modularity. Otherwise, it's using Radium for the styles and babel for the building work inside of webpack. There's no data access yet, but if it ever emerges, this site will likely adopt Redux.
+This is a standard react application, a main entry point at stream.html. The app.js file launches redux and manages state. I plan to add a dashboard.html which takes the twitch chat iframe, adds stream controls, the muxy ticker, and otherwise makes managing the stream a lot easier.
+
+* Muxy Live Ticker: http://u.muxy.io/live
+* Twitch Chat Frame: http://www.twitch.tv/{CHANNEL}/chat
+* Twitch Video Feed: http://player.twitch.tv/?channel={CHANNEL}&autoplay=true&muted=true
+* Material UI for dashboard: http://www.material-ui.com/
 
 ## Build/Deploy
 I'm using my standard webpack setup here:
