@@ -1,10 +1,11 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const SET_BACKGROUND = "background/SET_BACKGROUND";
 
-const initialState = {
+const initialState = generateState({
   background: "rgba(0,255,0,0)"
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -13,7 +14,7 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_BACKGROUND:
-      newState.background = action.background;
+      newState[action.targetScreen].background = action.background;
     break;
   }
 

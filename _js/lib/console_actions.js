@@ -7,7 +7,6 @@ import * as global from "../ducks/global";
 import * as logo from "../ducks/logo";
 import * as lowerthirds from "../ducks/lowerthirds";
 import * as screen from "../ducks/screen";
-import * as testdata from "../ducks/testdata";
 
 function strip(o) {
   let n = Object.assign({}, o, {
@@ -28,8 +27,7 @@ export default function init(store) {
       global: strip(global),
       logo: strip(logo),
       lowerthirds: strip(lowerthirds),
-      screen: strip(screen),
-      testdata: strip(testdata)
+      screen: strip(screen)
     }
   }
 }

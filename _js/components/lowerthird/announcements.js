@@ -161,9 +161,9 @@ const Announcement = Radium((props) => {
 const ConnectedAnnouncements = connect(
   (state, ownProps) => {
     return {
-      items: state.lowerthirds.ticker.items,
-      number: state.lowerthirds.ticker.size,
-      shuffle: state.lowerthirds.ticker.shuffle
+      items: state.lowerthirds[state.screen.current].ticker.items,
+      number: state.lowerthirds[state.screen.current].ticker.size,
+      shuffle: state.lowerthirds[state.screen.current].ticker.shuffle
     }
   }
 )(Announcements)

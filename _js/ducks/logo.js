@@ -1,4 +1,5 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const USE_BOX = "logo/USE_BOX";
 const USE_FULL_LOGO = "logo/USE_FULL_LOGO";
@@ -8,14 +9,14 @@ const SET_INFINITE = "logo/SET_INFINITE";
 const SET_SCALE = "logo/SET_SCALE";
 const SET_VISIBILITY = "logo/SET_VISIBILITY";
 
-const initialState = {
+const initialState = generateState({
   textLogo: false,
   spin: false,
   x: 0,
   y: 0,
   scale: 1,
   visible: true
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -24,27 +25,27 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_POSITION:
-      newState.x = action.x;
-      newState.y = action.y;
+      newState[action.targetScreen].x = action.x;
+      newState[action.targetScreen].y = action.y;
     break;
     case SET_SCALE:
-      newState.scale = action.scale;
+      newState[action.targetScreen].scale = action.scale;
     break;
     case SET_VISIBILITY:
-      newState.visible = action.visible;
+      newState[action.targetScreen].visible = action.visible;
     break;
     case SET_SPIN:
-      newState.spin = action.spin;
+      newState[action.targetScreen].spin = action.spin;
     break;
     case SET_INFINITE:
-      newState.infinite = action.infinite;
-      newState.spin = action.infinite;
+      newState[action.targetScreen].infinite = action.infinite;
+      newState[action.targetScreen].spin = action.infinite;
     break;
     case USE_BOX:
-      newState.textLogo = false;
+      newState[action.targetScreen].textLogo = false;
     break;
     case USE_FULL_LOGO:
-      newState.textLogo = true;
+      newState[action.targetScreen].textLogo = true;
     break;
   }
 

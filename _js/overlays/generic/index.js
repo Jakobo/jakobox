@@ -19,7 +19,6 @@ import configure from "./conf"
 import LowerThirds from "../../components/lowerthird"
 
 import overlay from "../../styles/overlay"
-import typography from "../../lib/typography"
 
 import Logo from "../../components/logo"
 import Cam from "../../components/cam"
@@ -44,6 +43,10 @@ const styles = {
     overflow: "hidden",
     position: "relative",
     background: "transparent"
+  },
+  typography: {
+    fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
+    fontSize: "26px"
   },
   logo: {
     position: "absolute"
@@ -91,7 +94,7 @@ Frame.defaultProps = {
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.background
+      background: state.background.generic.background
     }
   },
   (dispatch) => {

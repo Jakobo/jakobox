@@ -1,14 +1,15 @@
 import { setCameraColor } from "./color"
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const SET_POSITION = "camera/SET_POSITION";
 const SET_VISIBILITY = "camera/SET_VISIBILITY";
 
-const initialState = {
+const initialState = generateState({
   x: 0,
   y: 0,
   visible: true
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -17,11 +18,11 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_VISIBILITY:
-      newState.visible = action.show;
+      newState[action.targetScreen].visible = action.show;
     break;
     case SET_POSITION:
-      newState.x = action.x;
-      newState.y = action.y;
+      newState[action.targetScreen].x = action.x;
+      newState[action.targetScreen].y = action.y;
     break;
   }
 

@@ -1,11 +1,12 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const SET_CUBE = "color/SET_CUBE";
 const SET_B = "color/SET_B";
 const SET_TEXT = "color/SET_TEXT";
 const SET_CAMERA = "color/SET_CAMERA";
 
-const initialState = {
+const initialState = generateState({
   cube: {
     stroke: "#000",
     fill: "#fff"
@@ -22,7 +23,7 @@ const initialState = {
     main: "#fff",
     accent: "#fff"
   }
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -31,20 +32,20 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_CUBE:
-      newState.cube.stroke = action.stroke;
-      newState.cube.fill = action.fill;
+      newState[action.targetScreen].cube.stroke = action.stroke;
+      newState[action.targetScreen].cube.fill = action.fill;
     break;
     case SET_B:
-      newState.b.stroke = action.stroke;
-      newState.b.fill = action.fill;
+      newState[action.targetScreen].b.stroke = action.stroke;
+      newState[action.targetScreen].b.fill = action.fill;
     break;
     case SET_TEXT:
-      newState.text.stroke = action.stroke;
-      newState.text.fill = action.fill;
+      newState[action.targetScreen].text.stroke = action.stroke;
+      newState[action.targetScreen].text.fill = action.fill;
     break;
     case SET_CAMERA:
-      newState.camera.main = action.main;
-      newState.camera.accent = action.accent;
+      newState[action.targetScreen].camera.main = action.main;
+      newState[action.targetScreen].camera.accent = action.accent;
     break;
   }
 

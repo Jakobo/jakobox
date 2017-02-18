@@ -71,7 +71,7 @@ const Frame = (props) => {
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.background
+      background: state.background.destiny.background
     }
   },
   (dispatch) => {

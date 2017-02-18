@@ -32,11 +32,13 @@ const Follows = Radium((props) => {
 const ConnectedFollows = connect(
   (state, ownProps) => {
     return {
-      x: ownProps.x || state.follows.x,
-      y: ownProps.y || state.follows.y,
-      width: ownProps.width || state.follows.width,
-      height: ownProps.height || state.follows.height,
-      url: ownProps.url || (state.follows.fakeFollows) ? state.follows.fakeUrl : state.follows.liveUrl
+      x: ownProps.x || state.follows[state.screen.current].x,
+      y: ownProps.y || state.follows[state.screen.current].y,
+      width: ownProps.width || state.follows[state.screen.current].width,
+      height: ownProps.height || state.follows[state.screen.current].height,
+      url: ownProps.url || (state.follows[state.screen.current].fakeFollows) ?
+        state.follows[state.screen.current].fakeUrl :
+        state.follows[state.screen.current].liveUrl
     }
   }
 )(Radium(Follows))

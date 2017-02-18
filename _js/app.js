@@ -27,6 +27,9 @@ window.addEventListener("storage", onStorage);
 import initConsoleActions from "./lib/console_actions"
 initConsoleActions(store);
 
+import params from "./lib/url"
+import { setScreen } from "./ducks/screen"
+
 // Both Router and ConnectedRouter are small enough to leave in App for now
 // it's always possible to move them elsewhere, but until they are larger,
 // we don't want a ton of extra files
@@ -44,14 +47,35 @@ const screens = {
 }
 
 const Router = (props) => {
+  // set the screen from params if there was no screen
+  console.log("URGENT", params.screen, props.screen);
+  if (params.screen && !props.screen) {
+    props.onScreen(params.screen);
+    return null;
+  }
+  if (!params.screen && !props.screen) {
+    props.onScreen("incoming");
+    return null;
+  }
+
+  // else render the requested component
   const Component = screens[props.screen];
-  return <Component />
+  return (Component) ? <Component /> : null;
 }
 
 const ConnectedRouter = connect(
   (state, ownProps) => {
     return {
-      screen: state.screen.current || "destiny"
+      screen: state.screen.current
+    }
+  },
+  (dispatch) => {
+    return {
+      onScreen: (screen) => {
+        window.setTimeout(() => {
+          dispatch(setScreen(screen))
+        })
+      }
     }
   }
 )(Router)

@@ -196,18 +196,18 @@ Logo.defaultProps = {
 const ConnectedLogo = connect(
   (state, ownProps) => {
     return {
-      cubeStrokeColor: ownProps.cubeStrokeColor || state.color.cube.stroke,
-      cubeFillColor: ownProps.cubeFillColor || state.color.cube.fill,
-      textStrokeColor: ownProps.textStrokeColor || state.color.text.stroke,
-      textFillColor: ownProps.textFillColor || state.color.text.fill,
-      bStrokeColor: ownProps.bStrokeColor || state.color.b.stroke,
-      bFillColor: ownProps.bFillColor || state.color.b.fill,
-      x: (typeof ownProps.x !== "undefined") ? ownProps.x : state.logo.x,
-      y: (typeof ownProps.y !== "undefined") ? ownProps.y : state.logo.y,
-      scale: (typeof ownProps.scale !== "undefined") ? ownProps.scale : state.logo.scale,
-      text: (typeof ownProps.text !== "undefined") ? ownProps.text : state.logo.textLogo,
-      spin: (typeof ownProps.spin !== "undefined") ? ownProps.spin : state.logo.spin,
-      infinite: (typeof ownProps.infinite !== "undefined") ? ownProps.infinite : state.logo.infinite
+      cubeStrokeColor: ownProps.cubeStrokeColor || state.color[state.screen.current].cube.stroke,
+      cubeFillColor: ownProps.cubeFillColor || state.color[state.screen.current].cube.fill,
+      textStrokeColor: ownProps.textStrokeColor || state.color[state.screen.current].text.stroke,
+      textFillColor: ownProps.textFillColor || state.color[state.screen.current].text.fill,
+      bStrokeColor: ownProps.bStrokeColor || state.color[state.screen.current].b.stroke,
+      bFillColor: ownProps.bFillColor || state.color[state.screen.current].b.fill,
+      x: (typeof ownProps.x !== "undefined") ? ownProps.x : state.logo[state.screen.current].x,
+      y: (typeof ownProps.y !== "undefined") ? ownProps.y : state.logo[state.screen.current].y,
+      scale: (typeof ownProps.scale !== "undefined") ? ownProps.scale : state.logo[state.screen.current].scale,
+      text: (typeof ownProps.text !== "undefined") ? ownProps.text : state.logo[state.screen.current].textLogo,
+      spin: (typeof ownProps.spin !== "undefined") ? ownProps.spin : state.logo[state.screen.current].spin,
+      infinite: (typeof ownProps.infinite !== "undefined") ? ownProps.infinite : state.logo[state.screen.current].infinite
     }
   },
   (dispatch) => {

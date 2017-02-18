@@ -1,11 +1,9 @@
 import * as color from "../../ducks/color"
 import * as generic from "../../ducks/generic"
-import * as global from "../../ducks/global"
 import * as logo from "../../ducks/logo"
 import * as lowerthirds from "../../ducks/lowerthirds"
 
 export default function init(dispatch) {
-  dispatch(global.reset())
   dispatch(color.setCameraColor("#fff", "#fff"))
   dispatch(color.setBColor("#000", "#fff"))
   dispatch(color.setCubeColor("#000", "#fff"))

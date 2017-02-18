@@ -1,11 +1,12 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const SET_URLS = "follows/SET_URLS";
 const SET_FAKE_FOLLOWS = "follows/SET_FAKE_FOLLOWS";
 const SET_SIZE = "follows/SET_SIZE";
 const SET_POSITION = "follows/SET_POSITION";
 
-const initialState = {
+const initialState = generateState({
   fakeFollows: false,
   fakeUrl: "",
   liveURl: "",
@@ -13,7 +14,7 @@ const initialState = {
   height: 0,
   x: 0,
   y: 0
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -22,19 +23,19 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_FAKE_FOLLOWS:
-      newState.fakeFollows = action.enabled;
+      newState[action.targetScreen].fakeFollows = action.enabled;
     break;
     case SET_URLS:
-      newState.fakeUrl = action.fake;
-      newState.liveUrl = action.live;
+      newState[action.targetScreen].fakeUrl = action.fake;
+      newState[action.targetScreen].liveUrl = action.live;
     break;
     case SET_SIZE:
-      newState.width = action.width;
-      newState.height = action.height;
+      newState[action.targetScreen].width = action.width;
+      newState[action.targetScreen].height = action.height;
     break;
     case SET_POSITION:
-      newState.x = action.x;
-      newState.y = action.y;
+      newState[action.targetScreen].x = action.x;
+      newState[action.targetScreen].y = action.y;
     break;
   }
 

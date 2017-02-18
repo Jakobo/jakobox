@@ -1,6 +1,6 @@
 import { RESET } from "./global"
 
-const SET_SCREEN = 'screen/SET_SCREEN';
+export const SET_SCREEN = "screen/SET_SCREEN";
 
 const initialState = {
   current: null
@@ -9,10 +9,6 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
-    case RESET:
-      // screen does not reset on global reset
-      // newState = Object.assign({}, initialState);
-    break;
     case SET_SCREEN:
       newState.current = action.screen;
     break;
@@ -22,5 +18,5 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function setScreen(screen) {
-  return {type: SET_SCREEN, screen};
+  return {type: SET_SCREEN, screen, targetScreen: screen};
 }

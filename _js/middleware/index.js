@@ -1,3 +1,5 @@
+import { doNotPropogate } from "./blocklist"
+
 const storagePrefix = "jakobox-";
 let key = "";
 
@@ -37,7 +39,11 @@ export function createOnStorage(store) {
     throw new Error("setStorageKey must be called first")
   }
   return () => {
-    const wrappedAction = JSON.parse(localStorage.getItem(storageKey()));
-    store.dispatch(wrappedAction.action);
+    // decorate unwrapped action w/ info so we know it was proxied
+    let wrappedAction = JSON.parse(localStorage.getItem(storageKey()));
+    wrappedAction.origin = "localstorage";
+    if (!doNotPropogate(wrappedAction.action)) {
+      store.dispatch(wrappedAction.action);
+    }
   }
 }

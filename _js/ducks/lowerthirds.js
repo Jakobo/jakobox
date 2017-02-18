@@ -1,4 +1,5 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 const SHOW_LOWER_THIRDS = "lowerthirds/SHOW_LOWER_THIRDS";
 const HIDE_LOWER_THIRDS = "lowerthirds/HIDE_LOWER_THIRDS";
@@ -7,7 +8,7 @@ const SET_TICKER_ITEMS = "lowerthirds/SET_TICKER_ITEMS";
 const SET_TICKER_SIZE = "lowerthirds/SET_TICKER_SIZE";
 const SET_TICKER_SHUFFLE = "lowerthirds/SET_TICKER_SHUFFLE";
 
-const initialState = {
+const initialState = generateState({
   visible: false,
   currentPlaylist: "",
   ticker: {
@@ -15,7 +16,7 @@ const initialState = {
     subset: 1,
     shuffle: true
   }
-};
+});
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
@@ -24,22 +25,22 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SHOW_LOWER_THIRDS:
-      newState.visible = true;
+      newState[action.targetScreen].visible = true;
     break;
     case HIDE_LOWER_THIRDS:
-      newState.visible = false;
+      newState[action.targetScreen].visible = false;
     break;
     case SET_CURRENT_PLAYLIST:
-      newState.currentPlaylist = action.name;
+      newState[action.targetScreen].currentPlaylist = action.name;
     break;
     case SET_TICKER_ITEMS:
-      newState.ticker.items = action.items;
+      newState[action.targetScreen].ticker.items = action.items;
     break;
     case SET_TICKER_SIZE:
-      newState.ticker.subset = action.size;
+      newState[action.targetScreen].ticker.subset = action.size;
     break;
     case SET_TICKER_SHUFFLE:
-      newState.ticker.shuffle = action.shuffle;
+      newState[action.targetScreen].ticker.shuffle = action.shuffle;
     break;
   }
 

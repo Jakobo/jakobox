@@ -1,4 +1,5 @@
 import { RESET } from "./global"
+import generateState from "../lib/state"
 
 import * as cameraActions from "./camera"
 import * as followsActions from "./follows"
@@ -7,10 +8,10 @@ import * as logoActions from "./logo"
 
 const SET_POSITIONS = "generic/SET_POSITIONS"
 
-const initialState = {
+const initialState = generateState({
   logo: 10,
   cam: 4
-};
+});
 
 const positions = {
   logo: {
@@ -134,8 +135,8 @@ export default function reducer(state = initialState, action = {}) {
       newState = Object.assign({}, initialState);
     break;
     case SET_POSITIONS:
-      newState.logo = action.logo;
-      newState.cam = action.cam;
+      newState[action.targetScreen].logo = action.logo;
+      newState[action.targetScreen].cam = action.cam;
     break;
   }
 

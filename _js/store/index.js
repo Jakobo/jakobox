@@ -13,7 +13,6 @@ import global from "../ducks/global";
 import logo from "../ducks/logo";
 import lowerthirds from "../ducks/lowerthirds";
 import screen from "../ducks/screen";
-import testdata from "../ducks/testdata";
 
 import {setStorageKey, storageMiddleware} from '../middleware';
 
@@ -24,23 +23,32 @@ const loggerMiddleware = createLogger();
 
 export default function(key) {
   const reducers = combineReducers({
+    screen,
     background,
     camera,
     color,
     follows,
     generic,
     logo,
-    lowerthirds,
-    screen,
-    testdata
+    lowerthirds
   });
+
+  // The relayReducer passes the last set screen information in to subsequent
+  // actions. This way, they are operating on an action relative to the current
+  // screen (if they choose to)
+
+  const relayReducer = (state = {}, action = {}) => {
+    // target screen is set with a helper
+    // action.targetScreen = (state.screen && state.screen.current) ? state.screen.current : "default";
+    return reducers(state, action);
+  }
 
   if (key) {
     setStorageKey(key);
   }
 
   return createStore(
-    reducers,
+    relayReducer,
     applyMiddleware(
       storageMiddleware(),
       thunkMiddleware,

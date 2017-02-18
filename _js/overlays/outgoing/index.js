@@ -7,7 +7,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import typography from "../../lib/typography"
 import splashStyles from "../../styles/splash"
 
 import Logo from "../../components/logo"
@@ -54,18 +53,22 @@ const styles = {
     position: "relative",
     background: "transparent"
   },
+  typography: {
+    fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
+    fontSize: "26px"
+  },
   omnibar: {
     position: "absolute",
     left: "480px",
     top: "810px",
     width: "1920px"
   },
-  note: Object.assign({}, typography.base, {
+  note: {
     position: "absolute",
     top: "645px",
     left: "1050px",
     fontSize: "48px"
-  })
+  }
 };
 
 // layout
@@ -74,6 +77,7 @@ const Frame = Radium((props) => {
 
   const frameStyles = Object.assign({},
     styles.base,
+    styles.typography,
     {
       background: (props.background.indexOf("http") === 0) ? `url(${props.background}) top left no-repeat` : props.background
     }
@@ -100,7 +104,7 @@ const Frame = Radium((props) => {
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.background
+      background: state.background.outgoing.background
     }
   },
   (dispatch) => {
