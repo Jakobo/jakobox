@@ -4,7 +4,16 @@ import * as follows from "../../ducks/follows"
 import * as logo from "../../ducks/logo"
 import * as lowerthirds from "../../ducks/lowerthirds"
 
-export default function init(dispatch) {
+const makeDispatch = (screen, dispatch) => {
+  return (action) => {
+    action.targetScreen = screen;
+    dispatch(action);
+  }
+}
+
+export default function init(originalDispatch) {
+  const dispatch = makeDispatch("destiny", originalDispatch);
+
   dispatch(color.setCameraColor("#2a3f56", "#df8926"))
   dispatch(color.setBColor("#000", "#fff"))
   dispatch(color.setCubeColor("#000", "#fff"))
@@ -25,12 +34,12 @@ export default function init(dispatch) {
   dispatch(lowerthirds.setTickerItems([
     "Jakob got into streaming, decided to put his programming to use. Now we have this!\nWhat is the box?",
     "Keep it clean, stay respectful, don't be an asshole\nChat rules",
-    "Arminius-D with Crowd Control & Focused Fire\nFavorite weapon",
+    "Palindrome with Explosive Rounds and Hidden Hand\nFavorite weapon",
     "The cat's name is Churchill =^_^= He likes to chew on HDMI cables...\nMeow",
     "When not streaming, I work for a Technology company in San Francisco\nDay Job",
-    "Vault of Glass: [x]  // Crota's End [ ] // Prison of Elders: [ ]\nYear 1 Accomplishments",
-    "King's Fall: [x] // Challenge of Elders [x]\nYear 2 Accomplishments",
-    "Wrath of the Machine: [ ]\nYear 3 Accomplishments",
+    "Vault of Glass: ✪ // Crota's End: ○ // Prison of Elders: ○\nYear 1 Accomplishments",
+    "King's Fall: ✪ // Challenge of Elders ✪\nYear 2 Accomplishments",
+    "Wrath of the Machine: ✩\nYear 3 Accomplishments",
     "[7] wins on Asylum\nBest Trials Card",
     "I play Dungeons & Dragons with my coworkers. We're currently playing Out of the Abyss\nExtra nerding",
     "If I had to pick a favorite alcohol, it'd be bourbon",

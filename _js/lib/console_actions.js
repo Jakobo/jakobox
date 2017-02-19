@@ -17,7 +17,20 @@ function strip(o) {
 
 export default function init(store) {
   window.ACTIONS = {
-    dispatch: store.dispatch,
+    dispatch: (action, targetScreen = null) => {
+      const newAction = Object.assign(
+        {},
+        action,
+        (targetScreen) ? { targetScreen } : {}
+      );
+      console.log("MANUAL DISPATCH", targetScreen, newAction);
+      store.dispatch(newAction);
+    },
+    dispatchMany: (actions, targetScreen = null) => {
+      actions.forEach((action) => {
+        window.ACTIONS.dispatch(action, targetScreen);
+      })
+    },
     ducks: {
       background: strip(background),
       camera: strip(camera),

@@ -3,7 +3,16 @@ import * as generic from "../../ducks/generic"
 import * as logo from "../../ducks/logo"
 import * as lowerthirds from "../../ducks/lowerthirds"
 
-export default function init(dispatch) {
+const makeDispatch = (screen, dispatch) => {
+  return (action) => {
+    action.targetScreen = screen;
+    dispatch(action);
+  }
+}
+
+export default function init(originalDispatch) {
+  const dispatch = makeDispatch("generic", originalDispatch);
+
   dispatch(color.setCameraColor("#fff", "#fff"))
   dispatch(color.setBColor("#000", "#fff"))
   dispatch(color.setCubeColor("#000", "#fff"))
