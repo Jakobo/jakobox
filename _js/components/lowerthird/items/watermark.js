@@ -10,8 +10,8 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo from "../logo"
-import Animation, {timeline} from "../animation"
+import Logo from "../../logo"
+import Animation, {timeline} from "../../animation"
 
 const makeWatermark = (cycles) => {
   cycles = cycles || 1;

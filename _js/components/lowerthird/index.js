@@ -11,10 +11,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import GGGRCobrand from "./lowerthird/gggr"
-import ExpandingLogo from "./lowerthird/expand"
-import {makeWatermark} from "./lowerthird/watermark"
-
 const logoStyle = {
   left: "1800px",
   top: "960px",

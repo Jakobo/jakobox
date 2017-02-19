@@ -33,12 +33,14 @@ import { setScreen } from "./ducks/screen"
 // Both Router and ConnectedRouter are small enough to leave in App for now
 // it's always possible to move them elsewhere, but until they are larger,
 // we don't want a ton of extra files
+import Admin from "./overlays/admin"
 import Destiny from "./overlays/destiny"
 import BRB from "./overlays/brb"
 import Generic from "./overlays/generic"
 import Incoming from "./overlays/incoming"
 import Outgoing from "./overlays/outgoing"
 const screens = {
+  admin: Admin,
   brb: BRB,
   destiny: Destiny,
   generic: Generic,
@@ -48,7 +50,6 @@ const screens = {
 
 const Router = (props) => {
   // set the screen from params if there was no screen
-  console.log("URGENT", params.screen, props.screen);
   if (params.screen && !props.screen) {
     props.onScreen(params.screen);
     return null;

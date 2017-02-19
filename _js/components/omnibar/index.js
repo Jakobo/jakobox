@@ -9,7 +9,7 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Animation, {timeline} from "./animation"
+import Animation, {timeline} from "../animation"
 
 const OmnibarItem = Radium((props) => {
   window.setTimeout(() => {

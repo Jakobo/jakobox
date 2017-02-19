@@ -24,9 +24,9 @@ import Logo from "../../components/logo"
 import Cam from "../../components/cam"
 
 // TODO: replace with Watermark, make lowerthirds support pulling props from playlist
-import {makeWatermark} from "../../components/lowerthird/watermark"
-import ExpandingLogo from "../../components/lowerthird/expand"
-import GGGRCobrand from "../../components/lowerthird/gggr"
+import {makeWatermark} from "../../components/lowerthird/items/watermark"
+import ExpandingLogo from "../../components/lowerthird/items/expand"
+import GGGRCobrand from "../../components/lowerthird/items/gggr"
 
 const playlists = {
   normal: [

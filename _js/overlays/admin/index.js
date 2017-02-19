@@ -13,64 +13,54 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import splashStyles from "../../styles/splash"
-
-import Logo from "../../components/logo"
+// TODO: components to add
+// import Chat from "../../components/twitch/chat"
+// import Video from "../../components/twitch/video"
+// import Muxy from "../../components/muxy/ticker"
 
 const styles = {
   base: {
-    width: "1920px",
-    height: "1080px",
-    overflow: "hidden",
+    width: "100%",
+    height: "100%",
+    overflow: "visible",
     position: "relative",
-    background: "transparent"
+    background: "transparent",
+    margin: "0px",
+    padding: "0px"
   },
   typography: {
     fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
-    fontSize: "26px"
+    fontSize: "16px"
   },
-  background: {
-    background: "rgba(0, 0, 0, 0.5)"
+  flexbox: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "stretch",
+    alignContent: "flex-start"
   },
-  note: {
-    position: "absolute",
-    top: "645px",
-    left: "1287px",
-    fontSize: "48px",
-    color: "rgba(255, 255, 255, 0.8)"
-  },
-  logo: {
-    opacity: 0.8
+  column: {
+    width: "33.333%"
   }
 };
 
 // layout
 const Frame = Radium((props) => {
-
-  const frameStyles = Object.assign({},
-    styles.base,
-    styles.typography,
-    {
-      background: (props.background.indexOf("http") === 0) ? `url(${props.background}) top left no-repeat` : props.background
-    }
-  )
-
-  const brbStyles = Object.assign({}, frameStyles, styles.background)
-
-  return <div style={frameStyles}>
-    <div style={brbStyles}>
-      <div style={styles.logo}><Logo spin={true} infinite={true} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
-      <h1 style={styles.note}>BE RIGHT BACK...</h1>
+  // background layer: twitch video, unclickable div on top
+  // Top left corner (toggle DB visibility)
+  // column 1: Screen Selector, Component Selector, Save/Cancel, remainder is the config for it
+  // column 2: Muxy Ticker 100% height
+  // column 3: Twitch Chat 100% height
+  return <div style={Object.assign({}, styles.base, styles.typography)}>
+    <div>TODO master visibility toggle</div>
+    <div>TODO twitch Video layer</div>
+    <div style={styles.flexbox}>
+      <div style={styles.column}>column 1</div>
+      <div style={styles.column}>column 2</div>
+      <div style={styles.column}>column 3</div>
     </div>
   </div>
 })
 
-const ConnectedFrame = connect(
-  (state, ownProps) => {
-    return {
-      background: state.background.brb.background
-    }
-  }
-)(Radium(Frame))
-
-export default ConnectedFrame;
+export default Frame;

@@ -8,10 +8,10 @@ import React, {PropTypes} from "react"
 import { render } from "react-dom"
 import Radium from "radium"
 
-import Logo from "../logo"
-import Watermark from "../watermark"
-import gggrSrc from "../../../_assets/gggr-simple-color.png"
-import Animation, {timeline} from "../animation"
+import Logo from "../../logo"
+import Watermark from "../../watermark"
+import gggrSrc from "../../../../_assets/gggr-simple-color.png"
+import Animation, {timeline} from "../../animation"
 
 const oStyles = {
   svg: {

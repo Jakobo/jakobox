@@ -1,4 +1,4 @@
-import Logo from "./logo"
+import Logo from "../logo"
 
 // watermark is a common enough configuration, it should be defined
 const Watermark = (props) => {

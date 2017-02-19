@@ -17,12 +17,12 @@ import LowerThird from "../../components/lowerthird"
 import Cam from "../../components/cam"
 import Follows from "../../components/follows"
 
-import ExpandingLogo from "../../components/lowerthird/expand"
-import GGGRCobrand from "../../components/lowerthird/gggr"
-import Announcements from "../../components/lowerthird/announcements"
+import ExpandingLogo from "../../components/lowerthird/items/expand"
+import GGGRCobrand from "../../components/lowerthird/items/gggr"
+import Announcements from "../../components/lowerthird/items/announcements"
 
 // TODO: replace with Watermark, make lowerthirds support pulling props from playlist
-import {makeWatermark} from "../../components/lowerthird/watermark"
+import {makeWatermark} from "../../components/lowerthird/items/watermark"
 
 const styles = {
   base: {

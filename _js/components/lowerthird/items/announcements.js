@@ -17,9 +17,9 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import Logo from "../logo"
-import Watermark from "../watermark"
-import Animation, {timeline} from "../animation"
+import Logo from "../../logo"
+import Watermark from "../../watermark"
+import Animation, {timeline} from "../../animation"
 
 const shuffle = (array) => {
   let counter = array.length;

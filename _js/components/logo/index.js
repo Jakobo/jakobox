@@ -10,7 +10,7 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import Cube from "./logo/cube"
+import Cube from "./cube"
 
 const styles = {
   position: {
