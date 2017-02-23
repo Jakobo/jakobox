@@ -26,7 +26,7 @@ const Follows = Radium((props) => {
   styles.base.width = `${props.width}px`;
   styles.base.height = `${props.height}px`;
 
-  return <iframe style={styles.base} src={props.url}  seamless="seamless"/>
+  return <iframe style={styles.base} src={props.url} seamless="seamless"/>
 });
 
 const ConnectedFollows = connect(

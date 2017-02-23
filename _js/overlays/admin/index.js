@@ -13,6 +13,18 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
+
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import {deepPurple700} from "material-ui/styles/colors";
+
+import AppBar from "material-ui/AppBar";
+import FlatButton from "material-ui/FlatButton";
+
 // TODO: components to add
 // import Chat from "../../components/twitch/chat"
 // import Video from "../../components/twitch/video"
@@ -32,18 +44,45 @@ const styles = {
     fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
     fontSize: "16px"
   },
+  iframe: {
+    border: "0",
+    margin: "0",
+    padding: "0"
+  },
   flexbox: {
     display: "flex",
+  },
+  flexboxColumn: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "stretch",
     alignContent: "flex-start"
   },
+  flexboxRows: {
+    flexDirection: "column"
+  },
   column: {
-    width: "33.333%"
+    width: "33.333%",
+    height: "100%"
+  },
+  flexboxToContent: {
+    flexGrow: "0",
+    flexShrink: "1",
+    flexBasis: "auto"
+  },
+  flexboxFill: {
+    flexGrow: "1",
+    flexShrink: "1",
+    flexBasis: "auto"
   }
 };
+
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepPurple700,
+  },
+});
 
 // layout
 const Frame = Radium((props) => {
@@ -52,15 +91,58 @@ const Frame = Radium((props) => {
   // column 1: Screen Selector, Component Selector, Save/Cancel, remainder is the config for it
   // column 2: Muxy Ticker 100% height
   // column 3: Twitch Chat 100% height
-  return <div style={Object.assign({}, styles.base, styles.typography)}>
-    <div>TODO master visibility toggle</div>
-    <div>TODO twitch Video layer</div>
-    <div style={styles.flexbox}>
-      <div style={styles.column}>column 1</div>
-      <div style={styles.column}>column 2</div>
-      <div style={styles.column}>column 3</div>
+  return <MuiThemeProvider muiTheme={muiTheme}>
+    <div style={Object.assign({}, styles.base, styles.typography)}>
+      <div style={Object.assign({}, styles.flexbox, styles.flexboxColumn)}>
+        <div style={styles.column}>column 1</div>
+        <div style={styles.column}>
+          <iframe
+            src="https://u.muxy.io/live"
+            width="100%"
+            height="700"
+            frameborder="0"
+            scrolling="no"
+            style={Object.assign({}, styles.iframe, styles.flexboxFill)}
+            seamless="seamless">
+          </iframe>
+        </div>
+        <div style={Object.assign({}, styles.flexbox, styles.flexboxRows, styles.column)}>
+          <iframe
+            src="http://player.twitch.tv/?channel=jakobox"
+            width="100%"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="false"
+            muted="true"
+            style={Object.assign({}, styles.iframe, styles.flexboxToContent)}
+            seamless="seamless">
+          </iframe>
+          <iframe frameborder="0"
+            scrolling="no"
+            id="chat_embed"
+            src="http://www.twitch.tv/jakobox/chat"
+            width="100%"
+            height="550"
+            style={Object.assign({}, styles.iframe, styles.flexboxFill)}
+            seamless="seamless">
+          </iframe>
+        </div>
+      </div>
     </div>
-  </div>
+  </MuiThemeProvider>
 })
 
-export default Frame;
+const ConnectedFrame = connect(
+  (state, ownProps) => {
+    return {};
+  },
+  (dispatch) => {
+    return {
+      onLeftIconButtonTouchTap: () => {
+        console.log("onLeftIconButtonTouchTap");
+      }
+    }
+  }
+)(Radium(Frame))
+
+export default ConnectedFrame;
