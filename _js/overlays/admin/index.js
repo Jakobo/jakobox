@@ -18,12 +18,16 @@ import Radium from "radium"
 import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import {deepPurple700} from "material-ui/styles/colors";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
+import getMuiTheme from "material-ui/styles/getMuiTheme"
+import {deepPurple700} from "material-ui/styles/colors"
 
-import AppBar from "material-ui/AppBar";
-import FlatButton from "material-ui/FlatButton";
+import Paper from "material-ui/Paper"
+import Divider from "material-ui/Divider"
+
+import ScreenSelector from "../../components/admin/screenselector"
+import ComponentSelector from "../../components/admin/componentselector"
+import AppBar from "../../components/admin/appbar"
 
 // TODO: components to add
 // import Chat from "../../components/twitch/chat"
@@ -75,6 +79,21 @@ const styles = {
     flexGrow: "1",
     flexShrink: "1",
     flexBasis: "auto"
+  },
+  widthFull: {
+    width: "100%"
+  },
+  heightOneThird: {
+    height: "33vh"
+  },
+  heightTwoThirds: {
+    height: "66vh"
+  },
+  heightFull: {
+    height: "100vh"
+  },
+  divider: {
+    margin: "8px 0 8px 0"
   }
 };
 
@@ -91,39 +110,42 @@ const Frame = Radium((props) => {
   // column 1: Screen Selector, Component Selector, Save/Cancel, remainder is the config for it
   // column 2: Muxy Ticker 100% height
   // column 3: Twitch Chat 100% height
+  /*
+  <ScreenSelector></ScreenSelector>
+  <ComponentSelector></ComponentSelector>
+  */
   return <MuiThemeProvider muiTheme={muiTheme}>
     <div style={Object.assign({}, styles.base, styles.typography)}>
       <div style={Object.assign({}, styles.flexbox, styles.flexboxColumn)}>
-        <div style={styles.column}>column 1</div>
+        <div style={styles.column}>
+          <AppBar />
+        </div>
         <div style={styles.column}>
           <iframe
             src="https://u.muxy.io/live"
             width="100%"
             height="700"
-            frameborder="0"
+            frameBorder="0"
             scrolling="no"
-            style={Object.assign({}, styles.iframe, styles.flexboxFill)}
+            style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightFull, styles.widthFull)}
             seamless="seamless">
           </iframe>
         </div>
         <div style={Object.assign({}, styles.flexbox, styles.flexboxRows, styles.column)}>
           <iframe
             src="http://player.twitch.tv/?channel=jakobox"
-            width="100%"
-            frameborder="0"
+            style={Object.assign({}, styles.iframe, styles.flexboxToContent, styles.heightOneThird, styles.widthFull)}
+            frameBorder="0"
             scrolling="no"
-            allowfullscreen="false"
+            allowFullScreen="false"
             muted="true"
-            style={Object.assign({}, styles.iframe, styles.flexboxToContent)}
             seamless="seamless">
           </iframe>
-          <iframe frameborder="0"
-            scrolling="no"
-            id="chat_embed"
+          <iframe
             src="http://www.twitch.tv/jakobox/chat"
-            width="100%"
-            height="550"
-            style={Object.assign({}, styles.iframe, styles.flexboxFill)}
+            style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightTwoThirds, styles.widthFull)}
+            frameBorder="0"
+            scrolling="no"
             seamless="seamless">
           </iframe>
         </div>

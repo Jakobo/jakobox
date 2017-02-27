@@ -4,6 +4,7 @@ import {
   combineReducers
 } from "redux";
 
+import admin from "../ducks/admin";
 import background from "../ducks/background";
 import camera from "../ducks/camera";
 import color from "../ducks/color";
@@ -24,6 +25,7 @@ const loggerMiddleware = createLogger();
 export default function(key) {
   const reducers = combineReducers({
     screen,
+    admin,
     background,
     camera,
     color,
