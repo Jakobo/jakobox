@@ -1,6 +1,6 @@
 import { RESET } from "./global"
 
-export const SET_SCREEN = "screen/SET_SCREEN";
+export const SET_SCREEN = "local/screen/SET_SCREEN";
 export const SET_ADMIN_TARGET = "screen/SET_ADMIN_TARGET";
 
 const initialState = {

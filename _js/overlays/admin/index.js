@@ -25,14 +25,8 @@ import {deepPurple700} from "material-ui/styles/colors"
 import Paper from "material-ui/Paper"
 import Divider from "material-ui/Divider"
 
-import ScreenSelector from "../../components/admin/screenselector"
-import ComponentSelector from "../../components/admin/componentselector"
 import AppBar from "../../components/admin/appbar"
-
-// TODO: components to add
-// import Chat from "../../components/twitch/chat"
-// import Video from "../../components/twitch/video"
-// import Muxy from "../../components/muxy/ticker"
+import PanelRouter from "../../components/admin/componentchooser"
 
 const styles = {
   base: {
@@ -110,15 +104,12 @@ const Frame = Radium((props) => {
   // column 1: Screen Selector, Component Selector, Save/Cancel, remainder is the config for it
   // column 2: Muxy Ticker 100% height
   // column 3: Twitch Chat 100% height
-  /*
-  <ScreenSelector></ScreenSelector>
-  <ComponentSelector></ComponentSelector>
-  */
   return <MuiThemeProvider muiTheme={muiTheme}>
     <div style={Object.assign({}, styles.base, styles.typography)}>
       <div style={Object.assign({}, styles.flexbox, styles.flexboxColumn)}>
         <div style={styles.column}>
           <AppBar />
+          <PanelRouter />
         </div>
         <div style={styles.column}>
           <iframe

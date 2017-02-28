@@ -1,7 +1,9 @@
-import { doNotPropogate } from "./blocklist"
-
 const storagePrefix = "jakobox-";
 let key = "";
+
+const doNotPropogate = (action) => {
+  return (action.type.match(/^local\//)) ? true : false;
+}
 
 function wrapAction(action) {
   return {
