@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 import {ticker as destinyTicker} from "./lowerthirds/destiny"
@@ -34,6 +34,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.lowerthirds);
     break;
     case SHOW_LOWER_THIRDS:
       newState[action.targetScreen].visible = true;

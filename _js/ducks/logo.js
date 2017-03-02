@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 const USE_BOX = "logo/USE_BOX";
@@ -90,6 +90,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.logo);
     break;
     case SET_POSITION:
       newState[action.targetScreen].x = action.x;

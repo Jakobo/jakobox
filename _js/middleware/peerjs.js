@@ -1,6 +1,6 @@
 // peerjs middleware for redux
 import Peer from "peerjs"
-
+import { sync } from "../ducks/global"
 
 const uuid = () => {
   let d = (new Date()).getTime();
@@ -27,16 +27,15 @@ let enqueue = (action) => {
 };
 
 const createPeerConnection = (store, host, key, isClient) => {
-  let peer = new Peer((isClient) ? connectClient : host, {key: key});
   let clients = {};
 
   // drain the queue
   const drain = () => {
     if (queue.length > 0) {
-      const str = JSON.stringify({
+      const str = {
         fn: INCREMENTAL_STATE,
-        queue: queue
-      });
+        queue: queue.slice(0)
+      };
       clearQueue();
       Object.keys(clients).forEach((id) => {
         clients[id].send(str);
@@ -48,29 +47,30 @@ const createPeerConnection = (store, host, key, isClient) => {
   }
 
   const initializeClient = (client) => {
-    const str = JSON.stringify({
+    client.send({
       fn: FULL_STATE,
       state: store.getState()
     });
-    client.send(str);
   }
 
-  if (isClient) { // client mode
-    enqueue = () => {}; // disable queueing as a client
-    clearQueue();
+  const connectToHost = (after = 200, tries = 0) => {
+    let seq = 0;
+    let peer = new Peer(`${connectClient}-${seq}`, {key: key});
+    const reconnect = () => {
+      window.setTimeout(() => {
+        connectToHost(after * 2, ++tries);
+      }, after);
+    }
 
+    console.log(`Connection request to ${host} from ${connectClient} w/ key:${key} (${tries})`);
     const connection = peer.connect(host);
-    console.log(`Connection request to ${host} from ${connectClient} w/ key:${key}`);
-
     connection.on("open", () => {
       console.log(`Connection request to ${host} OK`);
-    })
-
-    connection.on("data", (d) => {
-      const data = JSON.parse(d);
+    });
+    connection.on("data", (data) => {
       switch (data.fn) {
         case FULL_STATE:
-          store.setState(data.state);
+          store.dispatch(sync(data.state));
         break;
         case INCREMENTAL_STATE:
           data.queue.forEach((item) => {
@@ -79,27 +79,48 @@ const createPeerConnection = (store, host, key, isClient) => {
         break;
       }
     });
-  }
-  else { // host mode (any new client needs the current state tree)
-    peer.on("connection", (connection) => {
-      console.log(`Connection established with ${connection.peer} w/ key:${key}`);
-      clients[connection.peer] = connection;
-      initializeClient(connection);
-      drain();
+    peer.on("error", (err) => {
+      switch (err.type) {
+        case "peer-unavailable":
+          peer.destroy();
+          reconnect();
+        break;
+      }
+    });
+    peer.on("disconnected", () => {
+      // wait a certain amount of time, then...
+      if (!peer.destroyed) {
+        window.setTimeout(() => {
+          peer.reconnect();
+        }, 200);
+      }
     });
   }
 
-  peer.on("error", (err) => {
-    // TODO: switch on err.type
-    // peer-unavailable - Peer no longer exists. If host, remove from pool
-    console.log(err);
-  });
-  peer.on("disconnected", () => {
-    // wait a certain amount of time, then...
-    window.setTimeout(() => {
-      peer.reconnect();
-    }, 200);
-  });
+  const establishHost = () => {
+    // host mode (any new client needs the current state tree)
+    const peer = new Peer(host, {key: key});
+    peer.on("connection", (connection) => {
+      connection.on("open", () => {
+        console.log(`Connection established with ${connection.peer} w/ key:${key}`);
+        clients[connection.peer] = connection;
+        initializeClient(connection);
+        drain();
+      });
+    });
+    peer.on("error", (err) => {
+      console.log(err.type, err);
+    });
+  }
+
+  if (isClient) {
+    enqueue = () => {}; // disable queueing as a client
+    clearQueue();
+    connectToHost();
+  }
+  else {
+    establishHost();
+  }
 }
 
 // only sync over RTC events that are not local*

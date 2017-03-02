@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 const SET_BACKGROUND = "background/SET_BACKGROUND";
@@ -12,6 +12,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.background);
     break;
     case SET_BACKGROUND:
       newState[action.targetScreen].background = action.background;

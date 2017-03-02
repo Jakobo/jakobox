@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 import * as cameraActions from "./camera"
@@ -133,6 +133,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.generic);
     break;
     case SET_POSITIONS:
       newState[action.targetScreen].logo = action.logo;

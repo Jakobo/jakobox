@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 const SET_POSITION = "camera/SET_POSITION";
@@ -29,6 +29,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.camera);
     break;
     case SET_VISIBILITY:
       newState[action.targetScreen].visible = action.show;

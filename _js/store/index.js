@@ -24,14 +24,14 @@ const loggerMiddleware = createLogger();
 
 export default function() {
   const reducers = combineReducers({
-    screen,
     admin,
     background,
     camera,
     follows,
     generic,
     logo,
-    lowerthirds
+    lowerthirds,
+    screen
   });
 
   return createStore(

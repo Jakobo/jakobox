@@ -1,4 +1,4 @@
-import { RESET } from "./global"
+import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 const SET_URLS = "follows/SET_URLS";
@@ -30,6 +30,9 @@ export default function reducer(state = initialState, action = {}) {
   switch(action.type) {
     case RESET:
       newState = Object.assign({}, initialState);
+    break;
+    case SYNC:
+      newState = Object.assign({}, action.newState.follows);
     break;
     case SET_FAKE_FOLLOWS:
       newState[action.targetScreen].fakeFollows = action.enabled;
