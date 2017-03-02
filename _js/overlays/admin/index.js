@@ -111,39 +111,43 @@ const Frame = Radium((props) => {
           <AppBar />
           <PanelRouter />
         </div>
-        <div style={styles.column}>
-          <iframe
-            src="https://u.muxy.io/live"
-            width="100%"
-            height="700"
-            frameBorder="0"
-            scrolling="no"
-            style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightFull, styles.widthFull)}
-            seamless="seamless">
-          </iframe>
-        </div>
-        <div style={Object.assign({}, styles.flexbox, styles.flexboxRows, styles.column)}>
-          <iframe
-            src="http://player.twitch.tv/?channel=jakobox"
-            style={Object.assign({}, styles.iframe, styles.flexboxToContent, styles.heightOneThird, styles.widthFull)}
-            frameBorder="0"
-            scrolling="no"
-            allowFullScreen="false"
-            muted="true"
-            seamless="seamless">
-          </iframe>
-          <iframe
-            src="http://www.twitch.tv/jakobox/chat"
-            style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightTwoThirds, styles.widthFull)}
-            frameBorder="0"
-            scrolling="no"
-            seamless="seamless">
-          </iframe>
-        </div>
+
       </div>
     </div>
   </MuiThemeProvider>
 })
+
+/*
+<div style={styles.column}>
+  <iframe
+    src="https://u.muxy.io/live"
+    width="100%"
+    height="700"
+    frameBorder="0"
+    scrolling="no"
+    style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightFull, styles.widthFull)}
+    seamless="seamless">
+  </iframe>
+</div>
+<div style={Object.assign({}, styles.flexbox, styles.flexboxRows, styles.column)}>
+  <iframe
+    src="http://player.twitch.tv/?channel=jakobox"
+    style={Object.assign({}, styles.iframe, styles.flexboxToContent, styles.heightOneThird, styles.widthFull)}
+    frameBorder="0"
+    scrolling="no"
+    allowFullScreen="false"
+    muted="true"
+    seamless="seamless">
+  </iframe>
+  <iframe
+    src="http://www.twitch.tv/jakobox/chat"
+    style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightTwoThirds, styles.widthFull)}
+    frameBorder="0"
+    scrolling="no"
+    seamless="seamless">
+  </iframe>
+</div>
+*/
 
 const ConnectedFrame = connect(
   (state, ownProps) => {

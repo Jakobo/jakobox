@@ -67,8 +67,6 @@ const styles = {
 };
 
 const Frame = (props) => {
-  props.defaults();
-
   const frameStyles = Object.assign({},
     styles.base,
     {
@@ -95,16 +93,6 @@ const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
       background: state.background.generic.background
-    }
-  },
-  (dispatch) => {
-    return {
-      defaults: () => {
-        // place on end of event queue
-        window.setTimeout(() => {
-          configure(dispatch);
-        });
-      }
     }
   }
 )(Radium(Frame))

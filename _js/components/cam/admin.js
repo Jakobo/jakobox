@@ -14,8 +14,8 @@ const CamAdmin = (props) => {
 const ConnectedCamAdmin = connect(
   (state, ownProps) => {
     return {
-      color: state.color[state.admin.target].camera.main,
-      accent: state.color[state.admin.target].camera.accent,
+      color: state.camera[state.admin.target].color.main,
+      accent: state.camera[state.admin.target].color.accent,
       x: state.camera[state.admin.target].x,
       y: state.camera[state.admin.target].y,
       visible: state.camera[state.admin.target].visible
@@ -30,7 +30,7 @@ const ConnectedCamAdmin = connect(
 
       },
       onChangeVisibility: (visible) => {
-        
+
       }
     }
   }

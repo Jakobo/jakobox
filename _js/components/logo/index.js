@@ -196,12 +196,12 @@ Logo.defaultProps = {
 const ConnectedLogo = connect(
   (state, ownProps) => {
     return {
-      cubeStrokeColor: ownProps.cubeStrokeColor || state.color[state.screen.current].cube.stroke,
-      cubeFillColor: ownProps.cubeFillColor || state.color[state.screen.current].cube.fill,
-      textStrokeColor: ownProps.textStrokeColor || state.color[state.screen.current].text.stroke,
-      textFillColor: ownProps.textFillColor || state.color[state.screen.current].text.fill,
-      bStrokeColor: ownProps.bStrokeColor || state.color[state.screen.current].b.stroke,
-      bFillColor: ownProps.bFillColor || state.color[state.screen.current].b.fill,
+      cubeStrokeColor: ownProps.cubeStrokeColor || state.logo[state.screen.current].cube.stroke,
+      cubeFillColor: ownProps.cubeFillColor || state.logo[state.screen.current].cube.fill,
+      textStrokeColor: ownProps.textStrokeColor || state.logo[state.screen.current].text.stroke,
+      textFillColor: ownProps.textFillColor || state.logo[state.screen.current].text.fill,
+      bStrokeColor: ownProps.bStrokeColor || state.logo[state.screen.current].b.stroke,
+      bFillColor: ownProps.bFillColor || state.logo[state.screen.current].b.fill,
       x: (typeof ownProps.x !== "undefined") ? ownProps.x : state.logo[state.screen.current].x,
       y: (typeof ownProps.y !== "undefined") ? ownProps.y : state.logo[state.screen.current].y,
       scale: (typeof ownProps.scale !== "undefined") ? ownProps.scale : state.logo[state.screen.current].scale,

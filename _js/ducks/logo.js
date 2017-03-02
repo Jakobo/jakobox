@@ -8,14 +8,81 @@ const SET_SPIN = "logo/SET_SPIN";
 const SET_INFINITE = "logo/SET_INFINITE";
 const SET_SCALE = "logo/SET_SCALE";
 const SET_VISIBILITY = "logo/SET_VISIBILITY";
+const SET_CUBE = "logo/SET_CUBE";
+const SET_B = "logo/SET_B";
+const SET_TEXT = "logo/SET_TEXT";
 
 const initialState = generateState({
   textLogo: false,
   spin: false,
+  infinite: false,
   x: 0,
   y: 0,
   scale: 1,
-  visible: true
+  visible: true,
+  cube: {
+    stroke: "#000",
+    fill: "#fff"
+  },
+  b: {
+    stroke: "#000",
+    fill: "#fff"
+  },
+  text: {
+    stroke: "#000",
+    fill: "#fff"
+  }
+},{
+  brb: {
+    x: 83,
+    y: 343,
+    scale: 3.8,
+    textLogo: true,
+    cube: {
+      stroke: "#fff",
+      fill: "#45548e"
+    },
+    b: {
+      stroke: "rgba(255, 255, 255, 0.8)",
+      fill: "#45548e"
+    }
+  },
+  destiny: {
+  },
+  generic: {
+    x: 8,
+    y: 230,
+    spin: true,
+    infinite: true
+  },
+  incoming: {
+    x: 83,
+    y: 343,
+    scale: 3.8,
+    textLogo: true,
+    cube: {
+      stroke: "#fff",
+      fill: "#2A2A5C"
+    },
+    b: {
+      stroke: "#000",
+      fill: "#151431"
+    }
+  },
+  outgoing: {
+    x: 83,
+    y: 343,
+    scale: 3.8,
+    textLogo: true,
+    cube: {
+      stroke: "#fff",
+      fill: "#2A2A5C"
+    },
+    b: {
+      stroke: "#000",
+      fill: "#151431"
+    }
+  }
 });
 
 export default function reducer(state = initialState, action = {}) {
@@ -46,6 +113,18 @@ export default function reducer(state = initialState, action = {}) {
     break;
     case USE_FULL_LOGO:
       newState[action.targetScreen].textLogo = true;
+    break;
+    case SET_CUBE:
+      newState[action.targetScreen].cube.stroke = action.stroke;
+      newState[action.targetScreen].cube.fill = action.fill;
+    break;
+    case SET_B:
+      newState[action.targetScreen].b.stroke = action.stroke;
+      newState[action.targetScreen].b.fill = action.fill;
+    break;
+    case SET_TEXT:
+      newState[action.targetScreen].text.stroke = action.stroke;
+      newState[action.targetScreen].text.fill = action.fill;
     break;
   }
 
@@ -86,4 +165,16 @@ export function stopInfiniteSpin() {
 
 export function spin() {
   return {type: SET_SPIN, spin: true};
+}
+
+export function setCubeColor(stroke, fill) {
+  return {type: SET_CUBE, stroke, fill};
+}
+
+export function setBColor(stroke, fill) {
+  return {type: SET_B, stroke, fill};
+}
+
+export function setTextColor(stroke, fill) {
+  return {type: SET_TEXT, stroke, fill};
 }

@@ -1,14 +1,27 @@
-import { setCameraColor } from "./color"
 import { RESET } from "./global"
 import generateState from "../lib/state"
 
 const SET_POSITION = "camera/SET_POSITION";
 const SET_VISIBILITY = "camera/SET_VISIBILITY";
+const SET_COLOR = "camera/SET_COLOR";
 
 const initialState = generateState({
   x: 0,
   y: 0,
-  visible: true
+  visible: true,
+  color: {
+    main: "#fff",
+    accent: "#fff"
+  }
+}, {
+  destiny: {
+    x: 3,
+    y: 460,
+    color: {
+      main: "#2a3f56",
+      accent: "#df8926"
+    }
+  }
 });
 
 export default function reducer(state = initialState, action = {}) {
@@ -23,6 +36,10 @@ export default function reducer(state = initialState, action = {}) {
     case SET_POSITION:
       newState[action.targetScreen].x = action.x;
       newState[action.targetScreen].y = action.y;
+    break;
+    case SET_COLOR:
+      newState[action.targetScreen].color.main = action.main;
+      newState[action.targetScreen].color.accent = action.accent;
     break;
   }
 
@@ -41,7 +58,6 @@ export function hideCamera() {
   return {type: SET_VISIBILITY, show: false}
 }
 
-// color of camera is handled in the color domain
-export function setColors(color, accent) {
-  return setCameraColor(color, accent);
+export function setColor(main, accent) {
+  return {type: SET_CAMERA, main, accent};
 }

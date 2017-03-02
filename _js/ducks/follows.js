@@ -14,6 +14,15 @@ const initialState = generateState({
   height: 0,
   x: 0,
   y: 0
+}, {
+  destiny: {
+    x: 1238,
+    y: 283,
+    width: 682,
+    height: 210,
+    fakeUrl: "http://u.muxy.io/dashboard/alerts/demo/g9djjNHgai340bmM76i2Fhfe5nyiMKSX",
+    liveUrl: "http://a.muxy.io/alert/jakobox/srX-UDXTDVsAURa8mWWdPkAVxz0NA94E"
+  }
 });
 
 export default function reducer(state = initialState, action = {}) {

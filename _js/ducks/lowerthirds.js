@@ -1,6 +1,8 @@
 import { RESET } from "./global"
 import generateState from "../lib/state"
 
+import {ticker as destinyTicker} from "./lowerthirds/destiny"
+
 const SHOW_LOWER_THIRDS = "lowerthirds/SHOW_LOWER_THIRDS";
 const HIDE_LOWER_THIRDS = "lowerthirds/HIDE_LOWER_THIRDS";
 const SET_CURRENT_PLAYLIST = "lowerthirds/SET_CURRENT_PLAYLIST";
@@ -15,6 +17,15 @@ const initialState = generateState({
     items: [],
     subset: 1,
     shuffle: true
+  }
+}, {
+  destiny: {
+    visible: true,
+    currentPlaylist: "normal",
+    ticker: {
+      subset: 3,
+      items: destinyTicker
+    }
   }
 });
 

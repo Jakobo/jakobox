@@ -83,8 +83,8 @@ const Cam = Radium((props) => {
 const ConnectedCam = connect(
   (state, ownProps) => {
     return {
-      color: ownProps.color || state.color[state.screen.current].camera.main,
-      accent: ownProps.accent || state.color[state.screen.current].camera.accent,
+      color: ownProps.color || state.camera[state.screen.current].color.main,
+      accent: ownProps.accent || state.camera[state.screen.current].color.accent,
       x: ownProps.x || state.camera[state.screen.current].x,
       y: ownProps.y || state.camera[state.screen.current].y,
       visible: state.camera[state.screen.current].visible

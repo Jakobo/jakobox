@@ -1,7 +1,6 @@
 import * as admin from "../ducks/admin";
 import * as background from "../ducks/background";
 import * as camera from "../ducks/camera";
-import * as color from "../ducks/color";
 import * as follows from "../ducks/follows";
 import * as generic from "../ducks/generic";
 import * as global from "../ducks/global";
@@ -36,7 +35,6 @@ export default function init(store) {
       admin: strip(admin),
       background: strip(background),
       camera: strip(camera),
-      color: strip(color),
       follows: strip(follows),
       generic: strip(generic),
       global: strip(global),

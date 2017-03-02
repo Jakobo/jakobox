@@ -18,16 +18,10 @@ import {StyleRoot, Style} from "radium";
 
 import { connect, Provider } from "react-redux"
 
-import createStore from "./store";
-import {createOnStorage} from "./middleware";
-const store = createStore("jakobox");
-const onStorage = createOnStorage(store);
-window.addEventListener("storage", onStorage);
-
-import initConsoleActions from "./lib/console_actions"
-initConsoleActions(store);
-
 import params from "./lib/url"
+import createStore from "./store";
+import {createPeerConnection} from "./middleware/peerjs";
+import initConsoleActions from "./lib/console_actions"
 import { setScreen } from "./ducks/screen"
 
 // Both Router and ConnectedRouter are small enough to leave in App for now
@@ -47,6 +41,10 @@ const screens = {
   incoming: Incoming,
   outgoing: Outgoing
 }
+
+const store = createStore();
+initConsoleActions(store);
+createPeerConnection(store, params.connect || params.host, params.key || null, (params.connect) ? true : false);
 
 const Router = (props) => {
   // set the screen from params if there was no screen
