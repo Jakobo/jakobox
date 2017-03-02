@@ -45,18 +45,9 @@ const screens = {
 const store = createStore();
 initConsoleActions(store);
 createPeerConnection(store, params.connect || params.host, params.key || null, (params.connect) ? true : false);
+store.dispatch(setScreen(params.screen || "incoming"));
 
 const Router = (props) => {
-  // set the screen from params if there was no screen
-  if (params.screen && !props.screen) {
-    props.onScreen(params.screen);
-    return null;
-  }
-  if (!params.screen && !props.screen) {
-    props.onScreen("incoming");
-    return null;
-  }
-
   // else render the requested component
   const Component = screens[props.screen];
   return (Component) ? <Component /> : null;
@@ -66,15 +57,6 @@ const ConnectedRouter = connect(
   (state, ownProps) => {
     return {
       screen: state.screen.current
-    }
-  },
-  (dispatch) => {
-    return {
-      onScreen: (screen) => {
-        window.setTimeout(() => {
-          dispatch(setScreen(screen))
-        })
-      }
     }
   }
 )(Router)
