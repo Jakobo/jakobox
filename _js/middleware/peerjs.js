@@ -16,6 +16,7 @@ const FULL_STATE = "FULL_STATE"
 const INCREMENTAL_STATE = "INCREMENTAL_STATE"
 
 const connectClient = `client-${uuid()}`
+const connectHost = `host`
 let queue = [];
 
 const clearQueue = () => {
@@ -26,7 +27,7 @@ let enqueue = (action) => {
   queue.push(action);
 };
 
-const createPeerConnection = (store, host, key, isClient) => {
+const createPeerConnection = (store, key, isClient) => {
   let clients = {};
 
   // drain the queue
@@ -62,10 +63,10 @@ const createPeerConnection = (store, host, key, isClient) => {
       }, after);
     }
 
-    console.log(`Connection request to ${host} from ${connectClient} w/ key:${key} (${tries})`);
-    const connection = peer.connect(host);
+    console.log(`Connection request to ${connectHost} from ${connectClient} w/ key:${key} (${tries})`);
+    const connection = peer.connect(connectHost);
     connection.on("open", () => {
-      console.log(`Connection request to ${host} OK`);
+      console.log(`Connection request to ${connectHost} OK`);
     });
     connection.on("data", (data) => {
       switch (data.fn) {
@@ -99,7 +100,7 @@ const createPeerConnection = (store, host, key, isClient) => {
 
   const establishHost = () => {
     // host mode (any new client needs the current state tree)
-    const peer = new Peer(host, {key: key});
+    const peer = new Peer(connectHost, {key: key});
     peer.on("connection", (connection) => {
       connection.on("open", () => {
         console.log(`Connection established with ${connection.peer} w/ key:${key}`);

@@ -21,6 +21,7 @@ import { connect, Provider } from "react-redux"
 import params from "./lib/url"
 import createStore from "./store";
 import {createPeerConnection} from "./middleware/peerjs";
+import {createLocalStorageConnection} from "./middleware/localstorage";
 import initConsoleActions from "./lib/console_actions"
 import { setScreen } from "./ducks/screen"
 
@@ -44,7 +45,14 @@ const screens = {
 
 const store = createStore();
 initConsoleActions(store);
-createPeerConnection(store, params.connect || params.host, params.key || null, (params.connect) ? true : false);
+
+if (params.ls) {
+  createLocalStorageConnection(store, params.key || "x", (params.client) ? true : false);
+}
+else {
+  createPeerConnection(store, params.key || null, (params.client) ? true : false);
+}
+
 store.dispatch(setScreen(params.screen || "incoming"));
 
 const Router = (props) => {

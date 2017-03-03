@@ -14,8 +14,10 @@ import logo from "../ducks/logo";
 import lowerthirds from "../ducks/lowerthirds";
 import screen from "../ducks/screen";
 
-// import {setStorageKey, storageMiddleware} from '../middleware';
+import params from "../lib/url"
+
 import {peerMiddleware} from "../middleware/peerjs";
+import {lsMiddleware} from "../middleware/localstorage";
 
 import thunkMiddleware from "redux-thunk"
 import createLogger from "redux-logger"
@@ -37,7 +39,7 @@ export default function() {
   return createStore(
     reducers,
     applyMiddleware(
-      peerMiddleware,
+      (params.ls) ? lsMiddleware : peerMiddleware,
       thunkMiddleware,
       loggerMiddleware
     )
