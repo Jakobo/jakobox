@@ -2,8 +2,12 @@ import { RESET, SYNC } from "./global"
 import generateState from "../lib/state"
 
 const SET_POSITION = "camera/SET_POSITION";
+const SET_X_POSITION = "camera/SET_X_POSITION";
+const SET_Y_POSITION = "camera/SET_Y_POSITION";
 const SET_VISIBILITY = "camera/SET_VISIBILITY";
 const SET_COLOR = "camera/SET_COLOR";
+const SET_MAIN_COLOR = "camera/SET_MAIN_COLOR";
+const SET_ACCENT_COLOR = "camera/SET_ACCENT_COLOR";
 
 const initialState = generateState({
   x: 0,
@@ -37,12 +41,24 @@ export default function reducer(state = initialState, action = {}) {
       newState[action.targetScreen].visible = action.show;
     break;
     case SET_POSITION:
-      newState[action.targetScreen].x = action.x;
-      newState[action.targetScreen].y = action.y;
+      newState[action.targetScreen].x = parseInt(action.x, 10);
+      newState[action.targetScreen].y = parseInt(action.y, 10);
+    break;
+    case SET_X_POSITION:
+      newState[action.targetScreen].x = parseInt(action.x, 10);
+    break;
+    case SET_Y_POSITION:
+      newState[action.targetScreen].y = parseInt(action.y, 10);
     break;
     case SET_COLOR:
       newState[action.targetScreen].color.main = action.main;
       newState[action.targetScreen].color.accent = action.accent;
+    break;
+    case SET_MAIN_COLOR:
+      newState[action.targetScreen].color.main = action.color;
+    break;
+    case SET_ACCENT_COLOR:
+      newState[action.targetScreen].color.accent = action.color;
     break;
   }
 
@@ -50,7 +66,18 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function setPosition(x, y) {
-  return {type: SET_POSITION, x, y};
+  return [
+    setXPosition(x),
+    setYPosition(y)
+  ];
+}
+
+export function setXPosition(x) {
+  return {type: SET_X_POSITION, x};
+}
+
+export function setYPosition(y) {
+  return {type: SET_Y_POSITION, y};
 }
 
 export function showCamera() {
@@ -62,5 +89,13 @@ export function hideCamera() {
 }
 
 export function setColor(main, accent) {
-  return {type: SET_CAMERA, main, accent};
+  return {type: SET_COLOR, main, accent};
+}
+
+export function setMainColor(color) {
+  return {type: SET_MAIN_COLOR, color};
+}
+
+export function setAccentColor(color) {
+  return {type: SET_ACCENT_COLOR, color};
 }

@@ -2,9 +2,13 @@ import React, {Component} from "react"
 import { connect } from "react-redux"
 
 import Cam from "../cam/admin"
+import Follow from "../follows/admin"
+import Logo from "../logo/admin"
 
 const panels = {
-  // "cam": Cam
+  "cam": Cam,
+  "follows": Follow,
+  "logo": Logo
 }
 
 const Chooser = (props) => {

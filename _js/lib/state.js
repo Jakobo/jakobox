@@ -7,10 +7,14 @@ const screens = [
   "outgoing"
 ]
 
+const clone = (o) => {
+  return JSON.parse(JSON.stringify(o));
+}
+
 export default function generateState(state, overrides = {}) {
   let newState = {};
   screens.forEach((screen) => {
-    newState[screen] = Object.assign({}, state)
+    newState[screen] = Object.assign({}, clone(state))
   })
 
   Object.keys(overrides).forEach((key) => {

@@ -118,16 +118,28 @@ export default function reducer(state = initialState, action = {}) {
       newState[action.targetScreen].textLogo = true;
     break;
     case SET_CUBE:
-      newState[action.targetScreen].cube.stroke = action.stroke;
-      newState[action.targetScreen].cube.fill = action.fill;
+      if (action.stroke) {
+        newState[action.targetScreen].cube.stroke = action.stroke;
+      }
+      if (action.fill) {
+        newState[action.targetScreen].cube.fill = action.fill;
+      }
     break;
     case SET_B:
-      newState[action.targetScreen].b.stroke = action.stroke;
-      newState[action.targetScreen].b.fill = action.fill;
+      if (action.stroke) {
+        newState[action.targetScreen].b.stroke = action.stroke;
+      }
+      if (action.fill) {
+        newState[action.targetScreen].b.fill = action.fill;
+      }
     break;
     case SET_TEXT:
-      newState[action.targetScreen].text.stroke = action.stroke;
-      newState[action.targetScreen].text.fill = action.fill;
+      if (action.stroke) {
+        newState[action.targetScreen].text.stroke = action.stroke;
+      }
+      if (action.fill) {
+        newState[action.targetScreen].text.fill = action.fill;
+      }
     break;
   }
 
@@ -168,6 +180,10 @@ export function stopInfiniteSpin() {
 
 export function spin() {
   return {type: SET_SPIN, spin: true};
+}
+
+export function stopSpin() {
+  return {type: SET_SPIN, spin: false};
 }
 
 export function setCubeColor(stroke, fill) {

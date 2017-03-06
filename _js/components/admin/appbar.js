@@ -7,6 +7,14 @@ import MenuItem from "material-ui/MenuItem"
 import SceneSelect from "material-ui/svg-icons/hardware/videogame-asset"
 import ComponentSelect from "material-ui/svg-icons/av/web"
 
+import CameraIcon from "material-ui/svg-icons/av/videocam"
+import FollowerIcon from "material-ui/svg-icons/action/speaker-notes"
+import LogoIcon from "material-ui/svg-icons/action/label"
+import LTIcon from "material-ui/svg-icons/content/low-priority"
+import OmniIcon from "material-ui/svg-icons/av/loop"
+import GenericIcon from "material-ui/svg-icons/action/dashboard"
+import NoIcon from "material-ui/svg-icons/toggle/check-box-outline-blank"
+
 import { connect } from "react-redux"
 
 import { setScreen, setComponent } from "../../ducks/admin"
@@ -26,6 +34,15 @@ const components = {
   "lowerthird": "Lower Thirds",
   "omnibar": "Omnibar",
   "generic": "Generic Game Settings"
+}
+const componentIcons = {
+  "none": NoIcon,
+  "cam": CameraIcon,
+  "follows": FollowerIcon,
+  "logo": LogoIcon,
+  "lowerthird": LTIcon,
+  "omnibar": OmniIcon,
+  "generic": GenericIcon
 }
 const sortedComponents = Object.keys(components).sort(alphaSort(components))
 
@@ -97,13 +114,14 @@ class AdminAppBar extends Component {
   }
 
   render() {
+    const ComponentIcon = componentIcons[this.props.currentComponent] || componentIcons["none"];
     return (
       <div>
         <AppBar
           title={screens[this.props.currentScene]}
           iconElementLeft={<IconButton><SceneSelect /></IconButton>}
           onLeftIconButtonTouchTap={this.openScene}
-          iconElementRight={<IconButton><ComponentSelect /></IconButton>}
+          iconElementRight={<IconButton><ComponentIcon /></IconButton>}
           onRightIconButtonTouchTap={this.openComponent}
         />
         <Popover open={this.state.selectorOpen}
@@ -126,7 +144,16 @@ class AdminAppBar extends Component {
         >
           <Menu>
             {sortedComponents.map((key) => {
-              return (<MenuItem key={key} disabled={key === this.props.currentComponent} primaryText={components[key]} onTouchTap={() => { this.chooseComponent(key) }} />)
+              const Icon = componentIcons[key] || componentIcons["none"];
+              return (
+                <MenuItem
+                  key={key}
+                  disabled={key === this.props.currentComponent}
+                  primaryText={components[key]}
+                  leftIcon={<Icon />}
+                  onTouchTap={() => { this.chooseComponent(key) }}
+                />
+              )
             })}
           </Menu>
         </Popover>

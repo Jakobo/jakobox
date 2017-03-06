@@ -3,7 +3,9 @@ import { RESET } from "./global"
 export const SET_SCREEN = "local/screen/SET_SCREEN";
 
 const initialState = {
-  current: null
+  current: null,
+  maxWidth: 1920,
+  maxHeight:1080
 };
 
 export default function reducer(state = initialState, action = {}) {
