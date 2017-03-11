@@ -65,13 +65,6 @@ export default function reducer(state = initialState, action = {}) {
   return newState;
 }
 
-export function setPosition(x, y) {
-  return [
-    setXPosition(x),
-    setYPosition(y)
-  ];
-}
-
 export function setXPosition(x) {
   return {type: SET_X_POSITION, x};
 }

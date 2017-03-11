@@ -13,8 +13,26 @@ This is a standard react application, a main entry point at stream.html. The app
 * Twitch Video Feed: http://player.twitch.tv/?channel={CHANNEL}&autoplay=true&muted=true
 * Material UI for dashboard: http://www.material-ui.com/
 
+## Usage
+As deployed, the React application is capable of running in two modes
+* Host - Owns the authoritative state of the application
+* Client - Consumes state changes but cannot push changes back
+
+The anatomy of a screen URL is:
+```
+http://.../screen.html?key=<key>&ls=<ls>&host=<host>&screen=<screen>
+KEY    - the API Key if using PeerJS for WebRTC connection signaling. Else, it's the localstorage key
+LS     - if set to "1", localstorage will be used instead of PeerJS
+HOST   - if set to "1", this screen will assume it has authority over the state
+SCREEN - the screen to render. Based on the available overlays in /overlays
+```
+
+This means that to start say, the Destiny overlay on key `foobar`, you would reference `http://.../screen.html?key=foobar&ls=1&screen=destiny`, while you can control it (and any other screens on the same KEY value) via `http://.../screen.html?key=foobar&ls=1&host=1&screen=admin`.
+
+In an RTC world, you could have your computer and your phone within reach and running the admin application. Either machine would need to be able to become the host (though that's not implemented in the admin panel yet).
+
 ## Build/Deploy
-I'm using my standard webpack setup here:
+I'm using a mostly standard webpack setup here:
 
 ```bash
 npm install # All the things

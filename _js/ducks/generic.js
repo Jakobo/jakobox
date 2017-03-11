@@ -148,6 +148,9 @@ export default function reducer(state = initialState, action = {}) {
 
 export function setLayout(camera, logo, textLogo) {
   let logoMode = "logo";
+  camera = (camera > 10) ? 10 : (camera < 0) ? 0 : camera;
+  logo = (logo > 10) ? 10 : (logo < 0) ? 0 : logo;
+
   if (camera === logo) {
     logoMode = (textLogo) ? "logoCam" : "boxCam"
   }
@@ -156,8 +159,8 @@ export function setLayout(camera, logo, textLogo) {
     y: positions.cam[camera][1]
   };
   const logoPosition = {
-    x: positions[logoMode][logo][0],
-    y: positions[logoMode][logo][1]
+    x: positions[logoMode][logo],
+    y: positions[logoMode][logo]
   };
   const followPosition = {
     x: positions.follow[camera][0],
@@ -170,11 +173,13 @@ export function setLayout(camera, logo, textLogo) {
 
   return [
     (camera > 0) ? cameraActions.showCamera() : cameraActions.hideCamera(),
-    cameraActions.setPosition(cameraPosition.x, cameraPosition.y),
+    cameraActions.setXPosition(cameraPosition.x),
+    cameraActions.setYPosition(cameraPosition.y),
     (logo > 0) ? logoActions.showLogo() : logoActions.hideLogo(),
     logoActions.setPosition(logoPosition.x, logoPosition.y),
     (textLogo) ? logoActions.showFullLogo() : logoActions.showOnlyBox(),
     followsActions.setUrls(followUrls.fakeUrl, followUrls.liveUrl),
-    followsActions.setPosition(followPosition.x, followPosition.y)
+    followsActions.setPosition(followPosition.x, followPosition.y),
+    { type: SET_POSITIONS, cam: camera, logo }
   ]
 }

@@ -18,6 +18,7 @@ import params from "../lib/url"
 
 import {peerMiddleware} from "../middleware/peerjs";
 import {lsMiddleware} from "../middleware/localstorage";
+import {enableBatching} from "redux-batched-actions";
 
 import thunkMiddleware from "redux-thunk"
 import createLogger from "redux-logger"
@@ -37,7 +38,7 @@ export default function() {
   });
 
   return createStore(
-    reducers,
+    enableBatching(reducers),
     applyMiddleware(
       (params.ls) ? lsMiddleware : peerMiddleware,
       thunkMiddleware,

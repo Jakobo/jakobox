@@ -47,10 +47,10 @@ const store = createStore();
 initConsoleActions(store);
 
 if (params.ls) {
-  createLocalStorageConnection(store, params.key || "x", (params.client) ? true : false);
+  createLocalStorageConnection(store, params.key || "x", (params.host) ? false : true);
 }
 else {
-  createPeerConnection(store, params.key || null, (params.client) ? true : false);
+  createPeerConnection(store, params.key || null, (params.host) ? false : true);
 }
 
 store.dispatch(setScreen(params.screen || "incoming"));

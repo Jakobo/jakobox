@@ -2,8 +2,8 @@ export const SET_SCREEN = "local/admin/SET_SCREEN";
 export const SET_COMPONENT = "local/admin/SET_COMPONENT";
 
 const initialState = {
-  screen: "generic",
-  component: "cam"
+  screen: "incoming",
+  component: "logo"
 };
 
 export default function reducer(state = initialState, action = {}) {
