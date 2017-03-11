@@ -57,9 +57,22 @@ const createPeerConnection = (store, key, isClient) => {
   const connectToHost = (after = 200, tries = 0) => {
     let seq = 0;
     let peer = new Peer(`${connectClient}-${seq}`, {key: key});
+    let connected = false;
+    window.setTimeout(() => {
+      if (!connected) {
+        console.log("Connection timeout. Retrying.");
+        reconnect();
+      }
+    }, 3000);
+
     const reconnect = () => {
+      // destroy the peer and close down gracefully
+      if (!peer.destroyed) {
+        peer.destroy();
+      }
+      // start a new connection and disconnect from thread
       window.setTimeout(() => {
-        connectToHost(after * 2, ++tries);
+        connectToHost(after * 2, ++tries)
       }, after);
     }
 
@@ -67,7 +80,13 @@ const createPeerConnection = (store, key, isClient) => {
     const connection = peer.connect(connectHost);
     connection.on("open", () => {
       console.log(`Connection request to ${connectHost} OK`);
+      connected = true;
+      after = 0;
     });
+    connection.on("close", () => {
+      console.log(`Disconnected from ${connectHost}. Resyncing.`);
+      reconnect();
+    })
     connection.on("data", (data) => {
       switch (data.fn) {
         case FULL_STATE:
@@ -83,19 +102,18 @@ const createPeerConnection = (store, key, isClient) => {
     peer.on("error", (err) => {
       switch (err.type) {
         case "peer-unavailable":
-          peer.destroy();
           reconnect();
         break;
       }
     });
-    peer.on("disconnected", () => {
-      // wait a certain amount of time, then...
-      if (!peer.destroyed) {
-        window.setTimeout(() => {
-          peer.reconnect();
-        }, 200);
-      }
-    });
+    // peer.on("disconnected", () => {
+    //   console.log("disconnect detected")
+    //   reconnect();
+    // });
+    // peer.on("close", () => {
+    //   console.log("disconnect detected")
+    //   reconnect();
+    // })
   }
 
   const establishHost = () => {
