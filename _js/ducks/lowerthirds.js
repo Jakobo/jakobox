@@ -12,7 +12,8 @@ const SET_TICKER_SHUFFLE = "lowerthirds/SET_TICKER_SHUFFLE";
 
 const initialState = generateState({
   visible: false,
-  currentPlaylist: "",
+  currentPlaylist: "normal",
+  availablePlaylists: ["normal"],
   ticker: {
     items: [],
     subset: 1,
@@ -22,8 +23,10 @@ const initialState = generateState({
   destiny: {
     visible: true,
     currentPlaylist: "normal",
+    availablePlaylists: ["normal", "demo"],
     ticker: {
       subset: 3,
+      shuffle: true,
       items: destinyTicker
     }
   }
