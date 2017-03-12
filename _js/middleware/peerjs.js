@@ -54,7 +54,7 @@ const createPeerConnection = (store, key, isClient) => {
     });
   }
 
-  const connectToHost = (after = 200, tries = 0) => {
+  const connectToHost = (after = 400, tries = 0) => {
     let seq = 0;
     let peer = new Peer(`${connectClient}-${seq}`, {key: key});
     let connected = false;
@@ -72,7 +72,7 @@ const createPeerConnection = (store, key, isClient) => {
       }
       // start a new connection and disconnect from thread
       window.setTimeout(() => {
-        connectToHost(after * 2, ++tries)
+        connectToHost(after, ++tries)
       }, after);
     }
 
@@ -104,16 +104,11 @@ const createPeerConnection = (store, key, isClient) => {
         case "peer-unavailable":
           reconnect();
         break;
+        default:
+          console.log(err);
+        break;
       }
     });
-    // peer.on("disconnected", () => {
-    //   console.log("disconnect detected")
-    //   reconnect();
-    // });
-    // peer.on("close", () => {
-    //   console.log("disconnect detected")
-    //   reconnect();
-    // })
   }
 
   const establishHost = () => {
