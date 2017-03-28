@@ -10,6 +10,8 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+import {objectAt, firstOf} from "../../lib/components"
+
 import Cube from "./cube"
 
 const styles = {
@@ -195,29 +197,20 @@ Logo.defaultProps = {
 
 const ConnectedLogo = connect(
   (state, ownProps) => {
+    const scope = objectAt(state, ownProps.source);
     return {
-      cubeStrokeColor: ownProps.cubeStrokeColor || state.logo[state.screen.current].cube.stroke,
-      cubeFillColor: ownProps.cubeFillColor || state.logo[state.screen.current].cube.fill,
-      textStrokeColor: ownProps.textStrokeColor || state.logo[state.screen.current].text.stroke,
-      textFillColor: ownProps.textFillColor || state.logo[state.screen.current].text.fill,
-      bStrokeColor: ownProps.bStrokeColor || state.logo[state.screen.current].b.stroke,
-      bFillColor: ownProps.bFillColor || state.logo[state.screen.current].b.fill,
-      x: (typeof ownProps.x !== "undefined") ? ownProps.x : state.logo[state.screen.current].x,
-      y: (typeof ownProps.y !== "undefined") ? ownProps.y : state.logo[state.screen.current].y,
-      scale: (typeof ownProps.scale !== "undefined") ? ownProps.scale : state.logo[state.screen.current].scale,
-      text: (typeof ownProps.text !== "undefined") ? ownProps.text : state.logo[state.screen.current].textLogo,
-      spin: (typeof ownProps.spin !== "undefined") ? ownProps.spin : state.logo[state.screen.current].spin,
-      infinite: (typeof ownProps.infinite !== "undefined") ? ownProps.infinite : state.logo[state.screen.current].infinite
-    }
-  },
-  (dispatch) => {
-    return {
-      defaults: () => {
-        // place on end of event queue
-        window.setTimeout(() => {
-          configure(dispatch);
-        });
-      }
+      cubeStrokeColor: firstOf(ownProps.cubeStrokeColor, objectAt(scope, "cube.stroke", null)),
+      cubeFillColor: firstOf(ownProps.cubeFillColor, objectAt(scope, "cube.fill", null)),
+      textStrokeColor: firstOf(ownProps.textStrokeColor, objectAt(scope, "text.stroke", null)),
+      textFillColor: firstOf(ownProps.textFillColor, objectAt(scope, "text.fill", null)),
+      bStrokeColor: firstOf(ownProps.bStrokeColor, objectAt(scope, "b.stroke", null)),
+      bFillColor: firstOf(ownProps.bFillColor, objectAt(scope, "b.fill", null)),
+      x: firstOf(ownProps.x, scope.x),
+      y: firstOf(ownProps.y, scope.y),
+      scale: firstOf(ownProps.scale, scope.scale),
+      text: firstOf(ownProps.text, scope.text),
+      spin: firstOf(ownProps.spin, scope.spin),
+      infinite: firstOf(ownProps.infinite, scope.infinite)
     }
   }
 )(Radium(Logo))

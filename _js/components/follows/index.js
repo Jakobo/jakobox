@@ -8,6 +8,8 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+import {objectAt, firstOf} from "../../lib/components"
+
 const originalStyles = {
   base: {
     position: "absolute",
@@ -26,19 +28,20 @@ const Follows = Radium((props) => {
   styles.base.width = `${props.width}px`;
   styles.base.height = `${props.height}px`;
 
-  return <iframe style={styles.base} src={props.url} seamless="seamless"/>
+  return <iframe style={styles.base} src={(props.fakeFollows) ? props.fakeUrl : props.liveUrl} seamless="seamless"/>
 });
 
 const ConnectedFollows = connect(
   (state, ownProps) => {
+    const scope = objectAt(state, ownProps.source);
     return {
-      x: ownProps.x || state.follows[state.screen.current].x,
-      y: ownProps.y || state.follows[state.screen.current].y,
-      width: ownProps.width || state.follows[state.screen.current].width,
-      height: ownProps.height || state.follows[state.screen.current].height,
-      url: ownProps.url || (state.follows[state.screen.current].fakeFollows) ?
-        state.follows[state.screen.current].fakeUrl :
-        state.follows[state.screen.current].liveUrl
+      x: firstOf(ownProps.x, scope.x),
+      y: firstOf(ownProps.y, scope.y),
+      width: firstOf(ownProps.width, scope.width),
+      height: firstOf(ownProps.height, scope.height),
+      fakeFollows: firstOf(ownProps.fakeFollows, scope.fakeFollows),
+      fakeUrl: firstOf(ownProps.fakeUrl, scope.fakeUrl),
+      liveUrl: firstOf(ownProps.liveUrl, scope.liveUrl)
     }
   }
 )(Radium(Follows))

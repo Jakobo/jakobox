@@ -5,14 +5,11 @@ import {
 } from "redux";
 
 import admin from "../ducks/admin";
-import background from "../ducks/background";
-import camera from "../ducks/camera";
-import follows from "../ducks/follows";
-import generic from "../ducks/generic";
-import global from "../ducks/global";
-import logo from "../ducks/logo";
-import lowerthirds from "../ducks/lowerthirds";
 import screen from "../ducks/screen";
+
+import destiny from "../ducksb/destiny";
+import genscreen from "../ducksb/generic";
+import interstitial from "../ducksb/interstitial";
 
 import params from "../lib/url"
 
@@ -28,13 +25,10 @@ const loggerMiddleware = createLogger();
 export default function() {
   const reducers = combineReducers({
     admin,
-    background,
-    camera,
-    follows,
-    generic,
-    logo,
-    lowerthirds,
-    screen
+    screen,
+    destiny,
+    interstitial,
+    genscreen
   });
 
   return createStore(

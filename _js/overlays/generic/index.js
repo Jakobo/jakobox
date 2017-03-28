@@ -14,8 +14,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import configure from "./conf"
-
 import LowerThirds from "../../components/lowerthird"
 
 import overlay from "../../styles/overlay"
@@ -30,7 +28,7 @@ import GGGRCobrand from "../../components/lowerthird/items/gggr"
 
 const playlists = {
   normal: [
-    makeWatermark(10),
+    makeWatermark(10, "genscreen.lowerthirds"),
     ExpandingLogo,
     GGGRCobrand
   ]
@@ -75,24 +73,16 @@ const Frame = (props) => {
   )
 
   return <div style={frameStyles}>
-    <Cam />
-    <Logo />
-    <LowerThirds playlists={playlists} />
+    <Cam source={"genscreen.camera"} />
+    <Logo source={"genscreen.logo"} />
+    <LowerThirds source={"genscreen.lowerthirds"} playlists={playlists} />
   </div>
-};
-
-Frame.propTypes = {
-  background: PropTypes.string
-};
-
-Frame.defaultProps = {
-  background: ""
 };
 
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.generic.background
+      background: state.genscreen.background
     }
   }
 )(Radium(Frame))

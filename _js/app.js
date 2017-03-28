@@ -22,7 +22,6 @@ import params from "./lib/url"
 import createStore from "./store";
 import {createPeerConnection} from "./middleware/peerjs";
 import {createLocalStorageConnection} from "./middleware/localstorage";
-import initConsoleActions from "./lib/console_actions"
 import { setScreen } from "./ducks/screen"
 
 // Both Router and ConnectedRouter are small enough to leave in App for now
@@ -44,7 +43,6 @@ const screens = {
 }
 
 const store = createStore();
-initConsoleActions(store);
 
 if (params.ls) {
   createLocalStorageConnection(store, params.key || "x", (params.host) ? false : true);

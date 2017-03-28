@@ -11,8 +11,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import configure from "./conf"
-
 import LowerThird from "../../components/lowerthird"
 import Cam from "../../components/cam"
 import Follows from "../../components/follows"
@@ -36,10 +34,10 @@ const styles = {
 
 const playlists = {
   normal: [
-    makeWatermark(7),
+    makeWatermark(7, "destiny.lowerthirds"),
     ExpandingLogo,
     Announcements,
-    makeWatermark(5),
+    makeWatermark(5, "destiny.lowerthirds"),
     ExpandingLogo,
     GGGRCobrand
   ],
@@ -47,7 +45,7 @@ const playlists = {
     Announcements,
     ExpandingLogo,
     GGGRCobrand,
-    makeWatermark(1)
+    makeWatermark(1, "destiny.lowerthirds")
   ]
 }
 
@@ -60,16 +58,16 @@ const Frame = (props) => {
   )
 
   return <div style={frameStyles}>
-    <Cam />
-    <Follows />
-    <LowerThird playlists={playlists}></LowerThird>
+    <Cam source={"destiny.camera"} />
+    <Follows source={"destiny.follows"} />
+    <LowerThird playlists={playlists} source={"destiny.lowerthirds"}></LowerThird>
   </div>
 };
 
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.destiny.background
+      background: state.destiny.background
     }
   }
 )(Radium(Frame))

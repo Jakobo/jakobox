@@ -11,8 +11,6 @@ import splashStyles from "../../styles/splash"
 
 import Logo from "../../components/logo"
 
-import configure from "./conf"
-
 const styles = {
   base: {
     width: "1920px",
@@ -54,7 +52,7 @@ const Frame = Radium((props) => {
 
   return <div style={frameStyles}>
     <div style={brbStyles}>
-      <div style={styles.logo}><Logo spin={true} infinite={true} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
+      <div style={styles.logo}><Logo source={"interstitial.brb.logo"} spin={true} infinite={true} cubeStroke={6} filter={"drop-shadow(3px 3px 5px rgba(0,0,0,0.75))"} /></div>
       <h1 style={styles.note}>BE RIGHT BACK...</h1>
     </div>
   </div>
@@ -63,7 +61,7 @@ const Frame = Radium((props) => {
 const ConnectedFrame = connect(
   (state, ownProps) => {
     return {
-      background: state.background.brb.background
+      background: state.interstitial.brb.background
     }
   }
 )(Radium(Frame))

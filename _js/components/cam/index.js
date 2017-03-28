@@ -8,6 +8,8 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+import {objectAt, firstOf} from "../../lib/components"
+
 const originalStyles = {
   position: {
     position: "absolute",
@@ -82,12 +84,13 @@ const Cam = Radium((props) => {
 
 const ConnectedCam = connect(
   (state, ownProps) => {
+    const scope = objectAt(state, ownProps.source);
     return {
-      color: ownProps.color || state.camera[state.screen.current].color.main,
-      accent: ownProps.accent || state.camera[state.screen.current].color.accent,
-      x: ownProps.x || state.camera[state.screen.current].x,
-      y: ownProps.y || state.camera[state.screen.current].y,
-      visible: state.camera[state.screen.current].visible
+      color: firstOf(ownProps.color, objectAt(scope, "color.main", null)),
+      accent: firstOf(ownProps.accent, objectAt(scope, "color.accent", null)),
+      x: firstOf(ownProps.x, scope.x),
+      y: firstOf(ownProps.y, scope.y),
+      visible: firstOf(ownProps.visible, scope.visible)
     }
   }
 )(Radium(Cam))

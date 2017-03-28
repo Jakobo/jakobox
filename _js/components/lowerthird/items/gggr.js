@@ -9,7 +9,6 @@ import { render } from "react-dom"
 import Radium from "radium"
 
 import Logo from "../../logo"
-import Watermark from "../../watermark"
 import gggrSrc from "../../../../_assets/gggr-simple-color.png"
 import Animation, {timeline} from "../../animation"
 
@@ -79,7 +78,7 @@ const GGGRCobrand = Radium((props) => {
   return <div>
     <div style={props.logoStyle}>
       <Animation timeline={boxSlide.timeline()}>
-        <Logo spin={true} infinite={false} text={false} />
+        <Logo source={(props.source) ? `${props.source}.logo` : null} spin={true} infinite={false} text={false} />
       </Animation>
     </div>
     <div style={styles.gggr}>

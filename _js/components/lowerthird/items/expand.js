@@ -93,7 +93,7 @@ const ExpandingLogo = Radium((props) => {
     </div>
     <div style={props.logoStyle}>
       <Animation timeline={boxSlide.timeline()}>
-        <Logo spin={false} infinite={false} text={false} />
+        <Logo source={(props.source) ? `${props.source}.logo` : null} spin={false} infinite={false} text={false} />
       </Animation>
     </div>
     <div style={styles.ox}>

@@ -17,6 +17,8 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+import {objectAt, firstOf} from "../../../lib/components"
+
 import Logo from "../../logo"
 import Watermark from "../../watermark"
 import Animation, {timeline} from "../../animation"
@@ -61,7 +63,18 @@ class Announcements extends React.Component {
 
   render() {
     const [line1, line2] = this.items[this.state.current].split("\n");
-    return <Announcement key={this.state.current} line1={line1} line2={line2} onComplete={this.next} posX={this.props.posX} posY={this.props.posY} logoStyle={this.props.logoStyle} />
+    return <Announcement
+      key={this.state.current}
+      line1={line1}
+      line2={line2}
+      source={(this.props.source) ? `${this.props.source}` : null}
+      onComplete={this.next}
+      posX={this.props.posX}
+      posY={this.props.posY}
+      logoStyle={this.props.logoStyle}
+      textStroke={this.props.textStroke}
+      textFill={this.props.textFill}
+      />
   }
 }
 
@@ -95,9 +108,9 @@ const Announcement = Radium((props) => {
       fontSize: "24px",
       fontFamily: "HelveticaNeue",
       fontWeight: 600,
-      color: "#fff",
-      fill: "#fff",
-      stroke: "#000",
+      color: props.textFill,
+      fill: props.textFill,
+      stroke: props.textStroke,
       strokeWidth: "1",
       textAnchor: "end",
       filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.75))",
@@ -153,17 +166,20 @@ const Announcement = Radium((props) => {
         </Animation>
       </Animation>
     </div>
-    <div style={props.logoStyle}><Logo spin={true} infinite={false} text={false} /></div>
+    <div style={props.logoStyle}><Logo source={(props.source) ? `${props.source}.logo` : null} spin={true} infinite={false} text={false} /></div>
   </div>
-
 });
 
 const ConnectedAnnouncements = connect(
   (state, ownProps) => {
+    const scope = objectAt(state, `${ownProps.source}.announcements`);
+    const textScope = objectAt(state, `${ownProps.source}.text`);
     return {
-      items: state.lowerthirds[state.screen.current].ticker.items,
-      number: state.lowerthirds[state.screen.current].ticker.size,
-      shuffle: state.lowerthirds[state.screen.current].ticker.shuffle
+      textStroke: firstOf(ownProps.textStroke, textScope.stroke, "#000"),
+      textFill: firstOf(ownProps.textFill, textScope.fill, "#fff"),
+      items: firstOf(ownProps.items, scope.items, state.lowerthirds[state.screen.current].ticker.items),
+      number: firstOf(ownProps.size, scope.size, state.lowerthirds[state.screen.current].ticker.size),
+      shuffle: firstOf(ownProps.shuffle, scope.shuffle, state.lowerthirds[state.screen.current].ticker.shuffle)
     }
   }
 )(Announcements)

@@ -13,7 +13,7 @@ import Radium from "radium"
 import Logo from "../../logo"
 import Animation, {timeline} from "../../animation"
 
-const makeWatermark = (cycles) => {
+const makeWatermark = (cycles, source) => {
   cycles = cycles || 1;
   const cycleTime = 45;
   const fade = timeline()
@@ -25,7 +25,7 @@ const makeWatermark = (cycles) => {
     window.setTimeout(() => {
       props.onComplete()
     }, cycles * cycleTime * 1000);
-    return <div style={props.logoStyle}><Animation timeline={fade.timeline()}><Logo spin={true} infinite={true} text={false} /></Animation></div>
+    return <div style={props.logoStyle}><Animation timeline={fade.timeline()}><Logo source={(source) ? `${source}.logo` : null} spin={true} infinite={true} text={false} /></Animation></div>
   }
 }
 

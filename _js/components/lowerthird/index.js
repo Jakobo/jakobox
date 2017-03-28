@@ -11,6 +11,8 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
+import {objectAt, firstOf} from "../../lib/components"
+
 const logoStyle = {
   left: "1800px",
   top: "960px",
@@ -70,15 +72,18 @@ class LowerThird extends React.Component {
     }
 
     const Component = this.props.playlist[this.state.current];
-    return <div><Component key={this.cachebreak++} onComplete={this.onComplete} posX={posX} posY={posY} logoStyle={logoStyle} /></div>
+    return <div><Component key={this.cachebreak++} source={`${this.props.source}.components`} onComplete={this.onComplete} posX={posX} posY={posY} logoStyle={logoStyle} /></div>
   }
 }
 
 const ConnectedLowerThird = connect(
   (state, ownProps) => {
+    const scope = objectAt(state, ownProps.source);
+    const currentPlaylist = firstOf(ownProps.currentPlaylist, scope.currentPlaylist);
     return {
-      playlist: ownProps.playlists[state.lowerthirds[state.screen.current].currentPlaylist] || [],
-      visible: state.lowerthirds[state.screen.current].visible
+      source: ownProps.source,
+      playlist: ownProps.playlists[currentPlaylist] || [],
+      visible: firstOf(ownProps.visible, scope.visible)
     }
   }
 )(LowerThird);
