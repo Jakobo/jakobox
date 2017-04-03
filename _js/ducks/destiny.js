@@ -3,6 +3,7 @@ import {ticker as destinyTicker} from "../ducks/lowerthirds/destiny"
 const SET_BACKGROUND = "destiny/SET_BACKGROUND"
 const ENABLE_FAKE_FOLLOWS = "destiny/ENABLE_FAKE_FOLLOWS"
 const ENABLE_LIVE_FOLLOWS = "destiny/ENABLE_LIVE_FOLLOWS"
+const SET_LOWERTHIRDS_VISIBILITY = "destiny/SET_LOWERTHIRDS_VISIBILITY"
 const SET_LOWERTHIRDS_PLAYLIST = "destiny/SET_LOWERTHIRDS_PLAYLIST"
 const SET_LOWERTHIRDS_TICKER_SIZE = "destiny/SET_LOWERTHIRDS_TICKER_SIZE"
 const SET_LOWERTHIRDS_TICKER_ITEMS = "destiny/SET_LOWERTHIRDS_TICKER_ITEMS"
@@ -46,12 +47,12 @@ const initialState = {
   },
   lowerthirds: {
     visible: true,
-    currentPlaylist: "demo",
+    currentPlaylist: "normal",
     availablePlaylists: ["normal", "demo"],
     components: {
       text: { stroke: "#000", fill: "#fff" },
       announcements: {
-        size: 1,
+        size: 3,
         shuffle: true,
         items: destinyTicker
       },
@@ -75,6 +76,9 @@ export default function reducer(state = initialState, action = {}) {
     break;
     case ENABLE_LIVE_FOLLOWS:
       newState.follows.fakeFollows = false;
+    break;
+    case SET_LOWERTHIRDS_VISIBILITY:
+      newState.lowerthirds.visible = action.visible;
     break;
     case SET_LOWERTHIRDS_PLAYLIST:
       newState.lowerthirds.currentPlaylist = action.currentPlaylist;
@@ -125,7 +129,7 @@ export function useLiveFollows() {
 }
 
 export function setPlaylist(currentPlaylist) {
-  return {type: SET_CURRENT_PLAYLIST, currentPlaylist};
+  return {type: SET_LOWERTHIRDS_PLAYLIST, currentPlaylist};
 }
 
 export function setTickerItems(items) {
@@ -150,4 +154,12 @@ export function setLogoBColors(stroke, fill) {
 
 export function setCameraColors(main, accent) {
   return {type: SET_CAMERA_COLORS, main, accent}
+}
+
+export function showLowerThirds() {
+  return {type: SET_LOWERTHIRDS_VISIBILITY, visible: true}
+}
+
+export function hideLowerThirds() {
+  return {type: SET_LOWERTHIRDS_VISIBILITY, visible: false}
 }

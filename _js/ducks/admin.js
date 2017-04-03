@@ -1,29 +1,20 @@
-export const SET_SCREEN = "local/admin/SET_SCREEN";
-export const SET_COMPONENT = "local/admin/SET_COMPONENT";
+export const SET_PANEL = "local/admin/SET_PANEL";
 
 const initialState = {
-  screen: "incoming",
-  component: "logo"
+  panel: "destiny"
 };
 
 export default function reducer(state = initialState, action = {}) {
   let newState = Object.assign({}, state);
   switch(action.type) {
-    case SET_SCREEN:
-      newState.screen = action.screen;
-    break;
-    case SET_COMPONENT:
-      newState.component = action.component;
+    case SET_PANEL:
+      newState.panel = action.panel;
     break;
   }
 
   return newState;
 }
 
-export function setScreen(screen) {
-  return {type: SET_SCREEN, screen};
-}
-
-export function setComponent(component) {
-  return {type: SET_COMPONENT, component};
+export function setPanel(panel) {
+  return {type: SET_PANEL, panel};
 }

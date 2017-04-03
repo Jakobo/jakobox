@@ -7,9 +7,9 @@ import {
 import admin from "../ducks/admin";
 import screen from "../ducks/screen";
 
-import destiny from "../ducksb/destiny";
-import genscreen from "../ducksb/generic";
-import interstitial from "../ducksb/interstitial";
+import destiny from "../ducks/destiny";
+import genscreen from "../ducks/generic";
+import interstitial from "../ducks/interstitial";
 
 import params from "../lib/url"
 

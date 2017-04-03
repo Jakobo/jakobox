@@ -5,7 +5,9 @@ import textColor from "../lib/textcolor"
 
 import FlatButton from "material-ui/RaisedButton"
 import Popover from "material-ui/Popover"
-import { ChromePicker } from "react-color";
+import { ChromePicker } from "react-color"
+
+import ArtIcon from "material-ui/svg-icons/image/palette"
 
 class Picker extends Component {
   constructor(props) {
@@ -38,19 +40,28 @@ class Picker extends Component {
   }
 
   render() {
-    const style = {
+    const styles = {
       container: {
         display: "inline-block"
+      },
+      smallIcon: {
+        width: 36,
+        height: 36
+      },
+      label: {
+        color: textColor(this.props.color || "#fff")
       }
     }
 
-    return (<div style={style.container}>
+    return (<div style={styles.container}>
       <FlatButton
-        onTouchTap={this.onButtonClick}
         label={this.props.label}
-        backgroundColor={this.props.color}
-        labelColor={textColor(this.props.color)}
-      />
+        labelStyle={styles.label}
+        onTouchTap={this.onButtonClick}
+        backgroundColor={this.props.color || "#fff"}
+        >
+        <ArtIcon color={textColor(this.props.color || "#fff")} iconStyle={styles.smallIcon} />
+      </FlatButton>
       <Popover
         open={this.state.open}
         anchorEl={this.state.anchorEl}

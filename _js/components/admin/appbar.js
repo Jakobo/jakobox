@@ -7,17 +7,17 @@ import MenuItem from "material-ui/MenuItem"
 import SceneSelect from "material-ui/svg-icons/hardware/videogame-asset"
 import ComponentSelect from "material-ui/svg-icons/av/web"
 
-import CameraIcon from "material-ui/svg-icons/av/videocam"
-import FollowerIcon from "material-ui/svg-icons/action/speaker-notes"
-import LogoIcon from "material-ui/svg-icons/action/label"
-import LTIcon from "material-ui/svg-icons/content/low-priority"
-import OmniIcon from "material-ui/svg-icons/av/loop"
-import GenericIcon from "material-ui/svg-icons/action/dashboard"
-import NoIcon from "material-ui/svg-icons/toggle/check-box-outline-blank"
+// import CameraIcon from "material-ui/svg-icons/av/videocam"
+// import FollowerIcon from "material-ui/svg-icons/action/speaker-notes"
+// import LogoIcon from "material-ui/svg-icons/action/label"
+// import LTIcon from "material-ui/svg-icons/content/low-priority"
+// import OmniIcon from "material-ui/svg-icons/av/loop"
+// import GenericIcon from "material-ui/svg-icons/action/dashboard"
+// import NoIcon from "material-ui/svg-icons/toggle/check-box-outline-blank"
 
 import { connect } from "react-redux"
 
-import { setScreen, setComponent } from "../../ducks/admin"
+import { setPanel } from "../../ducks/admin"
 
 const alphaSort = (obj) => {
   return (a, b) => {
@@ -27,33 +27,14 @@ const alphaSort = (obj) => {
   }
 }
 
-const components = {
-  "cam": "Webcam Frame",
-  "follows": "Follower Notification",
-  "logo": "Logo",
-  "lowerthird": "Lower Thirds",
-  "omnibar": "Omnibar",
-  "generic": "Generic Game Settings"
-}
-const componentIcons = {
-  "none": NoIcon,
-  "cam": CameraIcon,
-  "follows": FollowerIcon,
-  "logo": LogoIcon,
-  "lowerthird": LTIcon,
-  "omnibar": OmniIcon,
-  "generic": GenericIcon
-}
-const sortedComponents = Object.keys(components).sort(alphaSort(components))
-
-const screens = {
+const panels = {
   "brb": "BRB",
   "destiny": "Destiny",
   "generic": "Generic game",
   "incoming": "Stream incoming",
   "outgoing": "Stream outgoing"
 }
-const sortedScreens = Object.keys(screens).sort(alphaSort(screens))
+const sortedPanels = Object.keys(panels).sort(alphaSort(panels))
 
 class AdminAppBar extends Component {
   constructor(props) {
@@ -61,21 +42,16 @@ class AdminAppBar extends Component {
     this.state = {
       selectorOpen: false,
       selectorEl: null,
-      componentOpen: false,
-      componentEl: null
     };
-    ["openScene",
-     "closeScene",
-     "chooseScene",
-     "openComponent",
-     "closeComponent",
-     "chooseComponent"
+    ["openPanel",
+     "closePanel",
+     "choosePanel"
     ].forEach((n) => {
       this[n] = (this[n]) ? this[n].bind(this) : () => {};
     })
   }
 
-  openScene(event) {
+  openPanel(event) {
     event.preventDefault();
     this.setState({
       selectorOpen: true,
@@ -83,77 +59,34 @@ class AdminAppBar extends Component {
     });
   }
 
-  closeScene() {
+  closePanel() {
     this.setState({
       selectorOpen: false,
     });
   }
 
-  chooseScene(name) {
-    this.props.selectScene(name);
-    this.closeScene();
-  }
-
-  openComponent(event) {
-    event.preventDefault();
-    this.setState({
-      componentOpen: true,
-      componentEl: event.currentTarget,
-    });
-  }
-
-  closeComponent() {
-    this.setState({
-      componentOpen: false,
-    });
-  }
-
-  chooseComponent(name) {
-    this.props.selectComponent(name);
-    this.closeComponent();
+  choosePanel(name) {
+    this.props.selectPanel(name);
+    this.closePanel();
   }
 
   render() {
-    const ComponentIcon = componentIcons[this.props.currentComponent] || componentIcons["none"];
     return (
       <div>
         <AppBar
-          title={screens[this.props.currentScene]}
+          title={panels[this.props.currentScene]}
           iconElementLeft={<IconButton><SceneSelect /></IconButton>}
-          onLeftIconButtonTouchTap={this.openScene}
-          iconElementRight={<IconButton><ComponentIcon /></IconButton>}
-          onRightIconButtonTouchTap={this.openComponent}
+          onLeftIconButtonTouchTap={this.openPanel}
         />
         <Popover open={this.state.selectorOpen}
                  anchorEl={this.state.selectorEl}
                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                 onRequestClose={this.closeScene}
+                 onRequestClose={this.closePanel}
         >
           <Menu>
-            {sortedScreens.map((key) => {
-              return (<MenuItem key={key} disabled={key === this.props.currentScene} primaryText={screens[key]} onTouchTap={() => { this.chooseScene(key) }} />)
-            })}
-          </Menu>
-        </Popover>
-        <Popover open={this.state.componentOpen}
-                 anchorEl={this.state.componentEl}
-                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                 onRequestClose={this.closeComponent}
-        >
-          <Menu>
-            {sortedComponents.map((key) => {
-              const Icon = componentIcons[key] || componentIcons["none"];
-              return (
-                <MenuItem
-                  key={key}
-                  disabled={key === this.props.currentComponent}
-                  primaryText={components[key]}
-                  leftIcon={<Icon />}
-                  onTouchTap={() => { this.chooseComponent(key) }}
-                />
-              )
+            {sortedPanels.map((key) => {
+              return (<MenuItem key={key} disabled={key === this.props.currentPanel} primaryText={panels[key]} onTouchTap={() => { this.choosePanel(key) }} />)
             })}
           </Menu>
         </Popover>
@@ -165,17 +98,13 @@ class AdminAppBar extends Component {
 const ConnectedAdminAppBar = connect(
   (state, ownProps) => {
     return {
-      currentScene: state.admin.screen,
-      currentComponent: state.admin.component
+      currentPanel: state.admin.panel
     }
   },
   (dispatch) => {
     return {
-      selectScene: (screen) => {
-        dispatch(setScreen(screen))
-      },
-      selectComponent: (component) => {
-        dispatch(setComponent(component))
+      choosePanel: (panel) => {
+        dispatch(setPanel(panel))
       }
     }
   }
