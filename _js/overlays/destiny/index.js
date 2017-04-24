@@ -34,10 +34,10 @@ const styles = {
 
 const playlists = {
   normal: [
-    makeWatermark(7, "destiny.lowerthirds"),
+    makeWatermark(7, "destiny.lowerthirds.components"),
     ExpandingLogo,
     Announcements,
-    makeWatermark(5, "destiny.lowerthirds"),
+    makeWatermark(5, "destiny.lowerthirds.components"),
     ExpandingLogo,
     GGGRCobrand
   ],
@@ -45,7 +45,7 @@ const playlists = {
     Announcements,
     ExpandingLogo,
     GGGRCobrand,
-    makeWatermark(1, "destiny.lowerthirds")
+    makeWatermark(1, "destiny.lowerthirds.components")
   ]
 }
 

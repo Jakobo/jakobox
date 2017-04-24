@@ -7,8 +7,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import splashStyles from "../../styles/splash"
-
 import Logo from "../../components/logo"
 
 const styles = {

@@ -12,23 +12,23 @@ import TextField from "material-ui/TextField"
 import Toggle from "material-ui/Toggle"
 import DropDownMenu from "material-ui/DropDownMenu"
 import MenuItem from "material-ui/MenuItem"
+import SelectField from "material-ui/SelectField"
 
 import {
   setBackground,
   useFakeFollows,
   useLiveFollows,
   setPlaylist,
-  setTickerItems,
-  setTickerSize,
   setLogoCubeColors,
   setLogoTextColors,
   setLogoBColors,
   setCameraColors,
   showLowerThirds,
-  hideLowerThirds
-} from "../../ducks/destiny"
+  hideLowerThirds,
+  setConfiguration
+} from "../../ducks/generic"
 
-const DestinyAdmin = (props) => {
+const GenericAdmin = (props) => {
   const styles = {
     padded: {
       padding: "10px"
@@ -55,8 +55,40 @@ const DestinyAdmin = (props) => {
   return (
     <Paper zDepth={2} style={styles.padded}>
       <section style={styles.padded}>
+        <h2 style={styles.h2}>Layout</h2>
+        <SelectField floatingLabelText="Camera Position" value={props.camera} onChange={props.onChangeCameraPosition}>
+          <MenuItem value={1} primaryText="Top, Left" />
+          <MenuItem value={2} primaryText="Top, Middle" />
+          <MenuItem value={3} primaryText="Top, Right" />
+          <MenuItem value={4} primaryText="1/3 Top, Left" />
+          <MenuItem value={5} primaryText="1/3 Top, Right" />
+          <MenuItem value={6} primaryText="2/3 Top, Left" />
+          <MenuItem value={7} primaryText="2/3 Top, Right" />
+          <MenuItem value={8} primaryText="Bottom, Left" />
+          <MenuItem value={9} primaryText="Bottom, Middle" />
+          <MenuItem value={10} primaryText="Bottom, Right" />
+        </SelectField>
+        <SelectField floatingLabelText="Logo Position" value={props.logo} onChange={props.onChangeLogoPosition}>
+          <MenuItem value={1} primaryText="Top, Left" />
+          <MenuItem value={2} primaryText="Top, Middle" />
+          <MenuItem value={3} primaryText="Top, Right" />
+          <MenuItem value={4} primaryText="1/3 Top, Left" />
+          <MenuItem value={5} primaryText="1/3 Top, Right" />
+          <MenuItem value={6} primaryText="2/3 Top, Left" />
+          <MenuItem value={7} primaryText="2/3 Top, Right" />
+          <MenuItem value={8} primaryText="Bottom, Left" />
+          <MenuItem value={9} primaryText="Bottom, Middle" />
+          <MenuItem value={10} primaryText="Bottom, Right" />
+        </SelectField>
+      </section>
+      <section style={styles.padded}>
         <h2 style={styles.h2}>Colors</h2>
         <div>
+          <span style={styles.label}>Camera:</span>
+          <ColorPicker label={"Main"} color={props.cameraMain} onChange={props.onChangeCameraMain} />
+          <ColorPicker label={"Accent"} color={props.cameraAccent} onChange={props.onChangeCameraAccent} />
+        </div>
+        <div style={styles.pair}>
           <span style={styles.label}>Text:</span>
           <ColorPicker label={"Stroke"} color={props.textStroke} onChange={props.onChangeTextStroke} />
           <ColorPicker label={"Fill"} color={props.textFill} onChange={props.onChangeTextFill} />
@@ -92,23 +124,6 @@ const DestinyAdmin = (props) => {
                 })}
               </DropDownMenu>
             </section>
-            <section>
-              <MultilineText
-                label="Change Ticker Items"
-                hintText="Long Line (newline) Short Line (newline) (blank line)"
-                floatingLabelText="Ticker Items"
-                fullWidth={true}
-                value={(props.tickerItems || []).join("\n\n")}
-                onChange={props.onChangeTickerItems}
-              />
-              <TextField
-                value={props.tickerSize}
-                hintText={"Number of Ticker Items"}
-                floatingLabelText={"Maximum Number of Ticker Items"}
-                fullWidth={true}
-                onChange={props.onChangeTickerSize}
-              />
-            </section>
           </div>
         }
       </section>
@@ -132,22 +147,20 @@ const DestinyAdmin = (props) => {
   )
 }
 
-const ConnectedDestinyAdmin = connect(
+const ConnectedGenericAdmin = connect(
   (state, ownProps) => {
     return {
-      textStroke: state.destiny.logo.text.stroke,
-      textFill: state.destiny.logo.text.fill,
-      bStroke: state.destiny.logo.b.stroke,
-      bFill: state.destiny.logo.b.fill,
-      cubeStroke: state.destiny.logo.cube.stroke,
-      cubeFill: state.destiny.logo.cube.fill,
-      showLowerThirds: state.destiny.lowerthirds.visible,
-      currentPlaylist: state.destiny.lowerthirds.currentPlaylist,
-      availablePlaylists: state.destiny.lowerthirds.availablePlaylists,
-      tickerItems: state.destiny.lowerthirds.components.announcements.items,
-      tickerSize: state.destiny.lowerthirds.components.announcements.size,
-      fakeFollows: state.destiny.follows.fakeFollows,
-      background: state.destiny.background
+      textStroke: state.genscreen.logo.text.stroke,
+      textFill: state.genscreen.logo.text.fill,
+      bStroke: state.genscreen.logo.b.stroke,
+      bFill: state.genscreen.logo.b.fill,
+      cubeStroke: state.genscreen.logo.cube.stroke,
+      cubeFill: state.genscreen.logo.cube.fill,
+      showLowerThirds: state.genscreen.lowerthirds.visible,
+      currentPlaylist: state.genscreen.lowerthirds.currentPlaylist,
+      availablePlaylists: state.genscreen.lowerthirds.availablePlaylists,
+      fakeFollows: state.genscreen.follows.fakeFollows,
+      background: state.genscreen.background
     }
   },
   (dispatch) => {
@@ -176,9 +189,6 @@ const ConnectedDestinyAdmin = connect(
       onChangePlaylist: (e, i, v) => {
         dispatch(setPlaylist(v))
       },
-      onChangeTickerItems: (v) => {
-        dispatch(setTickerItems(v))
-      },
       onChangeFakeFollows: (e, t) => {
         dispatch((t) ? useFakeFollows() : useLiveFollows())
       },
@@ -187,6 +197,6 @@ const ConnectedDestinyAdmin = connect(
       }
     }
   }
-)(Radium(DestinyAdmin))
+)(Radium(GenericAdmin))
 
-export default ConnectedDestinyAdmin;
+export default ConnectedGenericAdmin;

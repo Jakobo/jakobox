@@ -177,9 +177,9 @@ const ConnectedAnnouncements = connect(
     return {
       textStroke: firstOf(ownProps.textStroke, textScope.stroke, "#000"),
       textFill: firstOf(ownProps.textFill, textScope.fill, "#fff"),
-      items: firstOf(ownProps.items, scope.items, state.lowerthirds[state.screen.current].ticker.items),
-      number: firstOf(ownProps.size, scope.size, state.lowerthirds[state.screen.current].ticker.size),
-      shuffle: firstOf(ownProps.shuffle, scope.shuffle, state.lowerthirds[state.screen.current].ticker.shuffle)
+      items: firstOf(ownProps.items, scope.items, []),
+      number: firstOf(ownProps.size, scope.size, 1),
+      shuffle: firstOf(ownProps.shuffle, scope.shuffle, false)
     }
   }
 )(Announcements)

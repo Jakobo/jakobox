@@ -2,9 +2,16 @@ import React, {Component} from "react"
 import { connect } from "react-redux"
 
 import Destiny from "./destiny"
+import Generic from "./generic"
+import Interstitial from "./interstitial"
+import BRB from "./brb"
 
 const panels = {
-  "destiny": Destiny
+  "destiny": Destiny,
+  "generic": Generic,
+  "incoming": Interstitial,
+  "outgoing": Interstitial,
+  "brb": BRB
 }
 
 const PanelRouter = (props) => {

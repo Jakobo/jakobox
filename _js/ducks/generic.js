@@ -1,6 +1,7 @@
 const SET_BACKGROUND = "genscreen/SET_BACKGROUND"
 const ENABLE_FAKE_FOLLOWS = "genscreen/ENABLE_FAKE_FOLLOWS"
 const ENABLE_LIVE_FOLLOWS = "genscreen/ENABLE_LIVE_FOLLOWS"
+const SET_LOWERTHIRDS_VISIBILITY = "genscreen/SET_LOWERTHIRDS_VISIBILITY"
 const SET_LOWERTHIRDS_PLAYLIST = "genscreen/SET_LOWERTHIRDS_PLAYLIST"
 const SET_CAMERA_COLORS = "genscreen/SET_CAMERA_COLORS"
 const SET_LOGO_CUBE_COLORS = "genscreen/SET_LOGO_CUBE_COLORS"
@@ -183,6 +184,9 @@ export default function reducer(state = initialState, action = {}) {
     case ENABLE_LIVE_FOLLOWS:
       newState.follows.fakeFollows = false;
     break;
+    case SET_LOWERTHIRDS_VISIBILITY:
+      newState.lowerthirds.visible = action.visible;
+    break;
     case SET_LOWERTHIRDS_PLAYLIST:
       newState.lowerthirds.currentPlaylist = action.currentPlaylist;
     break;
@@ -209,8 +213,9 @@ export default function reducer(state = initialState, action = {}) {
       newState.lowerthirds.components.logo.text.fill = newState.logo.text.fill;
     break;
     case SET_CONFIGURATION:
-      let camera = action.cam;
-      let logo = action.logo;
+      action.textLogo = (typeof action.textLogo == "undefined") ? newState.logo.textLogo : action.textLogo;
+      let camera = action.cam || newState.cam;
+      let logo = action.logo || newState.logo;
       let logoMode = (action.textLogo) ? "logo" : "box";
       camera = (camera > 10) ? 10 : (camera < 0) ? 0 : camera;
       logo = (logo > 10) ? 10 : (logo < 0) ? 0 : logo;
@@ -269,4 +274,12 @@ export function setCameraColors(main, accent) {
 
 export function setConfiguration(camera, logo, textLogo) {
   return {type: SET_CONFIGURATION, camera, logo, textLogo}
+}
+
+export function showLowerThirds() {
+  return {type: SET_LOWERTHIRDS_VISIBILITY, visible: true}
+}
+
+export function hideLowerThirds() {
+  return {type: SET_LOWERTHIRDS_VISIBILITY, visible: false}
 }

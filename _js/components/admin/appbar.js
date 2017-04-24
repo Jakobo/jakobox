@@ -66,7 +66,7 @@ class AdminAppBar extends Component {
   }
 
   choosePanel(name) {
-    this.props.selectPanel(name);
+    this.props.choosePanel(name);
     this.closePanel();
   }
 
@@ -74,7 +74,7 @@ class AdminAppBar extends Component {
     return (
       <div>
         <AppBar
-          title={panels[this.props.currentScene]}
+          title={panels[this.props.currentPanel]}
           iconElementLeft={<IconButton><SceneSelect /></IconButton>}
           onLeftIconButtonTouchTap={this.openPanel}
         />

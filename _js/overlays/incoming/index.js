@@ -7,8 +7,6 @@ import { render } from "react-dom"
 import { connect } from "react-redux"
 import Radium from "radium"
 
-import splashStyles from "../../styles/splash"
-
 import Logo from "../../components/logo"
 
 const styles = {
@@ -22,12 +20,6 @@ const styles = {
   typography: {
     fontFamily: '"Helvetica Neue Condensed", "Helvetica Neue", Helvetica, sans-serif',
     fontSize: "26px"
-  },
-  omnibar: {
-    position: "absolute",
-    left: "480px",
-    top: "810px",
-    width: "1920px"
   },
   note: {
     position: "absolute",
