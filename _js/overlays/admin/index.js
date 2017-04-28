@@ -59,6 +59,7 @@ const styles = {
   },
   column: {
     width: "33.333%",
+    minWidth: "425px",
     height: "100%"
   },
   flexboxToContent: {
@@ -111,8 +112,6 @@ const Frame = Radium((props) => {
         <div style={styles.column}>
           <iframe
             src="https://u.muxy.io/live"
-            width="100%"
-            height="700"
             frameBorder="0"
             scrolling="no"
             style={Object.assign({}, styles.iframe, styles.flexboxFill, styles.heightFull, styles.widthFull)}
